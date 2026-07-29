@@ -6,17 +6,13 @@
   <title>Imena Drive</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Firebase Compat SDKs (v10) -->
+  <!-- Firebase Compat SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <style>
     /* ----- GLOBAL STYLES ----- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: #0F172A;
@@ -32,7 +28,7 @@
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-left: 1px solid rgba(255, 255, 255, 0.05);
@@ -42,9 +38,20 @@
       flex-direction: column;
       box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
     }
-    /* Glass card */
+    @media (min-width: 640px) {
+      body { padding: 1.5rem; }
+      #app {
+        max-width: 560px;
+        min-height: 90vh;
+        border-radius: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+    }
+    @media (min-width: 1024px) {
+      #app { max-width: 640px; }
+    }
     .glass {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -53,36 +60,33 @@
       transition: all 0.2s ease;
     }
     .glass-hover:hover {
-      background: rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.09);
       border-color: rgba(245, 158, 11, 0.3);
       transform: translateY(-2px);
     }
-    /* Page transitions */
     .page {
       display: none;
       flex: 1;
-      padding: 1.25rem 1.25rem 6rem 1.25rem;
+      padding: 1.25rem 1.25rem 5rem 1.25rem;
       animation: fadeIn 0.25s ease;
     }
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Bottom nav */
+    /* Bottom Nav */
     .bottom-nav {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(16px);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-around;
-      padding: 0.5rem 0 1rem 0;
+      padding: 0.4rem 0 0.8rem 0;
       border-radius: 0 0 1.5rem 1.5rem;
       z-index: 50;
     }
@@ -90,34 +94,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: #94a3b8;
       cursor: pointer;
       transition: color 0.2s;
       background: none;
       border: none;
-      gap: 2px;
-      padding: 0.25rem 0.75rem;
+      gap: 1px;
+      padding: 0.2rem 0.5rem;
       border-radius: 0.75rem;
     }
-    .nav-item.active {
-      color: #F59E0B;
-    }
-    .nav-item svg {
-      width: 24px;
-      height: 24px;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      fill: none;
-    }
-    .nav-item.active svg {
-      stroke: #F59E0B;
-    }
-    /* Custom scroll */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #F59E0B; border-radius: 10px; }
-    /* Auth toggle tabs */
+    .nav-item.active { color: #F59E0B; }
+    .nav-item svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 1.8; fill: none; }
+    .nav-item.active svg { stroke: #F59E0B; }
     .auth-tab {
       padding: 0.5rem 1.5rem;
       border-radius: 2rem;
@@ -127,12 +116,9 @@
       background: transparent;
       color: #94a3b8;
       border: none;
+      font-size: 0.9rem;
     }
-    .auth-tab.active {
-      background: #F59E0B;
-      color: #0F172A;
-    }
-    /* Quiz option */
+    .auth-tab.active { background: #F59E0B; color: #0F172A; }
     .quiz-option {
       padding: 0.75rem 1rem;
       border-radius: 1rem;
@@ -146,7 +132,6 @@
     .quiz-option.selected { border-color: #F59E0B; background: rgba(245,158,11,0.15); }
     .quiz-option.correct { border-color: #22c55e; background: rgba(34,197,94,0.15); }
     .quiz-option.wrong { border-color: #ef4444; background: rgba(239,68,68,0.15); }
-    /* Language badge */
     .lang-badge {
       display: inline-flex;
       align-items: center;
@@ -155,14 +140,13 @@
       border-radius: 2rem;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: 0.2s;
     }
     .lang-badge:hover { background: rgba(245,158,11,0.15); border-color: #F59E0B; }
-    /* Progress bar */
     .progress-bar {
-      height: 6px;
+      height: 5px;
       background: rgba(255,255,255,0.08);
       border-radius: 10px;
       overflow: hidden;
@@ -173,13 +157,12 @@
       border-radius: 10px;
       transition: width 0.4s ease;
     }
-    /* Divider */
     .divider {
       display: flex;
       align-items: center;
       gap: 1rem;
       color: #64748b;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       margin: 0.5rem 0;
     }
     .divider::before, .divider::after {
@@ -188,6 +171,22 @@
       height: 1px;
       background: rgba(255,255,255,0.06);
     }
+    /* Level badge */
+    .level-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.15rem 0.6rem;
+      border-radius: 2rem;
+      letter-spacing: 0.04em;
+    }
+    .level-beginner { background: rgba(34,197,94,0.2); color: #4ade80; }
+    .level-intermediate { background: rgba(251,191,36,0.2); color: #facc15; }
+    .level-advanced { background: rgba(248,113,113,0.2); color: #f87171; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #F59E0B; border-radius: 10px; }
   </style>
 </head>
 <body>
@@ -199,56 +198,47 @@
   <section id="auth-page" class="page active flex flex-col items-center justify-center min-h-screen px-6">
     <div class="text-center mb-8">
       <h1 class="text-4xl font-extrabold tracking-tight">
-        <span class="text-white">Imena</span><span class="text-accent" style="color:#F59E0B;">Drive</span>
+        <span class="text-white">Imena</span><span class="text-amber-400">Drive</span>
       </h1>
       <p class="text-slate-400 mt-1 text-sm" id="auth-subtitle">Master the road. Pass with confidence.</p>
     </div>
-
     <div class="w-full max-w-sm glass p-6 rounded-2xl">
-      <!-- Tabs -->
       <div class="flex justify-center gap-2 mb-6">
         <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Login</button>
         <button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Register</button>
       </div>
-
-      <!-- Login Form -->
+      <!-- Login -->
       <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
         <div class="mb-4">
-          <label class="block text-sm text-slate-300 mb-1">Email</label>
+          <label class="block text-sm text-slate-300 mb-1" data-i18n="email">Email</label>
           <input type="email" id="login-email" required class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/60" placeholder="you@example.com" />
         </div>
         <div class="mb-5">
-          <label class="block text-sm text-slate-300 mb-1">Password</label>
+          <label class="block text-sm text-slate-300 mb-1" data-i18n="password">Password</label>
           <input type="password" id="login-password" required class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/60" placeholder="••••••••" />
         </div>
-        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition">Login</button>
+        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition" data-i18n="login">Login</button>
         <p id="auth-error" class="text-red-400 text-sm mt-3 text-center hidden"></p>
       </form>
-
-      <!-- Register Form -->
+      <!-- Register -->
       <form id="register-form" class="auth-form hidden" onsubmit="handleRegister(event)">
         <div class="mb-4">
-          <label class="block text-sm text-slate-300 mb-1">Full Name</label>
+          <label class="block text-sm text-slate-300 mb-1" data-i18n="name">Full Name</label>
           <input type="text" id="reg-name" required class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/60" placeholder="John Doe" />
         </div>
         <div class="mb-4">
-          <label class="block text-sm text-slate-300 mb-1">Email</label>
+          <label class="block text-sm text-slate-300 mb-1" data-i18n="email">Email</label>
           <input type="email" id="reg-email" required class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/60" placeholder="you@example.com" />
         </div>
         <div class="mb-5">
-          <label class="block text-sm text-slate-300 mb-1">Password</label>
+          <label class="block text-sm text-slate-300 mb-1" data-i18n="password">Password</label>
           <input type="password" id="reg-password" required class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/60" placeholder="min 6 chars" />
         </div>
-        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition">Create Account</button>
+        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition" data-i18n="register">Create Account</button>
         <p id="reg-error" class="text-red-400 text-sm mt-3 text-center hidden"></p>
       </form>
-
-      <!-- Divider -->
       <div class="divider">or</div>
-
-      <!-- Google Sign-In Button -->
       <button onclick="handleGoogleSignIn()" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold transition flex items-center justify-center gap-2">
-        <!-- Google SVG Icon -->
         <svg class="w-5 h-5" viewBox="0 0 48 48">
           <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
           <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
@@ -262,72 +252,91 @@
   </section>
 
   <!-- ============================================================ -->
-  <!-- MAIN APP (protected) -->
+  <!-- MAIN APP -->
   <!-- ============================================================ -->
   <div id="main-app" style="display:none; flex:1; display:none; flex-direction:column; min-height:100vh;">
 
-    <!-- Header -->
-    <header class="flex items-center justify-between px-5 py-4 border-b border-white/5">
+    <!-- HEADER -->
+    <header class="flex items-center justify-between px-5 py-3 border-b border-white/5">
       <h2 class="text-xl font-bold">
         <span class="text-white">Imena</span><span class="text-amber-400">Drive</span>
       </h2>
       <div class="flex items-center gap-3">
-        <!-- Language Switcher -->
         <div class="relative">
           <button class="lang-badge" onclick="toggleLangMenu()">
             <span id="current-lang-label">🇬🇧 EN</span>
             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div id="lang-menu" class="absolute right-0 mt-1 glass rounded-xl p-1 hidden z-50 min-w-[120px]">
+          <div id="lang-menu" class="absolute right-0 mt-1 glass rounded-xl p-1 hidden z-50 min-w-[130px]">
             <button onclick="setLang('en')" class="block w-full text-left px-3 py-1.5 text-sm hover:bg-white/10 rounded-lg">🇬🇧 English</button>
             <button onclick="setLang('rw')" class="block w-full text-left px-3 py-1.5 text-sm hover:bg-white/10 rounded-lg">🇷🇼 Kinyarwanda</button>
             <button onclick="setLang('fr')" class="block w-full text-left px-3 py-1.5 text-sm hover:bg-white/10 rounded-lg">🇫🇷 Français</button>
           </div>
         </div>
-        <button onclick="handleLogout()" class="text-slate-400 hover:text-white text-sm px-3 py-1 rounded-lg border border-white/10 hover:border-white/30 transition">Logout</button>
+        <button onclick="handleLogout()" class="text-slate-400 hover:text-white text-xs px-3 py-1 rounded-lg border border-white/10 hover:border-white/30 transition">Logout</button>
       </div>
     </header>
 
-    <!-- Pages -->
-    <div class="flex-1 overflow-y-auto">
+    <!-- SCROLLABLE CONTENT -->
+    <div class="flex-1 overflow-y-auto pb-4">
+      
       <!-- DASHBOARD -->
       <section id="dashboard-page" class="page active">
         <h2 class="text-2xl font-bold mb-1" data-i18n="dashboard">Dashboard</h2>
-        <p class="text-slate-400 text-sm mb-5" id="greeting">Welcome back, <span id="user-name-display">Driver</span>!</p>
+        <p class="text-slate-400 text-sm mb-4" id="greeting">Welcome back, <span id="user-name-display">Driver</span>!</p>
 
-        <div class="grid grid-cols-2 gap-3 mb-6">
+        <div class="grid grid-cols-2 gap-3 mb-5">
           <div class="glass p-4 rounded-xl text-center">
             <p class="text-2xl font-bold text-amber-400" id="progress-percent">0%</p>
-            <p class="text-xs text-slate-400">Progress</p>
+            <p class="text-[0.65rem] text-slate-400" data-i18n="overall_progress">Overall Progress</p>
           </div>
           <div class="glass p-4 rounded-xl text-center">
             <p class="text-2xl font-bold text-amber-400" id="streak-count">0</p>
-            <p class="text-xs text-slate-400">Day Streak</p>
+            <p class="text-[0.65rem] text-slate-400" data-i18n="streak">Day Streak</p>
           </div>
         </div>
-
-        <div class="glass p-4 rounded-xl mb-4">
-          <p class="text-sm text-slate-300 mb-1">Overall completion</p>
+        <div class="glass p-4 rounded-xl mb-5">
+          <p class="text-sm text-slate-300 mb-1" data-i18n="overall_progress">Overall completion</p>
           <div class="progress-bar"><div class="fill" id="progress-fill" style="width:0%"></div></div>
         </div>
 
-        <h3 class="font-semibold text-slate-300 mt-4 mb-2">Quick Resume</h3>
+        <h3 class="font-semibold text-slate-300 text-sm mb-2">🏁 Level Progress</h3>
+        <div id="level-progress-summary" class="space-y-2 mb-5"></div>
+
         <div id="resume-lesson" class="glass p-4 rounded-xl glass-hover cursor-pointer" onclick="navigateTo('lessons')">
-          <p class="text-sm text-slate-400">Last lesson</p>
-          <p class="font-medium" id="last-lesson-name">Introduction to Driving</p>
+          <p class="text-xs text-slate-400" data-i18n="resume_lesson">Resume Lesson</p>
+          <p class="font-medium text-sm" id="last-lesson-name">Introduction to Driving</p>
+        </div>
+        
+        <!-- Footer Credit (inside dashboard) -->
+        <div class="mt-8 text-center opacity-60 hover:opacity-100 transition">
+          <a href="https://imena-hub.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 hover:text-amber-400">
+            ⚡ Developed by Imena Hub
+          </a>
         </div>
       </section>
 
       <!-- LESSONS -->
       <section id="lessons-page" class="page">
         <h2 class="text-2xl font-bold mb-4" data-i18n="lessons">Lessons</h2>
-        <div id="lessons-list" class="space-y-3"></div>
+        <div id="lessons-container" class="space-y-4"></div>
+        <!-- Footer Credit inside lessons -->
+        <div class="mt-8 text-center opacity-60 hover:opacity-100 transition">
+          <a href="https://imena-hub.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 hover:text-amber-400">
+            ⚡ Developed by Imena Hub
+          </a>
+        </div>
       </section>
 
       <!-- ROAD SIGNS -->
       <section id="signs-page" class="page">
         <h2 class="text-2xl font-bold mb-4" data-i18n="signs">Road Signs</h2>
         <div id="signs-grid" class="grid grid-cols-2 gap-3"></div>
+        <div class="mt-8 text-center opacity-60 hover:opacity-100 transition">
+          <a href="https://imena-hub.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 hover:text-amber-400">
+            ⚡ Developed by Imena Hub
+          </a>
+        </div>
       </section>
 
       <!-- QUIZ -->
@@ -335,6 +344,11 @@
         <h2 class="text-2xl font-bold mb-1" data-i18n="quiz">Practice Quiz</h2>
         <p class="text-slate-400 text-sm mb-4" id="quiz-status">Answer 10 questions</p>
         <div id="quiz-container"></div>
+        <div class="mt-8 text-center opacity-60 hover:opacity-100 transition">
+          <a href="https://imena-hub.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 hover:text-amber-400">
+            ⚡ Developed by Imena Hub
+          </a>
+        </div>
       </section>
 
       <!-- PROFILE -->
@@ -348,16 +362,21 @@
           <p class="text-slate-400 text-sm" id="profile-email">john@example.com</p>
         </div>
         <div class="mt-6 glass p-4 rounded-xl">
-          <p class="text-sm text-slate-300">Stats</p>
-          <div class="flex justify-between mt-2">
-            <span>Lessons completed: <strong id="stats-lessons">0</strong></span>
-            <span>Quiz score: <strong id="stats-quiz">0%</strong></span>
+          <p class="text-sm text-slate-300" data-i18n="stats">Stats</p>
+          <div class="flex justify-between mt-2 text-sm">
+            <span data-i18n="lessons_completed">Lessons: <strong id="stats-lessons">0</strong></span>
+            <span data-i18n="quiz_score">Quiz: <strong id="stats-quiz">0%</strong></span>
           </div>
+        </div>
+        <div class="mt-8 text-center opacity-60 hover:opacity-100 transition">
+          <a href="https://imena-hub.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-400 hover:text-amber-400">
+            ⚡ Developed by Imena Hub
+          </a>
         </div>
       </section>
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- BOTTOM NAV -->
     <div class="bottom-nav">
       <button class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
         <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/></svg>
@@ -385,7 +404,7 @@
 
 <script>
   // ================================================================
-  // 1.  FIREBASE CONFIG – 🔥 YOUR ACTUAL KEYS (from your snippet)
+  // FIREBASE CONFIG
   // ================================================================
   const firebaseConfig = {
     apiKey: "AIzaSyCvEGvmqHTSeU58dkDwCSz1uVLWexn4sRA",
@@ -396,152 +415,126 @@
     appId: "1:950576688581:web:e60573bb3ab8454c02afac",
     measurementId: "G-RZNMMNGK1Y"
   };
-
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
 
   // ================================================================
-  // 2.  TRANSLATIONS (English, Kinyarwanda, French)
+  // TRANSLATIONS (EN, RW, FR)
   // ================================================================
   const LANG = {
     en: {
-      app_name: 'Imena Drive',
-      subtitle: 'Master the road. Pass with confidence.',
+      app_name: 'Imena Drive', subtitle: 'Master the road. Pass with confidence.',
       login: 'Login', register: 'Register', email: 'Email', password: 'Password',
-      name: 'Full Name', no_account: "Don't have an account?", has_account: 'Already have one?',
-      dashboard: 'Dashboard', lessons: 'Lessons', signs: 'Road Signs', quiz: 'Quiz', profile: 'Profile',
-      logout: 'Logout', progress: 'Progress', streak: 'Day Streak',
-      greeting: 'Welcome back, {name}!',
-      lesson_intro: 'Introduction to Driving',
-      lesson_signs: 'Understanding Road Signs',
-      lesson_rules: 'Traffic Rules & Etiquette',
-      lesson_parking: 'Parking & Reversing',
-      sign_stop: 'Stop',
-      sign_yield: 'Yield',
-      sign_speed: 'Speed Limit',
-      sign_no_entry: 'No Entry',
-      sign_roundabout: 'Roundabout',
-      quiz_start: 'Start Quiz',
-      quiz_restart: 'Restart Quiz',
-      q1: 'What does a red traffic light mean?',
-      q2: 'What is the legal blood alcohol limit?',
-      q3: 'Which side do you overtake on?',
-      q4: 'What does a yellow warning light mean?',
-      q5: 'What is the safe following distance?',
-      opt_stop: 'Stop',
-      opt_go: 'Go',
-      opt_slow: 'Slow down',
-      opt_zero: '0.0%',
-      opt_0_05: '0.05%',
-      opt_0_1: '0.1%',
-      opt_left: 'Left',
-      opt_right: 'Right',
-      opt_either: 'Either',
-      opt_caution: 'Caution',
-      opt_go_fast: 'Go faster',
-      opt_2_sec: '2 seconds',
-      opt_4_sec: '4 seconds',
-      opt_6_sec: '6 seconds',
+      name: 'Full Name', dashboard: 'Dashboard', lessons: 'Lessons', signs: 'Road Signs',
+      quiz: 'Quiz', profile: 'Profile', logout: 'Logout', progress: 'Progress',
+      streak: 'Day Streak', overall_progress: 'Overall Progress',
+      greeting: 'Welcome back, {name}!', resume_lesson: 'Resume Lesson',
+      level: 'Level', level_beginner: 'Beginner', level_intermediate: 'Intermediate', level_advanced: 'Advanced',
+      completed: 'Completed', not_started: 'Not started',
+      stats: 'Stats', lessons_completed: 'Lessons:', quiz_score: 'Quiz:',
+      // Lessons
+      l1_intro: 'Introduction to Driving', l1_car_basics: 'Car Basics & Controls', l1_starting: 'Starting & Stopping',
+      l2_rules: 'Traffic Rules', l2_right_of_way: 'Right of Way', l2_overtaking: 'Overtaking Safely',
+      l3_night: 'Night Driving', l3_emergency: 'Emergency Handling', l3_eco: 'Eco-Driving',
+      // Signs
+      sign_stop: 'Stop', sign_yield: 'Yield', sign_speed: 'Speed Limit', sign_no_entry: 'No Entry', sign_roundabout: 'Roundabout',
+      sign_pedestrian: 'Pedestrian', sign_bicycle: 'Bicycle Lane', sign_parking: 'Parking',
+      // Quiz
+      quiz_start: 'Start Quiz', quiz_restart: 'Restart Quiz',
+      q1: 'What does a red traffic light mean?', q2: 'What is the legal blood alcohol limit?',
+      q3: 'Which side do you overtake on?', q4: 'What does a yellow warning light mean?',
+      q5: 'What is the safe following distance?', q6: 'What does a STOP sign mean?',
+      q7: 'When should you use hazard lights?', q8: 'What is the maximum speed in a school zone?',
+      q9: 'What does a solid white line mean?', q10: 'What is hydroplaning?',
+      opt_stop: 'Stop', opt_go: 'Go', opt_slow: 'Slow down', opt_zero: '0.0%',
+      opt_0_05: '0.05%', opt_0_1: '0.1%', opt_left: 'Left', opt_right: 'Right',
+      opt_either: 'Either', opt_caution: 'Caution', opt_go_fast: 'Go faster',
+      opt_2_sec: '2 seconds', opt_4_sec: '4 seconds', opt_6_sec: '6 seconds',
+      opt_full_stop: 'Full stop', opt_roll: 'Roll through', opt_ignore: 'Ignore',
+      opt_emergency: 'Emergency only', opt_parking: 'Parking', opt_fog: 'Fog/rain',
+      opt_20: '20 km/h', opt_30: '30 km/h', opt_50: '50 km/h',
+      opt_no_cross: 'No crossing', opt_lane_divider: 'Lane divider', opt_shoulder: 'Shoulder',
+      opt_water_glide: 'Water glide', opt_skid: 'Skid', opt_brake: 'Brake failure'
     },
     rw: {
-      app_name: 'Imena Drive',
-      subtitle: 'Menya amategeko y\'umuhanda. Wemezwa n\'ikizere.',
+      app_name: 'Imena Drive', subtitle: 'Menya amategeko y\'umuhanda. Wemezwa n\'ikizere.',
       login: 'Kwinjira', register: 'Kwiyandikisha', email: 'Imeli', password: 'Ijambobanga',
-      name: 'Izina ryose', no_account: "Nta konti ufite?",
-      has_account: 'Ufite konti?',
-      dashboard: 'Urubuga', lessons: 'Amasomo', signs: 'Ibimenyetso', quiz: 'Ikizamini', profile: 'Ibihu',
-      logout: 'Sohoka', progress: 'Iterambere', streak: 'Iminsi ikurikirana',
-      greeting: 'Murakaza neje, {name}!',
-      lesson_intro: 'Ibikurikiranwa mu gutwara',
-      lesson_signs: 'Kumenya ibimenyetso',
-      lesson_rules: 'Amategeko y\'umuhanda',
-      lesson_parking: 'Gupaka no gusubira inyuma',
-      sign_stop: 'Hagarara',
-      sign_yield: 'Erekana uburenganzira',
-      sign_speed: 'Umuvuduko uremerewe',
-      sign_no_entry: 'Nta kwinjira',
-      sign_roundabout: 'Akazu',
-      quiz_start: 'Tangira ikizamini',
-      quiz_restart: 'Subira ikizamini',
-      q1: 'Umutuku uturika usobanura iki?',
-      q2: 'Umuvuduko w\'inzoga uri he?',
-      q3: 'Urekura kuruhande ruki?',
-      q4: 'Umuhondo uturika usobanura iki?',
-      q5: 'Intera nziza yo gukurikira ni iyihe?',
-      opt_stop: 'Hagarara',
-      opt_go: 'Genda',
-      opt_slow: 'Genda buhoro',
-      opt_zero: '0.0%',
-      opt_0_05: '0.05%',
-      opt_0_1: '0.1%',
-      opt_left: 'Ibumoso',
-      opt_right: 'Iburyo',
-      opt_either: 'Byose',
-      opt_caution: 'Witondere',
-      opt_go_fast: 'Vuga byihuse',
-      opt_2_sec: 'Amasegonda 2',
-      opt_4_sec: 'Amasegonda 4',
-      opt_6_sec: 'Amasegonda 6',
+      name: 'Izina ryose', dashboard: 'Urubuga', lessons: 'Amasomo', signs: 'Ibimenyetso',
+      quiz: 'Ikizamini', profile: 'Ibihu', logout: 'Sohoka', progress: 'Iterambere',
+      streak: 'Iminsi ikurikirana', overall_progress: 'Iterambere ryose',
+      greeting: 'Murakaza neje, {name}!', resume_lesson: 'Komeza isomo',
+      level: 'Urwego', level_beginner: 'Umunyamwuga', level_intermediate: 'Rugari', level_advanced: 'Ruhanga',
+      completed: 'Byakozwe', not_started: 'Bitangiye',
+      stats: 'Imibare', lessons_completed: 'Amasomo:', quiz_score: 'Ikizamini:',
+      l1_intro: 'Gutangira gutwara', l1_car_basics: 'Ibikoresho by\'imodoka', l1_starting: 'Gutangira no guhagarara',
+      l2_rules: 'Amategeko y\'umuhanda', l2_right_of_way: 'Uburenganzira bwo kunyura', l2_overtaking: 'Kurekura mu muhanda',
+      l3_night: 'Gutwara nijoro', l3_emergency: 'Gukora mu by\'ihutirwa', l3_eco: 'Gutwara ubungubu',
+      sign_stop: 'Hagarara', sign_yield: 'Erekana uburenganzira', sign_speed: 'Umuvuduko uremerewe',
+      sign_no_entry: 'Nta kwinjira', sign_roundabout: 'Akazu', sign_pedestrian: 'Abanyamaguru',
+      sign_bicycle: 'Umuhanda w\'amagare', sign_parking: 'Gupaka',
+      quiz_start: 'Tangira ikizamini', quiz_restart: 'Subira ikizamini',
+      q1: 'Umutuku uturika usobanura iki?', q2: 'Umuvuduko w\'inzoga uri he?',
+      q3: 'Urekura kuruhande ruki?', q4: 'Umuhondo uturika usobanura iki?',
+      q5: 'Intera nziza yo gukurikira ni iyihe?', q6: 'Ikimenyetso cya STOP gisobanura iki?',
+      q7: 'Ni ryari ukoresha amatara ya hazard?', q8: 'Umuvuduko w\'emewe mu ishuri ni uwa he?',
+      q9: 'Umurongo wera ukomeye usobanura iki?', q10: 'Ni iki hydroplaning?',
+      opt_stop: 'Hagarara', opt_go: 'Genda', opt_slow: 'Genda buhoro', opt_zero: '0.0%',
+      opt_0_05: '0.05%', opt_0_1: '0.1%', opt_left: 'Ibumoso', opt_right: 'Iburyo',
+      opt_either: 'Byose', opt_caution: 'Witondere', opt_go_fast: 'Vuga byihuse',
+      opt_2_sec: 'Amasegonda 2', opt_4_sec: 'Amasegonda 4', opt_6_sec: 'Amasegonda 6',
+      opt_full_stop: 'Hagarara byose', opt_roll: 'Genda buhoro', opt_ignore: 'Wirengagize',
+      opt_emergency: 'Mu by\'ihutirwa gusa', opt_parking: 'Gupaka', opt_fog: 'Mu bihu / imvura',
+      opt_20: '20 km/h', opt_30: '30 km/h', opt_50: '50 km/h',
+      opt_no_cross: 'Nta kwambuka', opt_lane_divider: 'Igabana ry\'umuhanda', opt_shoulder: 'Ishanga',
+      opt_water_glide: 'Kunyura hejuru y\'amazi', opt_skid: 'Gusimbuka', opt_brake: 'Gutsindwa n\'amagare'
     },
     fr: {
-      app_name: 'Imena Drive',
-      subtitle: 'Maîtrisez la route. Réussissez avec confiance.',
+      app_name: 'Imena Drive', subtitle: 'Maîtrisez la route. Réussissez avec confiance.',
       login: 'Connexion', register: 'Inscription', email: 'Email', password: 'Mot de passe',
-      name: 'Nom complet', no_account: "Pas de compte ?",
-      has_account: 'Déjà un compte ?',
-      dashboard: 'Tableau de bord', lessons: 'Leçons', signs: 'Panneaux', quiz: 'Quiz', profile: 'Profil',
-      logout: 'Déconnexion', progress: 'Progrès', streak: 'Série de jours',
-      greeting: 'Bon retour, {name} !',
-      lesson_intro: 'Introduction à la conduite',
-      lesson_signs: 'Comprendre les panneaux',
-      lesson_rules: 'Règles de circulation',
-      lesson_parking: 'Stationnement et marche arrière',
-      sign_stop: 'Stop',
-      sign_yield: 'Céder le passage',
-      sign_speed: 'Limite de vitesse',
-      sign_no_entry: 'Interdit d\'entrer',
-      sign_roundabout: 'Rond-point',
-      quiz_start: 'Commencer le quiz',
-      quiz_restart: 'Recommencer',
-      q1: 'Que signifie un feu rouge ?',
-      q2: 'Quel est le taux d\'alcool légal ?',
-      q3: 'De quel côté dépasser ?',
-      q4: 'Que signifie un feu jaune ?',
-      q5: 'Quelle distance de sécurité ?',
-      opt_stop: 'Arrêter',
-      opt_go: 'Aller',
-      opt_slow: 'Ralentir',
-      opt_zero: '0.0%',
-      opt_0_05: '0.05%',
-      opt_0_1: '0.1%',
-      opt_left: 'Gauche',
-      opt_right: 'Droite',
-      opt_either: 'Soit',
-      opt_caution: 'Prudence',
-      opt_go_fast: 'Accélérer',
-      opt_2_sec: '2 secondes',
-      opt_4_sec: '4 secondes',
-      opt_6_sec: '6 secondes',
+      name: 'Nom complet', dashboard: 'Tableau de bord', lessons: 'Leçons', signs: 'Panneaux',
+      quiz: 'Quiz', profile: 'Profil', logout: 'Déconnexion', progress: 'Progrès',
+      streak: 'Série de jours', overall_progress: 'Progrès global',
+      greeting: 'Bon retour, {name} !', resume_lesson: 'Reprendre la leçon',
+      level: 'Niveau', level_beginner: 'Débutant', level_intermediate: 'Intermédiaire', level_advanced: 'Avancé',
+      completed: 'Terminé', not_started: 'Non commencé',
+      stats: 'Statistiques', lessons_completed: 'Leçons :', quiz_score: 'Quiz :',
+      l1_intro: 'Introduction à la conduite', l1_car_basics: 'Bases de la voiture', l1_starting: 'Démarrer et arrêter',
+      l2_rules: 'Règles de circulation', l2_right_of_way: 'Priorité', l2_overtaking: 'Dépasser en sécurité',
+      l3_night: 'Conduite de nuit', l3_emergency: 'Gestion des urgences', l3_eco: 'Éco-conduite',
+      sign_stop: 'Stop', sign_yield: 'Céder le passage', sign_speed: 'Limite de vitesse',
+      sign_no_entry: 'Entrée interdite', sign_roundabout: 'Rond-point', sign_pedestrian: 'Piéton',
+      sign_bicycle: 'Piste cyclable', sign_parking: 'Stationnement',
+      quiz_start: 'Commencer le quiz', quiz_restart: 'Recommencer',
+      q1: 'Que signifie un feu rouge ?', q2: 'Quel est le taux d\'alcool légal ?',
+      q3: 'De quel côté dépasser ?', q4: 'Que signifie un feu jaune ?',
+      q5: 'Quelle distance de sécurité ?', q6: 'Que signifie un panneau STOP ?',
+      q7: 'Quand utiliser les feux de détresse ?', q8: 'Vitesse maximale en zone scolaire ?',
+      q9: 'Que signifie une ligne blanche continue ?', q10: 'Qu\'est-ce que l\'aquaplaning ?',
+      opt_stop: 'Arrêter', opt_go: 'Aller', opt_slow: 'Ralentir', opt_zero: '0.0%',
+      opt_0_05: '0.05%', opt_0_1: '0.1%', opt_left: 'Gauche', opt_right: 'Droite',
+      opt_either: 'Soit', opt_caution: 'Prudence', opt_go_fast: 'Accélérer',
+      opt_2_sec: '2 secondes', opt_4_sec: '4 secondes', opt_6_sec: '6 secondes',
+      opt_full_stop: 'Arrêt complet', opt_roll: 'Rouler lentement', opt_ignore: 'Ignorer',
+      opt_emergency: 'Urgence uniquement', opt_parking: 'Stationnement', opt_fog: 'Brouillard/pluie',
+      opt_20: '20 km/h', opt_30: '30 km/h', opt_50: '50 km/h',
+      opt_no_cross: 'Ne pas traverser', opt_lane_divider: 'Séparateur de voie', opt_shoulder: 'Accotement',
+      opt_water_glide: 'Glisse sur l\'eau', opt_skid: 'Dérapage', opt_brake: 'Défaillance des freins'
     }
   };
 
   let currentLang = 'en';
-
   function t(key, vars = {}) {
     let str = LANG[currentLang]?.[key] || LANG['en'][key] || key;
     Object.keys(vars).forEach(k => str = str.replace(`{${k}}`, vars[k]));
     return str;
   }
-
   function setLang(lang) {
     currentLang = lang;
-    document.getElementById('current-lang-label').textContent =
-      lang === 'en' ? '🇬🇧 EN' : lang === 'rw' ? '🇷🇼 RW' : '🇫🇷 FR';
+    document.getElementById('current-lang-label').textContent = lang === 'en' ? '🇬🇧 EN' : lang === 'rw' ? '🇷🇼 RW' : '🇫🇷 FR';
     document.getElementById('lang-menu').classList.add('hidden');
     renderAll();
   }
-
   function toggleLangMenu() {
     document.getElementById('lang-menu').classList.toggle('hidden');
   }
@@ -551,14 +544,31 @@
   });
 
   // ================================================================
-  // 3.  DATA
+  // DATA: LEVELS & LESSONS
   // ================================================================
-  const LESSONS = [
-    { id: 'l1', titleKey: 'lesson_intro', icon: '🚗' },
-    { id: 'l2', titleKey: 'lesson_signs', icon: '🛑' },
-    { id: 'l3', titleKey: 'lesson_rules', icon: '📜' },
-    { id: 'l4', titleKey: 'lesson_parking', icon: '🅿️' },
+  const LEVELS = [
+    { id: 'beginner', titleKey: 'level_beginner', icon: '🌱', badge: 'level-beginner' },
+    { id: 'intermediate', titleKey: 'level_intermediate', icon: '🚗', badge: 'level-intermediate' },
+    { id: 'advanced', titleKey: 'level_advanced', icon: '🏎️', badge: 'level-advanced' }
   ];
+  const LESSONS_BY_LEVEL = {
+    beginner: [
+      { id: 'l1_intro', titleKey: 'l1_intro', icon: '🚦' },
+      { id: 'l1_car_basics', titleKey: 'l1_car_basics', icon: '⚙️' },
+      { id: 'l1_starting', titleKey: 'l1_starting', icon: '🔄' }
+    ],
+    intermediate: [
+      { id: 'l2_rules', titleKey: 'l2_rules', icon: '📜' },
+      { id: 'l2_right_of_way', titleKey: 'l2_right_of_way', icon: '🤝' },
+      { id: 'l2_overtaking', titleKey: 'l2_overtaking', icon: '🚀' }
+    ],
+    advanced: [
+      { id: 'l3_night', titleKey: 'l3_night', icon: '🌙' },
+      { id: 'l3_emergency', titleKey: 'l3_emergency', icon: '🚨' },
+      { id: 'l3_eco', titleKey: 'l3_eco', icon: '🌿' }
+    ]
+  };
+  const ALL_LESSON_IDS = Object.values(LESSONS_BY_LEVEL).flat().map(l => l.id);
 
   const SIGNS = [
     { id: 's1', nameKey: 'sign_stop', emoji: '🛑' },
@@ -566,6 +576,9 @@
     { id: 's3', nameKey: 'sign_speed', emoji: '🚫' },
     { id: 's4', nameKey: 'sign_no_entry', emoji: '⛔' },
     { id: 's5', nameKey: 'sign_roundabout', emoji: '🔄' },
+    { id: 's6', nameKey: 'sign_pedestrian', emoji: '🚶' },
+    { id: 's7', nameKey: 'sign_bicycle', emoji: '🚲' },
+    { id: 's8', nameKey: 'sign_parking', emoji: '🅿️' }
   ];
 
   const QUIZ = [
@@ -574,17 +587,22 @@
     { qKey: 'q3', options: ['opt_left', 'opt_right', 'opt_either'], correct: 0 },
     { qKey: 'q4', options: ['opt_caution', 'opt_go', 'opt_go_fast'], correct: 0 },
     { qKey: 'q5', options: ['opt_2_sec', 'opt_4_sec', 'opt_6_sec'], correct: 0 },
+    { qKey: 'q6', options: ['opt_full_stop', 'opt_roll', 'opt_ignore'], correct: 0 },
+    { qKey: 'q7', options: ['opt_emergency', 'opt_parking', 'opt_fog'], correct: 2 },
+    { qKey: 'q8', options: ['opt_20', 'opt_30', 'opt_50'], correct: 1 },
+    { qKey: 'q9', options: ['opt_no_cross', 'opt_lane_divider', 'opt_shoulder'], correct: 1 },
+    { qKey: 'q10', options: ['opt_water_glide', 'opt_skid', 'opt_brake'], correct: 0 }
   ];
 
   // ================================================================
-  // 4.  STATE
+  // STATE
   // ================================================================
   let currentUser = null;
   let userProgress = { completedLessons: [], quizScore: 0, streak: 0, lastLesson: null };
   let quizState = { current: 0, selected: [], finished: false };
 
   // ================================================================
-  // 5.  AUTH (Email + Google)
+  // AUTH
   // ================================================================
   function switchAuthTab(tab) {
     document.querySelectorAll('.auth-tab').forEach(el => el.classList.remove('active'));
@@ -594,18 +612,13 @@
     document.getElementById('auth-error').classList.add('hidden');
     document.getElementById('reg-error').classList.add('hidden');
   }
-
   async function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
     const pass = document.getElementById('login-password').value;
-    try {
-      await auth.signInWithEmailAndPassword(email, pass);
-    } catch (err) {
-      showAuthError(err.message);
-    }
+    try { await auth.signInWithEmailAndPassword(email, pass); } 
+    catch (err) { showAuthError(err.message); }
   }
-
   async function handleRegister(e) {
     e.preventDefault();
     const name = document.getElementById('reg-name').value;
@@ -615,64 +628,39 @@
       const cred = await auth.createUserWithEmailAndPassword(email, pass);
       await cred.user.updateProfile({ displayName: name });
       await db.collection('users').doc(cred.user.uid).set({ name, email, progress: {} }, { merge: true });
-    } catch (err) {
-      showRegError(err.message);
-    }
+    } catch (err) { showRegError(err.message); }
   }
-
-  // --- GOOGLE SIGN-IN ---
   async function handleGoogleSignIn() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       await auth.signInWithPopup(provider);
-      // The user will be handled in onAuthStateChanged below
     } catch (err) {
-      if (err.code !== 'auth/popup-closed-by-user') {
-        showAuthError(err.message);
-      }
+      if (err.code !== 'auth/popup-closed-by-user') showAuthError(err.message);
     }
   }
+  function showAuthError(msg) { const el = document.getElementById('auth-error'); el.textContent = msg; el.classList.remove('hidden'); }
+  function showRegError(msg) { const el = document.getElementById('reg-error'); el.textContent = msg; el.classList.remove('hidden'); }
+  function handleLogout() { auth.signOut(); }
 
-  function showAuthError(msg) {
-    const el = document.getElementById('auth-error');
-    el.textContent = msg;
-    el.classList.remove('hidden');
-  }
-  function showRegError(msg) {
-    const el = document.getElementById('reg-error');
-    el.textContent = msg;
-    el.classList.remove('hidden');
-  }
-
-  function handleLogout() {
-    auth.signOut();
-  }
-
-  // Auth state listener
   auth.onAuthStateChanged(async (user) => {
     if (user) {
       currentUser = user;
       document.getElementById('auth-page').style.display = 'none';
       document.getElementById('main-app').style.display = 'flex';
-
-      // Load or create user progress in Firestore
       try {
         const doc = await db.collection('users').doc(user.uid).get();
         if (doc.exists) {
           const data = doc.data();
           userProgress = data.progress || { completedLessons: [], quizScore: 0, streak: 0, lastLesson: null };
         } else {
-          // New user (e.g., Google sign-in) – create default profile
-          const name = user.displayName || 'Driver';
           await db.collection('users').doc(user.uid).set({
-            name,
+            name: user.displayName || 'Driver',
             email: user.email,
             progress: { completedLessons: [], quizScore: 0, streak: 0, lastLesson: null }
           });
           userProgress = { completedLessons: [], quizScore: 0, streak: 0, lastLesson: null };
         }
       } catch (e) {
-        // Fallback to localStorage
         const saved = localStorage.getItem('imena_progress');
         if (saved) userProgress = JSON.parse(saved);
       }
@@ -685,7 +673,7 @@
   });
 
   // ================================================================
-  // 6.  NAVIGATION
+  // NAVIGATION
   // ================================================================
   function navigateTo(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -700,45 +688,80 @@
   }
 
   // ================================================================
-  // 7.  RENDER FUNCTIONS
+  // RENDER FUNCTIONS
   // ================================================================
   function renderAll() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key) el.textContent = t(key);
+    });
+    document.getElementById('auth-subtitle').textContent = t('subtitle');
     renderDashboard();
     renderLessons();
     renderSigns();
     renderProfile();
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      el.textContent = t(key);
-    });
-    document.getElementById('auth-subtitle').textContent = t('subtitle');
   }
 
   function renderDashboard() {
-    const pct = userProgress.completedLessons.length / LESSONS.length * 100 || 0;
+    const total = ALL_LESSON_IDS.length;
+    const done = userProgress.completedLessons.filter(id => ALL_LESSON_IDS.includes(id)).length;
+    const pct = total > 0 ? (done / total) * 100 : 0;
     document.getElementById('progress-percent').textContent = Math.round(pct) + '%';
     document.getElementById('progress-fill').style.width = pct + '%';
     document.getElementById('streak-count').textContent = userProgress.streak || 0;
     const name = currentUser?.displayName || 'Driver';
     document.getElementById('greeting').textContent = t('greeting', { name });
     document.getElementById('user-name-display').textContent = name;
-    const last = userProgress.lastLesson || LESSONS[0]?.id;
-    const lesson = LESSONS.find(l => l.id === last);
-    document.getElementById('last-lesson-name').textContent = lesson ? t(lesson.titleKey) : '—';
+    const last = userProgress.lastLesson || 'l1_intro';
+    let lastLesson = null;
+    for (const level of LEVELS) {
+      const found = LESSONS_BY_LEVEL[level.id]?.find(l => l.id === last);
+      if (found) lastLesson = found;
+    }
+    document.getElementById('last-lesson-name').textContent = lastLesson ? t(lastLesson.titleKey) : '—';
+
+    // Level summary
+    const container = document.getElementById('level-progress-summary');
+    container.innerHTML = LEVELS.map(level => {
+      const lessons = LESSONS_BY_LEVEL[level.id] || [];
+      const doneCount = lessons.filter(l => userProgress.completedLessons.includes(l.id)).length;
+      const pct = lessons.length > 0 ? (doneCount / lessons.length) * 100 : 0;
+      return `
+        <div class="glass p-3 rounded-xl">
+          <div class="flex justify-between text-sm items-center">
+            <span><span class="level-badge ${level.badge}">${t(level.titleKey)}</span> ${level.icon}</span>
+            <span class="text-slate-400 text-xs">${doneCount}/${lessons.length}</span>
+          </div>
+          <div class="progress-bar mt-1"><div class="fill" style="width:${pct}%"></div></div>
+        </div>
+      `;
+    }).join('');
   }
 
   function renderLessons() {
-    const container = document.getElementById('lessons-list');
-    container.innerHTML = LESSONS.map(lesson => {
-      const done = userProgress.completedLessons.includes(lesson.id);
+    const container = document.getElementById('lessons-container');
+    container.innerHTML = LEVELS.map(level => {
+      const lessons = LESSONS_BY_LEVEL[level.id] || [];
+      const doneCount = lessons.filter(l => userProgress.completedLessons.includes(l.id)).length;
       return `
-        <div class="glass p-4 rounded-xl flex items-center gap-4 glass-hover cursor-pointer" onclick="toggleLesson('${lesson.id}')">
-          <span class="text-3xl">${lesson.icon}</span>
-          <div class="flex-1">
-            <p class="font-medium">${t(lesson.titleKey)}</p>
-            <p class="text-xs text-slate-400">${done ? '✅ Completed' : '⏳ Not started'}</p>
+        <div class="glass p-4 rounded-xl">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl">${level.icon}</span>
+            <span class="font-bold text-sm"><span class="level-badge ${level.badge}">${t(level.titleKey)}</span></span>
+            <span class="text-xs text-slate-400 ml-auto">${doneCount}/${lessons.length}</span>
           </div>
-          <span class="text-sm">${done ? '✔️' : '▶️'}</span>
+          <div class="space-y-2">
+            ${lessons.map(lesson => {
+              const done = userProgress.completedLessons.includes(lesson.id);
+              return `
+                <div class="flex items-center gap-3 cursor-pointer glass-hover p-2 rounded-lg transition" onclick="toggleLesson('${lesson.id}')">
+                  <span class="text-xl">${lesson.icon}</span>
+                  <span class="flex-1 text-sm font-medium">${t(lesson.titleKey)}</span>
+                  <span class="text-xs ${done ? 'text-green-400' : 'text-slate-500'}">${done ? '✅' : '⏳'}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
         </div>
       `;
     }).join('');
@@ -746,16 +769,12 @@
 
   function toggleLesson(id) {
     const idx = userProgress.completedLessons.indexOf(id);
-    if (idx > -1) {
-      userProgress.completedLessons.splice(idx, 1);
-    } else {
-      userProgress.completedLessons.push(id);
-    }
+    if (idx > -1) userProgress.completedLessons.splice(idx, 1);
+    else userProgress.completedLessons.push(id);
     userProgress.lastLesson = id;
     userProgress.streak = (userProgress.streak || 0) + 1;
     saveProgress();
     renderAll();
-    renderLessons();
   }
 
   function renderSigns() {
@@ -769,18 +788,18 @@
   }
 
   function renderProfile() {
-    const user = currentUser;
-    if (!user) return;
-    document.getElementById('profile-initial').textContent = (user.displayName || 'D')[0].toUpperCase();
-    document.getElementById('profile-name').textContent = user.displayName || 'Driver';
-    document.getElementById('profile-email').textContent = user.email || '';
-    document.getElementById('stats-lessons').textContent = userProgress.completedLessons?.length || 0;
-    const score = userProgress.quizScore || 0;
-    document.getElementById('stats-quiz').textContent = Math.round(score) + '%';
+    if (!currentUser) return;
+    document.getElementById('profile-initial').textContent = (currentUser.displayName || 'D')[0].toUpperCase();
+    document.getElementById('profile-name').textContent = currentUser.displayName || 'Driver';
+    document.getElementById('profile-email').textContent = currentUser.email || '';
+    const total = ALL_LESSON_IDS.length;
+    const done = userProgress.completedLessons.filter(id => ALL_LESSON_IDS.includes(id)).length;
+    document.getElementById('stats-lessons').textContent = `${done}/${total}`;
+    document.getElementById('stats-quiz').textContent = Math.round(userProgress.quizScore || 0) + '%';
   }
 
   // ================================================================
-  // 8.  QUIZ
+  // QUIZ
   // ================================================================
   function renderQuiz() {
     const container = document.getElementById('quiz-container');
@@ -796,47 +815,39 @@
           <p class="text-4xl mb-2">${pct >= 70 ? '🎉' : '📚'}</p>
           <p class="text-2xl font-bold">${pct}%</p>
           <p class="text-slate-400">${correct} / ${total} correct</p>
-          <button onclick="resetQuiz()" class="mt-4 px-6 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition">${t('quiz_restart')}</button>
+          <button onclick="resetQuiz()" class="mt-4 px-6 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition text-sm">${t('quiz_restart')}</button>
         </div>
       `;
+      document.getElementById('quiz-status').textContent = `✅ Finished!`;
       return;
     }
-
     const q = QUIZ[quizState.current];
     const qText = t(q.qKey);
     const options = q.options.map(optKey => t(optKey));
     const selectedIdx = quizState.selected[quizState.current];
     let html = `
       <div class="glass p-5 rounded-xl mb-4">
-        <p class="text-sm text-slate-400 mb-1">Question ${quizState.current+1} / ${total}</p>
-        <p class="text-lg font-semibold">${qText}</p>
+        <p class="text-xs text-slate-400 mb-1">${quizState.current+1} / ${total}</p>
+        <p class="text-base font-semibold">${qText}</p>
       </div>
       <div class="space-y-2">
     `;
     options.forEach((opt, idx) => {
-      let cls = 'quiz-option';
+      let cls = 'quiz-option text-sm';
       if (selectedIdx !== undefined) {
         if (idx === q.correct) cls += ' correct';
         else if (idx === selectedIdx && idx !== q.correct) cls += ' wrong';
         else if (idx === selectedIdx) cls += ' selected';
       }
-      html += `
-        <div class="${cls}" onclick="selectQuizOption(${idx})">
-          ${String.fromCharCode(65 + idx)}. ${opt}
-        </div>
-      `;
+      html += `<div class="${cls}" onclick="selectQuizOption(${idx})">${String.fromCharCode(65 + idx)}. ${opt}</div>`;
     });
     html += `</div>`;
     if (selectedIdx !== undefined) {
       const isLast = quizState.current === total - 1;
-      html += `
-        <button onclick="nextQuizQuestion()" class="w-full mt-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition">
-          ${isLast ? 'Finish' : 'Next →'}
-        </button>
-      `;
+      html += `<button onclick="nextQuizQuestion()" class="w-full mt-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-primary font-bold transition text-sm">${isLast ? 'Finish' : 'Next →'}</button>`;
     }
     container.innerHTML = html;
-    document.getElementById('quiz-status').textContent = `Question ${quizState.current+1} of ${total}`;
+    document.getElementById('quiz-status').textContent = `Question ${quizState.current+1} / ${total}`;
   }
 
   function selectQuizOption(idx) {
@@ -844,39 +855,24 @@
     quizState.selected[quizState.current] = idx;
     renderQuiz();
   }
-
   function nextQuizQuestion() {
-    if (quizState.current < QUIZ.length - 1) {
-      quizState.current++;
-      renderQuiz();
-    } else {
-      quizState.finished = true;
-      renderQuiz();
-    }
+    if (quizState.current < QUIZ.length - 1) { quizState.current++; renderQuiz(); } 
+    else { quizState.finished = true; renderQuiz(); }
   }
-
-  function resetQuiz() {
-    quizState = { current: 0, selected: [], finished: false };
-    renderQuiz();
-  }
+  function resetQuiz() { quizState = { current: 0, selected: [], finished: false }; renderQuiz(); }
 
   // ================================================================
-  // 9.  SAVE PROGRESS
+  // SAVE
   // ================================================================
   async function saveProgress() {
     if (currentUser) {
-      try {
-        await db.collection('users').doc(currentUser.uid).set({ progress: userProgress }, { merge: true });
-      } catch (e) {
-        localStorage.setItem('imena_progress', JSON.stringify(userProgress));
-      }
-    } else {
-      localStorage.setItem('imena_progress', JSON.stringify(userProgress));
-    }
+      try { await db.collection('users').doc(currentUser.uid).set({ progress: userProgress }, { merge: true }); } 
+      catch (e) { localStorage.setItem('imena_progress', JSON.stringify(userProgress)); }
+    } else { localStorage.setItem('imena_progress', JSON.stringify(userProgress)); }
   }
 
   // ================================================================
-  // 10. INIT
+  // INIT
   // ================================================================
   document.getElementById('current-lang-label').textContent = '🇬🇧 EN';
 </script>
