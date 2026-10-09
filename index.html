@@ -4,15 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>iMENA Drive</title>
+<link rel="icon" type="image/png" href="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png">
+<meta property="og:image" content="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png">
 <style>
 :root{
-  --bg:#060810;--card:#111a2e;--ink:#eef2fa;--ink2:#b9c4dc;--ink3:#7b88a8;
+  --bg:#060810;--card:#0d1424;--card2:#111a2e;
+  --ink:#eef2fa;--ink2:#b9c4dc;--ink3:#7b88a8;
   --cyan:#22d3ee;--green:#22c55e;--yellow:#facc15;--red:#ef4444;
-  --purple:#a855f7;--amber:#f59e0b;
+  --purple:#a855f7;--pink:#ec4899;--orange:#ff7a1a;--amber:#f59e0b;
   --bd:rgba(255,255,255,.10);--bd2:rgba(255,255,255,.22);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   background:var(--bg);color:var(--ink);line-height:1.55;overflow-x:hidden;
   -webkit-font-smoothing:antialiased}
@@ -25,16 +29,14 @@ a{color:var(--cyan);text-decoration:none}
 
 #scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
 
-header.home{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 20px;
+/* Header */
+header.home{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 20px;
   display:flex;align-items:center;justify-content:space-between;
   background:linear-gradient(180deg,rgba(6,8,16,.85),rgba(6,8,16,0));
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  backdrop-filter:blur(10px)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1rem}
-.logo{width:36px;height:36px;border-radius:10px;position:relative;
-  background:linear-gradient(135deg,var(--cyan),#0369a1 60%,var(--green));
-  box-shadow:0 6px 20px rgba(34,211,238,.35);flex-shrink:0}
-.logo::after{content:'';position:absolute;inset:8px;border-radius:4px;
-  border-left:2px dashed rgba(255,255,255,.85);border-right:2px dashed rgba(255,255,255,.85)}
+.brand img{width:40px;height:40px;object-fit:contain;flex-shrink:0;
+  filter:drop-shadow(0 4px 12px rgba(34,211,238,.4))}
 .brand small{display:block;font-size:.66rem;color:var(--ink3);font-weight:500}
 nav.hm{display:none;gap:4px;align-items:center}
 @media(min-width:820px){nav.hm{display:flex}}
@@ -45,13 +47,14 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
 .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;
   padding:11px 20px;border-radius:999px;border:1px solid transparent;
   font-weight:600;font-size:.9rem;font-family:inherit;cursor:pointer;
-  transition:.2s;min-height:42px;text-decoration:none}
+  transition:.2s;min-height:42px;text-decoration:none;color:var(--ink)}
 .btn-primary{background:linear-gradient(135deg,var(--cyan),#0ea5b7);color:#02121a;
   box-shadow:0 6px 24px rgba(34,211,238,.32)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 34px rgba(34,211,238,.48)}
 .btn-ghost{border-color:var(--bd2);color:var(--ink)}
 .btn-ghost:hover{background:rgba(255,255,255,.06);border-color:var(--cyan)}
 .btn-block{width:100%}
+.btn-sm{padding:8px 14px;font-size:.82rem;min-height:36px}
 
 .google-btn{display:inline-flex;align-items:center;gap:10px;
   padding:9px 16px;border-radius:999px;background:#fff;color:#1f2937;
@@ -60,6 +63,7 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
 .google-btn:hover{box-shadow:0 8px 24px rgba(255,255,255,.18);transform:translateY(-1px)}
 .google-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
 
+/* Hero */
 .hero{min-height:100vh;position:relative;display:flex;align-items:center;
   padding:120px 24px 100px;max-width:1240px;margin:0 auto;width:100%}
 .hero-inner{max-width:780px}
@@ -77,6 +81,7 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
   border:1px solid rgba(255,255,255,.22);background:rgba(6,8,16,.55);
   color:#cbd5e1;backdrop-filter:blur(8px)}
 
+/* Sections on landing */
 .section{min-height:70vh;padding:90px 24px;display:flex;align-items:center;
   max-width:1240px;margin:0 auto;width:100%;position:relative}
 .glass{background:rgba(8,12,24,.72);backdrop-filter:blur(18px);
@@ -99,31 +104,32 @@ footer.home .brand{justify-content:center;margin-bottom:18px}
 footer.home .brand small{text-align:left}
 footer.home p{max-width:600px;margin:8px auto}
 
+/* App shell */
 #app{min-height:100vh;background:
   radial-gradient(1200px 500px at 10% 0%,rgba(34,211,238,.06),transparent 60%),
   radial-gradient(1000px 500px at 100% 20%,rgba(168,85,247,.06),transparent 55%),
   var(--bg);position:relative;z-index:1}
-.app-shell{display:grid;grid-template-columns:1fr;max-width:1400px;margin:0 auto;padding:0 20px 80px}
-@media(min-width:1000px){.app-shell{grid-template-columns:250px 1fr;gap:30px;padding-top:20px}}
+.app-shell{display:grid;grid-template-columns:1fr;max-width:1440px;margin:0 auto;padding:0 20px 100px}
+@media(min-width:1000px){.app-shell{grid-template-columns:260px 1fr;gap:32px;padding-top:24px}}
 .app-side{display:none;position:sticky;top:80px;align-self:start}
 @media(min-width:1000px){.app-side{display:block}}
-.side-card{padding:18px;border-radius:16px;border:1px solid var(--bd);
+.side-card{padding:16px;border-radius:16px;border:1px solid var(--bd);
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
   margin-bottom:14px}
-.side-card .lbl{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+.side-card .lbl{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink3);font-weight:700}
 .side-nav{display:flex;flex-direction:column;gap:2px;margin-top:12px}
 .side-nav button{text-align:left;padding:11px 12px;border-radius:10px;background:none;
-  border:none;color:var(--ink2);font-family:inherit;font-size:.9rem;cursor:pointer;
-  transition:.18s;display:flex;align-items:center;gap:10px}
+  border:none;color:var(--ink2);font-family:inherit;font-size:.88rem;cursor:pointer;
+  transition:.18s;display:flex;align-items:center;gap:10px;font-weight:500}
 .side-nav button:hover{background:rgba(255,255,255,.06);color:#fff}
 .side-nav button.on{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(168,85,247,.12));
   color:#fff;font-weight:600}
 .side-nav button .ic{font-size:1rem}
 
-.topbar{position:sticky;top:0;z-index:40;background:rgba(6,8,16,.82);
+.topbar{position:sticky;top:0;z-index:40;background:rgba(6,8,16,.85);
   backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:12px 0}
-.topbar-inner{max-width:1400px;margin:0 auto;padding:0 20px;
+.topbar-inner{max-width:1440px;margin:0 auto;padding:0 20px;
   display:flex;align-items:center;justify-content:space-between;gap:12px}
 .avatar{width:42px;height:42px;border-radius:50%;
   background:linear-gradient(135deg,var(--cyan),var(--purple));
@@ -131,85 +137,157 @@ footer.home p{max-width:600px;margin:8px auto}
   overflow:hidden;flex-shrink:0}
 .avatar img{width:100%;height:100%;object-fit:cover}
 
-.dash-hero{padding:34px 32px;border-radius:24px;margin-bottom:22px;position:relative;
-  overflow:hidden;background:linear-gradient(135deg,#0f1e3d 0%,#1e2a5a 40%,#3b2166 100%);
-  border:1px solid rgba(255,255,255,.1)}
-.dash-hero::before{content:'';position:absolute;top:-40%;right:-10%;width:340px;height:340px;
-  background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);filter:blur(30px)}
-.dash-hero::after{content:'';position:absolute;bottom:-30%;left:-5%;width:300px;height:300px;
-  background:radial-gradient(circle,rgba(236,72,153,.28),transparent 65%);filter:blur(30px)}
+/* Dashboard */
+.dash-hero{position:relative;padding:38px 32px;border-radius:24px;margin-bottom:22px;
+  overflow:hidden;background:linear-gradient(120deg,#0a1730 0%,#12244d 30%,#281863 70%,#3d1f5e 100%);
+  border:1px solid rgba(255,255,255,.12)}
+.dash-hero::before{content:'';position:absolute;top:-50%;right:-15%;width:420px;height:420px;
+  background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);
+  filter:blur(40px);animation:aurora 12s ease-in-out infinite}
+.dash-hero::after{content:'';position:absolute;bottom:-40%;left:-10%;width:360px;height:360px;
+  background:radial-gradient(circle,rgba(236,72,153,.30),transparent 65%);
+  filter:blur(40px);animation:aurora 14s ease-in-out infinite reverse}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.15)}}
 .dash-hero .inner{position:relative;z-index:2;display:flex;justify-content:space-between;
   align-items:center;gap:20px;flex-wrap:wrap}
-.dash-hero h1{font-size:clamp(1.5rem,3vw,2.1rem);color:#fff;margin-bottom:6px}
+.dash-hero h1{font-size:clamp(1.5rem,3vw,2.2rem);color:#fff;margin-bottom:6px}
 .dash-hero .sub{color:#c8d2ea;font-size:.92rem}
-.dash-hero .who{display:flex;gap:16px;align-items:center}
-.dash-hero .avatar{width:56px;height:56px;font-size:1.35rem;box-shadow:0 8px 26px rgba(0,0,0,.4)}
+.dash-hero .who{display:flex;gap:18px;align-items:center}
+.dash-hero .avatar{width:64px;height:64px;font-size:1.5rem;
+  box-shadow:0 12px 32px rgba(0,0,0,.5);border:3px solid rgba(255,255,255,.15)}
+.streak-badge{display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;border-radius:999px;background:rgba(255,122,26,.2);
+  border:1px solid rgba(255,122,26,.4);font-size:.78rem;font-weight:700;color:#ffb37a;
+  margin-top:6px}
+.streak-badge .flame{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
 
-.kpis{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);margin-bottom:22px}
-@media(min-width:700px){.kpis{grid-template-columns:repeat(4,1fr)}}
-.kpi{padding:20px;border-radius:18px;position:relative;overflow:hidden;
-  border:1px solid rgba(255,255,255,.1)}
-.kpi::before{content:'';position:absolute;inset:0;opacity:.14;
-  background:linear-gradient(135deg,var(--c1),var(--c2))}
-.kpi::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;
-  border-radius:50%;background:var(--c1);opacity:.28;filter:blur(28px)}
-.kpi>*{position:relative;z-index:2}
-.kpi .k{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.7);font-weight:700}
-.kpi .v{font-size:1.9rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#fff;margin-top:6px}
-.kpi .h{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:4px}
-.kpi.c1{--c1:#22d3ee;--c2:#0ea5b7}
-.kpi.c2{--c1:#22c55e;--c2:#15803d}
-.kpi.c3{--c1:#f59e0b;--c2:#d97706}
-.kpi.c4{--c1:#a855f7;--c2:#7c3aed}
+/* Grids */
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:1fr}
+.grid-3{grid-template-columns:1fr}
+.grid-4{grid-template-columns:repeat(2,1fr)}
+@media(min-width:700px){
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+}
+@media(min-width:1000px){
+  .grid-4-lg{grid-template-columns:repeat(4,1fr)}
+}
 
 .panel{padding:22px;border-radius:20px;border:1px solid var(--bd);
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
   margin-bottom:20px}
-.panel h3{font-size:1rem;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.panel h3{font-size:1rem;margin-bottom:18px;display:flex;align-items:center;gap:10px;font-weight:700}
 .panel h3 .ic{font-size:1.15rem}
 
-.reco{padding:22px;border-radius:18px;margin-bottom:22px;position:relative;overflow:hidden;
-  border:1px solid rgba(34,211,238,.35);
-  background:linear-gradient(135deg,rgba(34,211,238,.14),rgba(34,197,94,.08))}
-.reco .tag{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:#67e8f9;font-weight:800;position:relative;z-index:2}
-.reco h3{margin:8px 0 6px;position:relative;z-index:2;font-size:1.15rem}
-.reco p{position:relative;z-index:2;color:var(--ink2);font-size:.9rem}
+/* Circular progress rings */
+.rings{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ring-card{display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:16px;border-radius:16px;border:1px solid var(--bd);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005))}
+.ring-card svg{width:90px;height:90px;transform:rotate(-90deg)}
+.ring-card .ring-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:8}
+.ring-card .ring-val{fill:none;stroke-width:8;stroke-linecap:round;
+  transition:stroke-dashoffset 1.2s ease-out}
+.ring-card .v{font-weight:800;font-size:1.3rem;margin-top:-58px;color:#fff;
+  letter-spacing:-.03em;z-index:2}
+.ring-card .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);margin-top:36px}
 
-.bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
-.bar>i{display:block;height:100%;border-radius:999px;transition:width .8s}
+/* Activity heatmap */
+.heatmap{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:14px}
+.heat-cell{aspect-ratio:1;border-radius:3px;background:rgba(255,255,255,.05);
+  transition:.2s;cursor:pointer;position:relative}
+.heat-cell:hover{transform:scale(1.3);z-index:2}
+.heat-cell[data-lvl="1"]{background:#0e4429}
+.heat-cell[data-lvl="2"]{background:#166c3a}
+.heat-cell[data-lvl="3"]{background:#22a04d}
+.heat-cell[data-lvl="4"]{background:#22d3ee}
+.heat-legend{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--ink3);margin-top:12px}
+.heat-legend .dot{width:10px;height:10px;border-radius:2px}
+.heat-legend .dot.l1{background:#0e4429}
+.heat-legend .dot.l2{background:#166c3a}
+.heat-legend .dot.l3{background:#22a04d}
+.heat-legend .dot.l4{background:#22d3ee}
 
-.row-topic{display:flex;align-items:center;gap:14px;padding:12px 0;
-  border-bottom:1px solid rgba(255,255,255,.05)}
-.row-topic:last-child{border-bottom:none}
-.row-topic .lbl{flex:0 0 130px;font-size:.86rem;font-weight:600;color:var(--ink)}
-.row-topic .tr{flex:1}
-.row-topic .val{flex:0 0 46px;text-align:right;font-size:.84rem;font-weight:800}
-@media(max-width:520px){.row-topic .lbl{flex:0 0 100px;font-size:.78rem}}
+/* Skill radar */
+.radar-wrap{display:flex;justify-content:center;align-items:center;padding:10px}
+.radar-wrap svg{width:100%;max-width:280px;height:auto}
 
+/* Continue learning */
+.continue-card{padding:24px;border-radius:20px;border:1px solid rgba(34,211,238,.35);
+  background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(168,85,247,.08));
+  position:relative;overflow:hidden;margin-bottom:22px}
+.continue-card::before{content:'';position:absolute;right:-30px;top:-30px;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(34,211,238,.3),transparent 65%);filter:blur(30px)}
+.continue-card .inner{position:relative;z-index:2;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.continue-card .illus{width:110px;height:110px;border-radius:18px;flex-shrink:0;
+  background:linear-gradient(135deg,#0891b2,#22d3ee);display:grid;place-items:center;
+  font-size:2.8rem;box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.continue-card .info{flex:1;min-width:200px}
+.continue-card .tag{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#67e8f9;font-weight:800}
+.continue-card h3{margin:6px 0 4px;font-size:1.15rem}
+.continue-card p{color:var(--ink2);font-size:.86rem}
+.continue-card .bar{margin-top:12px}
+
+/* Achievements grid */
+.achv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.achv-grid{grid-template-columns:repeat(4,1fr)}}
+.achv{position:relative;padding:16px;border-radius:14px;border:1px solid var(--bd);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
+  text-align:center;overflow:hidden;transition:.25s}
+.achv:hover{transform:translateY(-2px);border-color:var(--bd2)}
+.achv.on{border-color:rgba(250,204,21,.5);
+  background:linear-gradient(135deg,rgba(250,204,21,.14),rgba(245,158,11,.04))}
+.achv.on::after{content:'';position:absolute;inset:0;border-radius:14px;
+  box-shadow:0 0 30px rgba(250,204,21,.25) inset;pointer-events:none}
+.achv .ic{font-size:2rem;filter:grayscale(1);opacity:.4}
+.achv.on .ic{filter:none;opacity:1}
+.achv .t{font-weight:700;font-size:.82rem;margin-top:8px}
+.achv .d{font-size:.68rem;color:var(--ink3);margin-top:2px}
+.achv .bar{margin-top:8px;height:5px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--cyan),var(--purple),transparent)}
+.tl-item{position:relative;padding:10px 0 14px}
+.tl-item::before{content:'';position:absolute;left:-21px;top:14px;width:12px;height:12px;
+  border-radius:50%;background:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+.tl-item.success::before{background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.15)}
+.tl-item.warn::before{background:var(--yellow);box-shadow:0 0 0 3px rgba(250,204,21,.15)}
+.tl-item.error::before{background:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.15)}
+.tl-item .txt{font-size:.88rem;color:var(--ink)}
+.tl-item .when{font-size:.7rem;color:var(--ink3);margin-top:2px}
+
+/* Level grid */
 .level-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:600px){.level-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.level-grid{grid-template-columns:repeat(3,1fr)}}
-.lvl{position:relative;padding:22px;border-radius:18px;overflow:hidden;
+.lvl{position:relative;padding:24px;border-radius:20px;overflow:hidden;
   border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:.25s;
-  background:linear-gradient(135deg,var(--a1),var(--a2))}
-.lvl:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.5)}
-.lvl::after{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;
-  border-radius:50%;background:#fff;opacity:.08;filter:blur(20px)}
-.lvl .num{font-size:.68rem;letter-spacing:.18em;color:rgba(255,255,255,.85);
+  background:linear-gradient(135deg,var(--a1),var(--a2));min-height:180px;
+  display:flex;flex-direction:column}
+.lvl:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.lvl::after{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;
+  border-radius:50%;background:#fff;opacity:.08;filter:blur(24px)}
+.lvl .num{font-size:.68rem;letter-spacing:.18em;color:rgba(255,255,255,.9);
   font-weight:800;position:relative;z-index:2}
-.lvl h4{font-size:1.02rem;margin:8px 0 4px;color:#fff;position:relative;z-index:2}
-.lvl .topic{font-size:.76rem;color:rgba(255,255,255,.72);position:relative;z-index:2}
+.lvl h4{font-size:1.05rem;margin:8px 0 6px;color:#fff;position:relative;z-index:2}
+.lvl .topic{font-size:.76rem;color:rgba(255,255,255,.78);position:relative;z-index:2;
+  line-height:1.5;flex:1}
 .lvl .state{position:absolute;top:16px;right:16px;font-size:.62rem;
   letter-spacing:.1em;text-transform:uppercase;font-weight:800;
-  padding:5px 10px;border-radius:999px;background:rgba(0,0,0,.3);
+  padding:5px 10px;border-radius:999px;background:rgba(0,0,0,.35);
   color:#fff;z-index:3;backdrop-filter:blur(8px)}
 .lvl .mastery{margin-top:16px;position:relative;z-index:2}
-.lvl .mastery .bar{background:rgba(0,0,0,.35)}
+.lvl .mastery .bar{background:rgba(0,0,0,.35);height:6px}
 .lvl .mastery .bar>i{background:#fff}
-.lvl .mastery .v{font-size:.72rem;color:rgba(255,255,255,.85);margin-top:6px}
-.lvl.locked{opacity:.4;cursor:not-allowed;filter:grayscale(.4)}
+.lvl .mastery .v{font-size:.7rem;color:rgba(255,255,255,.9);margin-top:6px;font-weight:600}
+.lvl.locked{opacity:.45;cursor:not-allowed;filter:grayscale(.5)}
 .lvl.t1{--a1:#0891b2;--a2:#22d3ee}
 .lvl.t2{--a1:#dc2626;--a2:#f97316}
 .lvl.t3{--a1:#2563eb;--a2:#06b6d4}
@@ -223,44 +301,75 @@ footer.home p{max-width:600px;margin:8px auto}
 .lvl.t11{--a1:#c2410c;--a2:#fb923c}
 .lvl.t12{--a1:#166534;--a2:#22c55e}
 
-.lesson-head{padding:28px 26px;border-radius:22px;margin-bottom:22px;
+/* Lesson */
+.lesson-hero{padding:32px 28px;border-radius:24px;margin-bottom:22px;
   position:relative;overflow:hidden;color:#fff;
   background:linear-gradient(135deg,var(--c1),var(--c2))}
-.lesson-head::after{content:'';position:absolute;right:-60px;top:-40px;
-  width:220px;height:220px;border-radius:50%;background:#fff;opacity:.08}
-.lesson-head .eyebrow{color:rgba(255,255,255,.85);position:relative;z-index:2}
-.lesson-head h2{position:relative;z-index:2;font-size:clamp(1.3rem,2.4vw,1.8rem)}
-.lesson-head p{position:relative;z-index:2;color:rgba(255,255,255,.88);
-  margin-top:10px;font-size:.95rem;line-height:1.6}
+.lesson-hero::after{content:'';position:absolute;right:-80px;top:-60px;
+  width:280px;height:280px;border-radius:50%;background:#fff;opacity:.1}
+.lesson-hero .eyebrow{color:rgba(255,255,255,.9);position:relative;z-index:2}
+.lesson-hero h2{position:relative;z-index:2;font-size:clamp(1.3rem,2.6vw,1.9rem);margin-bottom:8px}
+.lesson-hero p{position:relative;z-index:2;color:rgba(255,255,255,.92);
+  margin-top:8px;font-size:.95rem;line-height:1.6;max-width:600px}
+.lesson-hero .hero-illus{position:absolute;right:20px;bottom:0;font-size:6rem;opacity:.25;z-index:1}
+@media(max-width:600px){.lesson-hero .hero-illus{display:none}}
+.audio-btn{position:absolute;top:16px;right:16px;z-index:3;
+  background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.3);color:#fff;
+  border-radius:999px;padding:8px 14px;font-size:.78rem;font-weight:600;
+  cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;
+  backdrop-filter:blur(8px);transition:.2s}
+.audio-btn:hover{background:rgba(0,0,0,.6)}
+.audio-btn.on{background:rgba(34,211,238,.9);color:#02121a;border-color:transparent}
 
-.step{padding:22px;border-radius:16px;margin-bottom:14px;border:1px solid var(--bd);
+.step{padding:24px;border-radius:18px;margin-bottom:14px;border:1px solid var(--bd);
   background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.005));
-  position:relative}
-.step .k{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-  font-weight:800;margin-bottom:10px;color:#67e8f9}
-.step h4{font-size:1rem;margin-bottom:8px}
-.step p{color:var(--ink2);font-size:.94rem;line-height:1.6}
+  position:relative;overflow:hidden}
+.step .k{display:inline-block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:800;margin-bottom:12px;color:#67e8f9;padding:4px 10px;border-radius:999px;
+  background:rgba(34,211,238,.12)}
+.step h4{font-size:1.05rem;margin-bottom:10px}
+.step p{color:var(--ink2);font-size:.95rem;line-height:1.65}
 .step.tip{border-left:4px solid var(--green);
   background:linear-gradient(135deg,rgba(34,197,94,.10),rgba(34,197,94,.02))}
-.step.tip .k{color:#4ade80}
+.step.tip .k{color:#4ade80;background:rgba(34,197,94,.15)}
 .step.mistake{border-left:4px solid var(--red);
   background:linear-gradient(135deg,rgba(239,68,68,.10),rgba(239,68,68,.02))}
-.step.mistake .k{color:#fca5a5}
+.step.mistake .k{color:#fca5a5;background:rgba(239,68,68,.15)}
+.step.video{border-left:4px solid var(--purple);
+  background:linear-gradient(135deg,rgba(168,85,247,.10),rgba(168,85,247,.02))}
+.step.video .k{color:#d8b4fe;background:rgba(168,85,247,.15)}
+.step.practice{border-left:4px solid var(--yellow);
+  background:linear-gradient(135deg,rgba(250,204,21,.10),rgba(250,204,21,.02))}
+.step.practice .k{color:#fde047;background:rgba(250,204,21,.15)}
+.video-embed{margin-top:14px;border-radius:14px;overflow:hidden;
+  position:relative;padding-bottom:56.25%;background:#000}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-.q-opt{display:flex;align-items:center;gap:12px;padding:15px 18px;border-radius:14px;
+.q-opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;
   border:1px solid var(--bd);background:rgba(255,255,255,.02);cursor:pointer;
   text-align:left;color:var(--ink);font-size:.94rem;font-family:inherit;
   transition:.2s;width:100%;margin-top:10px}
-.q-opt:hover{border-color:var(--cyan);background:rgba(34,211,238,.07);transform:translateX(3px)}
-.q-opt.correct{border-color:var(--green);background:rgba(34,197,94,.14)}
-.q-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.14)}
-.q-opt .kbd{width:28px;height:28px;border-radius:9px;background:rgba(255,255,255,.08);
-  display:grid;place-items:center;font-size:.8rem;font-weight:800;flex-shrink:0}
-.feedback{margin-top:14px;padding:15px;border-radius:14px;border-left:4px solid var(--cyan);
-  background:rgba(34,211,238,.08);font-size:.9rem}
+.q-opt:hover{border-color:var(--cyan);background:rgba(34,211,238,.07);transform:translateX(4px)}
+.q-opt.correct{border-color:var(--green);background:rgba(34,197,94,.14);
+  animation:pop .3s ease-out}
+.q-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.14);
+  animation:shake .3s ease-out}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.q-opt .kbd{width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.08);
+  display:grid;place-items:center;font-size:.82rem;font-weight:800;flex-shrink:0}
+.feedback{margin-top:16px;padding:16px;border-radius:14px;
+  border-left:4px solid var(--cyan);background:rgba(34,211,238,.08);font-size:.92rem}
 .feedback.ok{border-color:var(--green);background:rgba(34,197,94,.12)}
 .feedback.no{border-color:var(--red);background:rgba(239,68,68,.12)}
 
+.prog-rail{display:flex;gap:6px;margin-bottom:20px}
+.prog-rail span{height:5px;flex:1;border-radius:999px;background:rgba(255,255,255,.1);
+  transition:.4s}
+.prog-rail span.on{background:linear-gradient(90deg,var(--cyan),var(--purple))}
+.prog-rail span.done{background:var(--green)}
+
+/* Signs */
 .sign-tile{display:flex;flex-direction:column;align-items:center;text-align:center;
   gap:10px;padding:16px;border-radius:16px;border:1px solid var(--bd);
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005))}
@@ -268,53 +377,59 @@ footer.home p{max-width:600px;margin:8px auto}
 .sign-svg{width:100%;height:100%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
 .sign-name{font-size:.86rem;font-weight:700}
 .sign-cat{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
-.grid{display:grid;gap:16px}
-.grid-2{grid-template-columns:1fr}
-.grid-3{grid-template-columns:1fr}
-.grid-4{grid-template-columns:repeat(2,1fr)}
-@media(min-width:700px){
-  .grid-2{grid-template-columns:1fr 1fr}
-  .grid-3{grid-template-columns:repeat(3,1fr)}
-  .grid-4{grid-template-columns:repeat(4,1fr)}
-}
 .pill-row{display:flex;gap:8px;padding-bottom:4px;overflow-x:auto;scrollbar-width:none}
 .pill-row::-webkit-scrollbar{display:none}
 .pill{white-space:nowrap;padding:8px 15px;border-radius:999px;
   border:1px solid var(--bd2);background:transparent;color:var(--ink2);
   font-size:.82rem;cursor:pointer;font-family:inherit;transition:.2s}
-.pill.on{background:linear-gradient(135deg,var(--cyan),#0ea5b7);color:#02121a;border-color:transparent;font-weight:700}
+.pill.on{background:linear-gradient(135deg,var(--cyan),#0ea5b7);color:#02121a;
+  border-color:transparent;font-weight:700}
 
+.bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:999px;transition:width 1s cubic-bezier(.22,.61,.36,1)}
+
+.row-topic{display:flex;align-items:center;gap:14px;padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.row-topic:last-child{border-bottom:none}
+.row-topic .lbl{flex:0 0 130px;font-size:.86rem;font-weight:600;color:var(--ink)}
+.row-topic .tr{flex:1}
+.row-topic .val{flex:0 0 50px;text-align:right;font-size:.84rem;font-weight:800}
+
+/* Toast */
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(160%);
   background:#111a2e;border:1px solid var(--bd2);border-radius:14px;padding:14px 22px;
-  font-size:.88rem;z-index:900;transition:transform .4s;max-width:92vw;
-  box-shadow:0 20px 60px rgba(0,0,0,.7)}
+  font-size:.88rem;z-index:900;transition:transform .4s cubic-bezier(.22,.61,.36,1);
+  max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.7);color:#fff}
 #toast.on{transform:translateX(-50%) translateY(0)}
 #toast.ok{border-color:rgba(34,197,94,.6)}
 #toast.no{border-color:rgba(239,68,68,.6)}
 
+/* Mobile nav */
 .bottom-nav{display:flex;position:fixed;bottom:14px;left:14px;right:14px;z-index:60;
   justify-content:space-around;padding:6px;border-radius:22px;
   background:rgba(10,16,32,.94);backdrop-filter:blur(20px);
   border:1px solid var(--bd2);box-shadow:0 20px 60px rgba(0,0,0,.7)}
 @media(min-width:1000px){.bottom-nav{display:none}}
 .bottom-nav button{flex:1;background:none;border:none;color:var(--ink2);
-  font-family:inherit;font-size:.64rem;display:flex;flex-direction:column;
-  align-items:center;gap:4px;padding:8px 4px;border-radius:16px;cursor:pointer}
-.bottom-nav button.on{color:#67e8f9;background:rgba(34,211,238,.1)}
+  font-family:inherit;font-size:.62rem;display:flex;flex-direction:column;
+  align-items:center;gap:3px;padding:8px 4px;border-radius:16px;cursor:pointer;
+  transition:.2s}
+.bottom-nav button.on{color:#67e8f9;background:rgba(34,211,238,.12)}
 .bottom-nav .ic{font-size:1.2rem}
 
+/* Loading */
 #loading{position:fixed;inset:0;background:#060810;z-index:900;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
   transition:opacity .8s}
 #loading.hide{opacity:0;pointer-events:none}
-#loading .mark{width:60px;height:60px;border-radius:18px;position:relative;
-  background:linear-gradient(135deg,var(--cyan),#0369a1 60%,var(--green));
-  box-shadow:0 8px 30px rgba(34,211,238,.45);animation:pulse 1.6s ease-in-out infinite}
-#loading .mark::after{content:'';position:absolute;inset:14px;border-radius:6px;
-  border-left:2px dashed rgba(255,255,255,.85);border-right:2px dashed rgba(255,255,255,.85)}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.82}}
+#loading img{width:90px;height:90px;object-fit:contain;
+  filter:drop-shadow(0 8px 30px rgba(34,211,238,.5));
+  animation:pulse 1.6s ease-in-out infinite}
 #loading h1{font-size:1.1rem;font-weight:800;letter-spacing:.2em;color:#fff}
 #loading .st{font-size:.72rem;color:var(--ink3);letter-spacing:.12em}
+#loading .bar-l{width:220px;height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
+#loading .bar-l i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));animation:ld 1.6s ease-out forwards}
+@keyframes ld{to{width:100%}}
 </style>
 <script type="importmap">
 {"imports":{
@@ -326,8 +441,9 @@ footer.home p{max-width:600px;margin:8px auto}
 <body>
 
 <div id="loading">
-  <div class="mark"></div>
+  <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive">
   <h1>iMENA DRIVE</h1>
+  <div class="bar-l"><i></i></div>
   <div class="st">Preparing your journey through Kigali...</div>
 </div>
 
@@ -336,7 +452,7 @@ footer.home p{max-width:600px;margin:8px auto}
 <div id="home">
   <header class="home">
     <div class="brand">
-      <div class="logo"></div>
+      <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive">
       <div>iMENA DRIVE<small>Digital Driving Academy - Rwanda</small></div>
     </div>
     <nav class="hm">
@@ -364,7 +480,7 @@ footer.home p{max-width:600px;margin:8px auto}
       <h1>Learn the road. <span>Own the road.</span></h1>
       <p class="sub">Rwanda's digital driving academy. Master the theory, understand real Kigali road situations, and walk into your official driving examination already prepared.</p>
       <div class="cta">
-        <button class="btn btn-primary" onclick="App.openSignIn()">Start learning</button>
+        <button class="btn btn-primary" onclick="Auth.signIn()">Start learning</button>
         <a href="#learn" class="btn btn-ghost">Explore the journey</a>
       </div>
       <div class="badges">
@@ -381,11 +497,12 @@ footer.home p{max-width:600px;margin:8px auto}
       <div class="pill">01 - The journey</div>
       <h2>From beginner to exam-ready - a real digital academy.</h2>
       <p>Twelve structured levels take you from driving foundations to final readiness. Each level is mastery-gated: you advance by demonstrating understanding, not by clicking next.</p>
-      <p>Every lesson is bilingual, illustrated, and anchored to the road situations you will actually meet in Kigali and across Rwanda.</p>
+      <p>Every lesson is illustrated, narrated, and anchored to the road situations you will actually meet in Kigali and across Rwanda.</p>
       <div class="tags">
         <span class="tag">12 levels</span>
         <span class="tag">Bilingual</span>
         <span class="tag">Mastery-based</span>
+        <span class="tag">Audio narration</span>
       </div>
     </div>
   </section>
@@ -427,7 +544,7 @@ footer.home p{max-width:600px;margin:8px auto}
 
   <footer class="home">
     <div class="brand">
-      <div class="logo"></div>
+      <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive">
       <div style="text-align:left">iMENA DRIVE<small>A product of iMENA Hub</small></div>
     </div>
     <p>Digital driving education for Rwanda. Built with care in Kigali.</p>
@@ -439,12 +556,12 @@ footer.home p{max-width:600px;margin:8px auto}
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand" style="cursor:pointer" onclick="App.go('dashboard')">
-        <div class="logo"></div>
+        <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive" style="width:34px;height:34px">
         <div>iMENA DRIVE<small style="display:block;font-size:.66rem;color:var(--ink3)">Digital Driving Academy</small></div>
       </div>
       <div class="row">
         <div class="avatar" id="topAvatar">L</div>
-        <button class="btn btn-ghost" style="min-height:36px;padding:8px 14px;font-size:.82rem" onclick="Auth.signOut()">Sign out</button>
+        <button class="btn btn-ghost btn-sm" onclick="Auth.signOut()">Sign out</button>
       </div>
     </div>
   </div>
@@ -490,6 +607,9 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect,
 import { getFirestore, doc, getDoc, setDoc, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// Set FB synchronously first, THEN do async work.
+window.FB = { ready: function(){ return false; } };
+
 const cfg = {
   apiKey: "AIzaSyAV51yfKMG7erFy8NRNuFRaU1PAnBJj0gQ",
   authDomain: "imena-drive-18cf0.firebaseapp.com",
@@ -499,79 +619,69 @@ const cfg = {
   appId: "1:732515497157:web:f4c2be480f544a5b692cac"
 };
 
-let fb = null;
 try {
   const app = initializeApp(cfg);
   const auth = getAuth(app);
   setPersistence(auth, browserLocalPersistence).catch(function(){});
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
-  fb = {
-    auth: auth,
-    db: getFirestore(app),
-    provider: provider,
-    signInWithPopup: signInWithPopup,
-    signInWithRedirect: signInWithRedirect,
-    getRedirectResult: getRedirectResult,
-    signOut: signOut,
-    onAuthStateChanged: onAuthStateChanged,
-    doc: doc, getDoc: getDoc, setDoc: setDoc, serverTimestamp: serverTimestamp
+  const db = getFirestore(app);
+
+  window.FB = {
+    ready: function(){ return true; },
+    signIn: async function(){
+      try {
+        const r = await signInWithPopup(auth, provider);
+        return { user: r.user, viaRedirect: false };
+      } catch (err) {
+        const code = (err && (err.code || err.message)) || "";
+        console.warn("[iMENA] Popup failed:", code);
+        if (code.indexOf("popup-blocked") !== -1 ||
+            code.indexOf("popup-closed-by-user") !== -1 ||
+            code.indexOf("cancelled-popup-request") !== -1 ||
+            code.indexOf("operation-not-supported") !== -1) {
+          await signInWithRedirect(auth, provider);
+          return { user: null, viaRedirect: true };
+        }
+        throw err;
+      }
+    },
+    consumeRedirect: async function(){
+      try {
+        const r = await getRedirectResult(auth);
+        return (r && r.user) ? r.user : null;
+      } catch (e) {
+        console.warn("[iMENA] Redirect error:", e);
+        return null;
+      }
+    },
+    signOut: async function(){ try { await signOut(auth); } catch(e){} },
+    observe: function(cb){ onAuthStateChanged(auth, cb); },
+    load: async function(uid){
+      try {
+        const s = await getDoc(doc(db, "users", uid));
+        return s.exists() ? s.data() : null;
+      } catch (e) { return null; }
+    },
+    save: async function(uid, data){
+      try {
+        const payload = Object.assign({}, data, { updatedAt: serverTimestamp() });
+        await setDoc(doc(db, "users", uid), payload, { merge: true });
+      } catch (e) { /* ignore */ }
+    }
   };
   console.log("[iMENA] Firebase initialized");
 } catch (e) {
-  console.warn("[iMENA] Firebase unavailable", e);
+  console.warn("[iMENA] Firebase unavailable - demo mode only", e);
 }
-
-window.FB = {
-  ready: function(){ return !!fb; },
-  signIn: async function(){
-    if (!fb) throw new Error("no-firebase");
-    try {
-      const r = await fb.signInWithPopup(fb.auth, fb.provider);
-      return { user: r.user, viaRedirect: false };
-    } catch (err) {
-      const code = (err && (err.code || err.message)) || "";
-      console.warn("[iMENA] Popup failed:", code);
-      if (code.indexOf("popup-blocked") !== -1 ||
-          code.indexOf("popup-closed-by-user") !== -1 ||
-          code.indexOf("cancelled-popup-request") !== -1 ||
-          code.indexOf("operation-not-supported") !== -1) {
-        await fb.signInWithRedirect(fb.auth, fb.provider);
-        return { user: null, viaRedirect: true };
-      }
-      throw err;
-    }
-  },
-  consumeRedirect: async function(){
-    if (!fb) return null;
-    try {
-      const r = await fb.getRedirectResult(fb.auth);
-      return (r && r.user) ? r.user : null;
-    } catch (e) {
-      console.warn("[iMENA] Redirect error:", e);
-      return null;
-    }
-  },
-  signOut: async function(){ if (fb) await fb.signOut(fb.auth); },
-  observe: function(cb){ if (fb) fb.onAuthStateChanged(fb.auth, cb); },
-  load: async function(uid){
-    if (!fb) return null;
-    const s = await fb.getDoc(fb.doc(fb.db, "users", uid));
-    return s.exists() ? s.data() : null;
-  },
-  save: async function(uid, data){
-    if (!fb) return;
-    const payload = Object.assign({}, data, { updatedAt: fb.serverTimestamp() });
-    await fb.setDoc(fb.doc(fb.db, "users", uid), payload, { merge: true });
-  }
-};
 </script>
 
 <script>
+// ─── UTILS ───
 var $ = function(id){ return document.getElementById(id); };
 var esc = function(s){
-  return String(s || "").replace(/[&<>"']/g, function(c){
-    return ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" })[c];
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+    return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c];
   });
 };
 
@@ -585,6 +695,86 @@ var UI = {
   }
 };
 
+// ─── SOUND (Web Audio, no files) ───
+var Sound = {
+  ctx: null,
+  init: function(){
+    if (this.ctx) return;
+    try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
+  },
+  tone: function(freq, dur, type, vol){
+    this.init();
+    if (!this.ctx) return;
+    var o = this.ctx.createOscillator();
+    var g = this.ctx.createGain();
+    o.type = type || "sine";
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.15, this.ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (dur || 0.2));
+    o.connect(g);
+    g.connect(this.ctx.destination);
+    o.start();
+    o.stop(this.ctx.currentTime + (dur || 0.2));
+  },
+  correct: function(){
+    this.tone(660, 0.15, "sine", 0.14);
+    var self = this;
+    setTimeout(function(){ self.tone(880, 0.2, "sine", 0.14); }, 100);
+  },
+  wrong: function(){
+    this.tone(180, 0.28, "sawtooth", 0.12);
+    var self = this;
+    setTimeout(function(){ self.tone(140, 0.35, "sawtooth", 0.12); }, 120);
+  },
+  complete: function(){
+    this.tone(523, 0.15, "sine", 0.13);
+    var self = this;
+    setTimeout(function(){ self.tone(659, 0.15, "sine", 0.13); }, 130);
+    setTimeout(function(){ self.tone(784, 0.35, "sine", 0.13); }, 260);
+  },
+  fanfare: function(){
+    [523, 659, 784, 1047].forEach(function(f, i){
+      setTimeout(function(){ Sound.tone(f, 0.4, "triangle", 0.15); }, i * 130);
+    });
+  }
+};
+
+// ─── NARRATION (Web Speech) ───
+var Narrator = {
+  utter: null,
+  speaking: false,
+  speak: function(text, lang){
+    if (!("speechSynthesis" in window)) { UI.toast("Narration not supported on this browser.", "no"); return; }
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = (lang === "rw") ? "rw-RW" : "en-GB";
+    u.rate = 0.95;
+    u.pitch = 1;
+    var self = this;
+    u.onend = function(){ self.speaking = false; Narrator.updateBtn(); };
+    u.onerror = function(){ self.speaking = false; Narrator.updateBtn(); };
+    window.speechSynthesis.speak(u);
+    this.utter = u;
+    this.speaking = true;
+    Narrator.updateBtn();
+  },
+  stop: function(){
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    this.speaking = false;
+    Narrator.updateBtn();
+  },
+  toggle: function(text, lang){
+    if (this.speaking) this.stop(); else this.speak(text, lang);
+  },
+  updateBtn: function(){
+    var btn = $("audioBtn");
+    if (!btn) return;
+    if (this.speaking){ btn.classList.add("on"); btn.innerHTML = "&#128266; Stop"; }
+    else { btn.classList.remove("on"); btn.innerHTML = "&#128266; Listen"; }
+  }
+};
+
+// ─── STATE ───
 var State = {
   user: null,
   demo: false,
@@ -592,7 +782,8 @@ var State = {
   defaults: function(){
     return {
       uid: null, displayName: "Learner", email: null, photoURL: null,
-      progress: { lessons: {}, signsLearned: {}, topics: {}, levelsCompleted: [], currentLevel: 1 },
+      progress: { lessons: {}, signsLearned: {}, topics: {}, levelsCompleted: [], currentLevel: 1,
+                  activity: {}, currentLesson: { level: 1, idx: 0 } },
       stats: { attempts: 0, correct: 0, wrong: 0, streak: 0, lastDay: null },
       achievements: []
     };
@@ -602,47 +793,77 @@ var State = {
       var s = localStorage.getItem("imena-state");
       this.data = s ? JSON.parse(s) : this.defaults();
     } catch (e) { this.data = this.defaults(); }
+    if (!this.data.progress.activity) this.data.progress.activity = {};
+    if (!this.data.progress.currentLesson) this.data.progress.currentLesson = { level: 1, idx: 0 };
   },
   save: function(){
-    if (this.demo || !window.FB.ready()) {
+    if (this.demo || !window.FB || !window.FB.ready()) {
       localStorage.setItem("imena-state", JSON.stringify(this.data));
     }
-    if (window.FB.ready() && this.user && !this.demo) {
-      window.FB.save(this.user.uid, this.data).catch(function(){});
+    if (window.FB && window.FB.ready() && this.user && !this.demo) {
+      window.FB.save(this.user.uid, this.data);
     }
+  },
+  markActivity: function(){
+    var today = new Date().toISOString().slice(0, 10);
+    var a = this.data.progress.activity;
+    a[today] = (a[today] || 0) + 1;
   }
 };
 
+// ─── AUTH ───
 var Auth = {
-  signIn: async function(){
-    if (!window.FB.ready()) {
-      UI.toast("Sign-in not configured. Continuing in demo mode.", "no");
-      return this.demo();
+  waiting: false,
+  waitForFB: async function(){
+    if (window.FB && window.FB.ready && window.FB.ready()) return true;
+    for (var i = 0; i < 100; i++){
+      await new Promise(function(r){ setTimeout(r, 40); });
+      if (window.FB && window.FB.ready && window.FB.ready()) return true;
     }
+    return false;
+  },
+
+  signIn: async function(){
+    if (this.waiting) return;
+    this.waiting = true;
     var btn = $("googleBtn");
-    if (btn) { btn.disabled = true; $("gbtnText").textContent = "Signing in..."; }
+    if (btn) { btn.disabled = true; $("gbtnText").textContent = "Preparing..."; }
+
+    var ok = await this.waitForFB();
+    if (!ok){
+      UI.toast("Sign-in is loading. Try again in 3 seconds.", "no");
+      if (btn) { btn.disabled = false; $("gbtnText").textContent = "Sign in with Google"; }
+      this.waiting = false;
+      return;
+    }
+
+    if (btn) $("gbtnText").textContent = "Signing in...";
+
     try {
       var result = await window.FB.signIn();
-      if (result.user) {
+      if (result.user){
         await this.accept(result.user);
         UI.toast("Welcome, " + (result.user.displayName || "learner") + "!", "ok");
-        return;
+        Sound.complete();
+      } else {
+        UI.toast("Redirecting to Google...", "ok");
       }
-      UI.toast("Redirecting to Google...", "ok");
     } catch (e) {
       console.error("[Auth] error:", e);
       var code = ((e && (e.code || e.message)) || "unknown");
       var lower = String(code).toLowerCase();
-      if (lower.indexOf("unauthorized-domain") !== -1) {
+      if (lower.indexOf("unauthorized-domain") !== -1){
         UI.toast("Add 127.0.0.1 in Firebase Auth -> Authorized domains.", "no");
-      } else if (lower.indexOf("popup") !== -1) {
+      } else if (lower.indexOf("popup") !== -1){
         UI.toast("Popup blocked. Trying redirect...", "no");
-      } else if (lower.indexOf("network") !== -1) {
+      } else if (lower.indexOf("network") !== -1){
         UI.toast("Network error. Check your connection.", "no");
       } else {
         UI.toast("Sign-in failed: " + code, "no");
       }
       if (btn) { btn.disabled = false; $("gbtnText").textContent = "Sign in with Google"; }
+    } finally {
+      this.waiting = false;
     }
   },
 
@@ -659,6 +880,8 @@ var Auth = {
     State.data.photoURL = user.photoURL;
     State.save();
     App.open();
+    var btn = $("googleBtn");
+    if (btn) { btn.disabled = false; $("gbtnText").textContent = "Sign in with Google"; }
   },
 
   demo: function(){
@@ -673,7 +896,8 @@ var Auth = {
   },
 
   signOut: function(){
-    window.FB.signOut();
+    Narrator.stop();
+    if (window.FB && window.FB.ready()) window.FB.signOut();
     State.user = null;
     State.demo = false;
     App.close();
@@ -681,10 +905,14 @@ var Auth = {
   },
 
   init: async function(){
-    if (!window.FB.ready()) return;
+    var ok = await this.waitForFB();
+    if (!ok){
+      console.warn("[Auth] Firebase never initialised - demo only.");
+      return;
+    }
     try {
       var redirectUser = await window.FB.consumeRedirect();
-      if (redirectUser) {
+      if (redirectUser){
         await this.accept(redirectUser);
         UI.toast("Welcome, " + (redirectUser.displayName || "learner") + "!", "ok");
       }
@@ -698,6 +926,7 @@ var Auth = {
   }
 };
 
+// ─── APP ROUTER ───
 var App = {
   route: "dashboard",
   open: function(){
@@ -717,9 +946,9 @@ var App = {
     $("home").classList.remove("hidden");
     if (window.Scene3D) window.Scene3D.resume();
   },
-  openSignIn: function(){ Auth.signIn(); },
   go: function(route){
     this.route = route;
+    Narrator.stop();
     document.querySelectorAll(".bottom-nav button").forEach(function(b){
       b.classList.toggle("on", b.dataset.nav === route);
     });
@@ -741,58 +970,76 @@ var App = {
     document.querySelectorAll("[data-nav]").forEach(function(b){
       b.onclick = function(){ App.go(b.dataset.nav); };
     });
+    if (this.route === "lesson") Lesson.afterRender();
   }
 };
 
+// ─── CONTENT ───
 var LEVELS = [
-  { id:1, en:"Driving Foundations", rw:"Ibanze ry'Ugutwara", topic:"foundations", cls:"t1",
-    intro:"What driving really is - a continuous chain of observations and decisions." },
-  { id:2, en:"Road Signs & Markings", rw:"Ibimenyetso n'Imirongo", topic:"signs", cls:"t2",
-    intro:"Read the language of the road: shapes, colours, markings and signals." },
-  { id:3, en:"Traffic Rules", rw:"Amategeko y'Umuhanda", topic:"rules", cls:"t3",
-    intro:"The core rules that govern safe movement on Rwandan roads." },
-  { id:4, en:"Right of Way & Intersections", rw:"Uburenganzira n'Ihubyo", topic:"rightofway", cls:"t4",
-    intro:"Who goes first, and why - intersections, junctions, roundabouts." },
-  { id:5, en:"Vehicle Knowledge & Controls", rw:"Ubumenyi bw'Imodoka", topic:"vehicle", cls:"t5",
-    intro:"Every control, every warning light, every check - before you touch the wheel." },
-  { id:6, en:"Road Users & Responsibilities", rw:"Abakoresha Umuhanda", topic:"users", cls:"t6",
-    intro:"Pedestrians, cyclists, motorcyclists, buses - share the road safely." },
-  { id:7, en:"Road Safety & Defensive Driving", rw:"Umutekano n'Uburinzi", topic:"safety", cls:"t7",
-    intro:"Anticipate. Observe. Decide. The defensive habits that save lives." },
-  { id:8, en:"Real-World Situations", rw:"Imimerere nyayo", topic:"reallife", cls:"t8",
-    intro:"Rain, night, hills, Kigali traffic - decisions in context." },
-  { id:9, en:"Advanced Hazard Awareness", rw:"Kumenya Akaga", topic:"hazard", cls:"t9",
-    intro:"Spot danger before it becomes a crash. Scanning strategies that work." },
-  { id:10, en:"Theory Exam Preparation", rw:"Kwitegura Ikizamini", topic:"theory", cls:"t10",
-    intro:"How to prepare for the theory portion of the official process." },
-  { id:11, en:"Practical Driving Preparation", rw:"Kwitegura Gutwara", topic:"practical", cls:"t11",
-    intro:"The knowledge that makes your instructor's time count." },
-  { id:12, en:"Final Readiness Assessment", rw:"Isuzuma ry'Iherezo", topic:"final", cls:"t12",
-    intro:"Are you ready? A comprehensive readiness check across every topic." }
+  { id:1, en:"Driving Foundations", topic:"foundations", cls:"t1",
+    intro:"What driving really is - a chain of observations and decisions.", icon:"&#128663;" },
+  { id:2, en:"Road Signs & Markings", topic:"signs", cls:"t2",
+    intro:"Read the language of the road: shapes, colours, markings.", icon:"&#128721;" },
+  { id:3, en:"Traffic Rules", topic:"rules", cls:"t3",
+    intro:"The core rules that govern safe movement on Rwandan roads.", icon:"&#128220;" },
+  { id:4, en:"Right of Way & Intersections", topic:"rightofway", cls:"t4",
+    intro:"Who goes first, and why - junctions and roundabouts.", icon:"&#10145;" },
+  { id:5, en:"Vehicle Knowledge & Controls", topic:"vehicle", cls:"t5",
+    intro:"Every control, every warning light, every check.", icon:"&#128296;" },
+  { id:6, en:"Road Users & Responsibilities", topic:"users", cls:"t6",
+    intro:"Pedestrians, cyclists, motorcyclists, buses.", icon:"&#128694;" },
+  { id:7, en:"Road Safety & Defensive Driving", topic:"safety", cls:"t7",
+    intro:"Anticipate. Observe. Decide. Habits that save lives.", icon:"&#128737;" },
+  { id:8, en:"Real-World Situations", topic:"reallife", cls:"t8",
+    intro:"Rain, night, hills, busy Kigali traffic.", icon:"&#127783;" },
+  { id:9, en:"Advanced Hazard Awareness", topic:"hazard", cls:"t9",
+    intro:"Spot danger before it becomes a crash.", icon:"&#9888;" },
+  { id:10, en:"Theory Exam Preparation", topic:"theory", cls:"t10",
+    intro:"How to prepare for the theory portion of the official process.", icon:"&#128221;" },
+  { id:11, en:"Practical Driving Preparation", topic:"practical", cls:"t11",
+    intro:"Make your instructor's time count.", icon:"&#128736;" },
+  { id:12, en:"Final Readiness Assessment", topic:"final", cls:"t12",
+    intro:"Are you ready? A comprehensive readiness check.", icon:"&#127891;" }
 ];
 
+// Helper to make an SVG mini-illustration
+var SCENE_SVG = {
+  city: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><defs><linearGradient id="sk1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#87ceeb"/><stop offset="1" stop-color="#2d4a6e"/></linearGradient></defs><rect width="400" height="180" fill="url(#sk1)"/><rect y="120" width="400" height="60" fill="#334155"/><rect y="130" width="400" height="50" fill="#1e293b"/><rect x="30" y="70" width="50" height="60" fill="#475569"/><rect x="90" y="50" width="40" height="80" fill="#334155"/><rect x="140" y="80" width="55" height="50" fill="#475569"/><rect x="210" y="40" width="45" height="90" fill="#334155"/><rect x="270" y="70" width="60" height="60" fill="#475569"/><rect x="340" y="90" width="40" height="40" fill="#334155"/><g fill="#fbbf24" opacity=".9"><rect x="36" y="76" width="6" height="8"/><rect x="48" y="76" width="6" height="8"/><rect x="220" y="50" width="6" height="8"/><rect x="232" y="50" width="6" height="8"/></g><g transform="translate(60,142)"><rect width="34" height="16" fill="#0ea5e9" rx="3"/><circle cx="8" cy="16" r="4" fill="#111"/><circle cx="26" cy="16" r="4" fill="#111"/></g><g transform="translate(300,146)"><rect width="34" height="16" fill="#ef4444" rx="3"/><circle cx="8" cy="16" r="4" fill="#111"/><circle cx="26" cy="16" r="4" fill="#111"/></g></svg>',
+  signs: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#0e1526"/><g transform="translate(80,40)"><polygon points="0,60 -35,0 35,0" fill="#f8fafc" stroke="#0b1220" stroke-width="2"/><text x="0" y="48" text-anchor="middle" fill="#b91c1c" font-size="28" font-weight="800">!</text></g><g transform="translate(200,45)"><circle r="36" fill="#ef4444" stroke="#0b1220" stroke-width="2"/><text y="12" text-anchor="middle" fill="#fff" font-size="30" font-weight="800">-</text></g><g transform="translate(320,45)"><circle r="36" fill="#3b82f6" stroke="#0b1220" stroke-width="2"/><text y="12" text-anchor="middle" fill="#fff" font-size="30" font-weight="800">&#8594;</text></g><text x="80" y="145" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">WARNING</text><text x="200" y="145" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">PROHIBITORY</text><text x="320" y="145" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">MANDATORY</text></svg>',
+  intersection: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#0e1526"/><rect y="70" width="400" height="110" fill="#334155"/><rect x="180" width="40" height="180" fill="#334155"/><line x1="200" y1="0" x2="200" y2="180" stroke="#facc15" stroke-dasharray="10 10" stroke-width="2"/><line x1="0" y1="125" x2="180" y2="125" stroke="#f8fafc" stroke-dasharray="10 10" stroke-width="2"/><line x1="220" y1="125" x2="400" y2="125" stroke="#f8fafc" stroke-dasharray="10 10" stroke-width="2"/><g transform="translate(60,100)"><rect width="34" height="16" fill="#0ea5e9" rx="3"/><circle cx="8" cy="16" r="4" fill="#111"/><circle cx="26" cy="16" r="4" fill="#111"/></g><g transform="translate(300,100)"><rect width="34" height="16" fill="#ef4444" rx="3"/><circle cx="8" cy="16" r="4" fill="#111"/><circle cx="26" cy="16" r="4" fill="#111"/></g><text x="200" y="22" text-anchor="middle" fill="#67e8f9" font-size="12" font-weight="700">OBSERVE ALL DIRECTIONS</text></svg>',
+  pedestrian: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#0e1526"/><rect y="110" width="400" height="70" fill="#334155"/><rect y="110" width="400" height="3" fill="#facc15"/><g fill="#f8fafc" opacity=".9"><rect x="0" y="140" width="24" height="12"/><rect x="28" y="140" width="24" height="12"/><rect x="56" y="140" width="24" height="12"/><rect x="84" y="140" width="24" height="12"/><rect x="112" y="140" width="24" height="12"/><rect x="140" y="140" width="24" height="12"/><rect x="168" y="140" width="24" height="12"/><rect x="196" y="140" width="24" height="12"/><rect x="224" y="140" width="24" height="12"/></g><g transform="translate(200,70)"><circle cx="0" cy="0" r="6" fill="#fbbf24"/><rect x="-4" y="6" width="8" height="22" fill="#22d3ee"/><rect x="-8" y="28" width="6" height="14" fill="#1e293b"/><rect x="2" y="28" width="6" height="14" fill="#1e293b"/></g><text x="200" y="30" text-anchor="middle" fill="#67e8f9" font-size="12" font-weight="700">PEDESTRIAN CROSSING</text></svg>',
+  dashboard: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#0e1526"/><rect x="20" y="20" width="360" height="140" rx="20" fill="#1a2340" stroke="#2d3748"/><circle cx="200" cy="90" r="50" fill="none" stroke="#2d3748" stroke-width="3"/><circle cx="200" cy="90" r="50" fill="none" stroke="#22d3ee" stroke-width="3" stroke-dasharray="120 200" transform="rotate(-90 200 90)"/><text x="200" y="95" text-anchor="middle" fill="#22d3ee" font-size="22" font-weight="800">80</text><text x="200" y="112" text-anchor="middle" fill="#94a3b8" font-size="10">KM/H</text><circle cx="120" cy="60" r="18" fill="#ef4444"/><circle cx="280" cy="60" r="18" fill="#facc15"/></svg>',
+  night: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#05070d"/><circle cx="340" cy="40" r="20" fill="#fef3c7"/><rect y="120" width="400" height="60" fill="#0f172a"/><rect x="180" y="120" width="40" height="60" fill="#1e293b"/><ellipse cx="120" cy="140" rx="60" ry="20" fill="#fef3c7" opacity=".35"/><ellipse cx="280" cy="140" rx="60" ry="20" fill="#fef3c7" opacity=".35"/><g fill="#fef3c7"><circle cx="80" cy="135" r="4"/><circle cx="100" cy="135" r="4"/><circle cx="260" cy="135" r="4"/><circle cx="300" cy="135" r="4"/></g><text x="200" y="30" text-anchor="middle" fill="#67e8f9" font-size="12" font-weight="700">NIGHT DRIVING</text></svg>',
+  rain: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#1e293b"/><rect y="120" width="400" height="60" fill="#0f172a"/><g stroke="#60a5fa" stroke-width="1.5" opacity=".7"><line x1="30" y1="20" x2="20" y2="60"/><line x1="90" y1="10" x2="80" y2="50"/><line x1="150" y1="30" x2="140" y2="70"/><line x1="220" y1="15" x2="210" y2="55"/><line x1="290" y1="25" x2="280" y2="65"/><line x1="350" y1="20" x2="340" y2="60"/></g><rect x="60" y="120" width="40" height="20" rx="4" fill="#3b82f6"/><rect x="280" y="120" width="40" height="20" rx="4" fill="#ef4444"/><text x="200" y="160" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">SLOW DOWN - DOUBLE GAP</text></svg>',
+  roundabout: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#0e1526"/><circle cx="200" cy="90" r="55" fill="#334155"/><circle cx="200" cy="90" r="35" fill="#4ade80" opacity=".3"/><circle cx="200" cy="90" r="35" fill="none" stroke="#22c55e" stroke-width="2"/><text x="200" y="95" text-anchor="middle" fill="#4ade80" font-size="20" font-weight="800">&#8635;</text><g fill="#22d3ee"><circle cx="60" cy="90" r="8"/><circle cx="340" cy="90" r="8"/><circle cx="200" cy="20" r="8"/><circle cx="200" cy="160" r="8"/></g><text x="200" y="175" text-anchor="middle" fill="#67e8f9" font-size="12" font-weight="700">GIVE WAY TO THE ROUNDABOUT</text></svg>',
+  vehicle: '<svg viewBox="0 0 400 180" style="width:100%;display:block"><rect width="400" height="180" fill="#0e1526"/><ellipse cx="200" cy="130" rx="120" ry="40" fill="#1a2340"/><circle cx="200" cy="90" r="55" fill="none" stroke="#22d3ee" stroke-width="8"/><circle cx="200" cy="90" r="20" fill="#22d3ee"/><circle cx="200" cy="90" r="8" fill="#0a1020"/><rect x="80" y="130" width="30" height="12" rx="3" fill="#22c55e"/><rect x="290" y="130" width="30" height="12" rx="3" fill="#ef4444"/><text x="200" y="30" text-anchor="middle" fill="#67e8f9" font-size="12" font-weight="700">CONTROLS AT YOUR FINGERTIPS</text></svg>'
+};
+
+// Lesson content (5 per level, richer with narration + video slot)
 var LESSONS = {
   foundations: [
-    {
-      title: "What driving really is",
+    { title: "What driving really is",
       objective: "Understand driving as a chain of decisions, not a skill.",
-      color: ["#0891b2", "#22d3ee"],
+      color: ["#0891b2", "#22d3ee"], scene: "city", icon: "&#128663;",
       steps: [
         { kind: "learn", t: "Driving is a decision, every second",
-          d: "Every moment behind the wheel, you are observing the road, predicting what might happen, deciding what to do, and acting. The vehicle does not decide - you do." },
+          d: "Every moment behind the wheel, you are observing the road, predicting what might happen, deciding what to do, and acting. The vehicle does not decide - you do. Understanding this is the first step to becoming a safe driver." },
         { kind: "learn", t: "The observation chain",
           d: "Look far ahead. Check mirrors. Scan the sides. Feel the vehicle. The best drivers are not the ones who react fastest - they are the ones who noticed early." },
+        { kind: "video", t: "See it in real life",
+          d: "Watch this short clip of real Kigali roads to understand the observation rhythm.",
+          video: "https://www.youtube.com/embed/xvFZjo5PgG0" },
         { kind: "tip", t: "Safety tip",
           d: "A safe driver is not a slow driver. A safe driver is one who has already decided what to do before the situation arrives." },
         { kind: "mistake", t: "Common beginner mistake",
           d: "Thinking driving is about controlling the car. It is about reading the road. The car is easy. The road is the challenge." }
       ],
-      quiz: { q: "What is the safest decision-making order?", opts: ["Act, then think", "Observe then Decide then Act", "Guess and go", "Ignore and hope"], a: 1 }
+      quiz: { q: "What is the safest decision-making order?", opts: ["Act, then think", "Observe then Decide then Act", "Guess and go", "Ignore and hope"], a: 1,
+              why: "Observe first, then decide, then act. Every safe driver follows this rhythm." }
     },
-    {
-      title: "The road is a shared space",
+    { title: "The road is a shared space",
       objective: "Understand that every road user has a right to safety.",
-      color: ["#0e7490", "#06b6d4"],
+      color: ["#0e7490", "#06b6d4"], scene: "pedestrian", icon: "&#128694;",
       steps: [
         { kind: "learn", t: "You are never alone on the road",
           d: "Cars, buses, motorcycles (moto taxis), bicycles, pedestrians, animals, and children - all share the same Rwandan road. Your decisions affect every one of them." },
@@ -801,187 +1048,358 @@ var LESSONS = {
         { kind: "tip", t: "Safety tip",
           d: "Treat every pedestrian as if they might step into the road. That is how you keep them alive - and yourself out of trouble." }
       ],
-      quiz: { q: "Who shares the road with you?", opts: ["Only other cars", "Cars, motos, cyclists, pedestrians", "Only buses", "Nobody else"], a: 1 }
+      quiz: { q: "Who shares the road with you?", opts: ["Only other cars", "Cars, motos, cyclists, pedestrians", "Only buses", "Nobody else"], a: 1,
+              why: "Rwandan roads carry cars, motos, bicycles, pedestrians and more. Everyone shares the space." }
     },
-    {
-      title: "Your first responsibilities",
+    { title: "Your first responsibilities",
       objective: "Learn the four responsibilities you accept when you get behind the wheel.",
-      color: ["#155e75", "#22d3ee"],
+      color: ["#155e75", "#22d3ee"], scene: "city", icon: "&#9878;",
       steps: [
         { kind: "learn", t: "Four responsibilities",
           d: "1) Be licensed and fit to drive. 2) Keep your vehicle safe and roadworthy. 3) Obey the rules of the road. 4) Protect the more vulnerable road users around you." },
         { kind: "tip", t: "Safety tip",
-          d: "If you are tired, unwell, or emotional, you are not fit to drive. Postpone the trip. No destination is worth a life." }
+          d: "If you are tired, unwell, or emotional, you are not fit to drive. Postpone the trip. No destination is worth a life." },
+        { kind: "practice", t: "Try it yourself",
+          d: "Before you start the engine tomorrow, say the four responsibilities out loud. Say them every trip for a week and they become habit." }
       ],
-      quiz: { q: "If you are very tired you should:", opts: ["Drive faster", "Postpone the trip", "Drink coffee and continue", "Ignore it"], a: 1 }
+      quiz: { q: "If you are very tired you should:", opts: ["Drive faster", "Postpone the trip", "Drink coffee and continue", "Ignore it"], a: 1,
+              why: "Fatigue is as dangerous as alcohol. If you are tired, do not drive." }
+    },
+    { title: "Understanding the road environment",
+      objective: "Recognise the different environments you will drive in.",
+      color: ["#0369a1", "#38bdf8"], scene: "rain", icon: "&#127783;",
+      steps: [
+        { kind: "learn", t: "Environments differ",
+          d: "City roads, residential streets, hills, rural highways and market areas each demand different speeds and attention. The safe speed is the one that matches the environment." },
+        { kind: "tip", t: "Safety tip",
+          d: "If you are unsure of the environment, slow down. Slowness costs seconds. Speed can cost lives." }
+      ],
+      quiz: { q: "City roads require:", opts: ["More speed", "More observation and lower speeds", "Ignoring pedestrians", "Using the horn constantly"], a: 1,
+              why: "City roads are dense with pedestrians and vehicles. More observation, lower speeds." }
+    },
+    { title: "Your first pre-drive routine",
+      objective: "Know the routine you run every single time you start the engine.",
+      color: ["#0891b2", "#22d3ee"], scene: "vehicle", icon: "&#128663;",
+      steps: [
+        { kind: "learn", t: "The pre-drive routine",
+          d: "1) Adjust your seat. 2) Adjust mirrors. 3) Fasten seat belt. 4) Check controls. 5) Observe surroundings. Do this every single time - even for a two-minute trip." },
+        { kind: "practice", t: "Try it today",
+          d: "Sit in a parked car. Close your eyes. Reach for each control in order. Then open your eyes and confirm. Repeat five times." }
+      ],
+      quiz: { q: "First step before driving:", opts: ["Start the engine", "Adjust seat, mirrors, belt", "Turn on the radio", "Sound the horn"], a: 1,
+              why: "Seat, mirrors, belt, controls. Every time. No exceptions." }
     }
   ],
+
   signs: [
-    {
-      title: "Reading signs correctly",
+    { title: "Reading signs correctly",
       objective: "Signs are grouped by shape and colour - learn the pattern.",
-      color: ["#b91c1c", "#f97316"],
+      color: ["#b91c1c", "#f97316"], scene: "signs", icon: "&#128721;",
       steps: [
         { kind: "learn", t: "Shape tells you the category",
           d: "Circles give orders. Triangles warn. Rectangles inform. Octagons stop. Diamonds give priority. Read the shape first - the meaning becomes obvious." },
         { kind: "learn", t: "Colour reinforces the shape",
-          d: "Red means stop or prohibit. Blue means mandatory. Yellow or white triangles warn. Green or blue rectangles inform." },
+          d: "Red means stop or prohibit. Blue means mandatory. Yellow or white triangles warn. Green or blue rectangles inform. Once you know the pattern, you can read a sign you have never seen before." },
         { kind: "tip", t: "Safety tip",
           d: "When you see a sign you do not recognise, slow down. That is always the right response." }
       ],
-      quiz: { q: "Triangle-shaped signs usually:", opts: ["Warn of a hazard", "Give orders", "Inform", "Give priority"], a: 0 }
+      quiz: { q: "Triangle-shaped signs usually:", opts: ["Warn of a hazard", "Give orders", "Inform", "Give priority"], a: 0,
+              why: "Triangles warn. Circles order. Rectangles inform. Octagons stop." }
+    },
+    { title: "Warning signs",
+      objective: "Recognise the yellow/red triangle family.",
+      color: ["#dc2626", "#ef4444"], scene: "signs", icon: "&#9888;",
+      steps: [
+        { kind: "learn", t: "What warning signs look like",
+          d: "Red-bordered triangles with a yellow or white interior, or a black symbol on yellow. They tell you about a hazard ahead: bends, crossings, schools, road works." },
+        { kind: "learn", t: "The correct response",
+          d: "Warning signs are not orders - they are predictions. Slow down. Increase your observation. Be ready for something unexpected." }
+      ],
+      quiz: { q: "At a warning sign, you should:", opts: ["Speed up", "Slow and increase observation", "Ignore if you know the road", "Sound the horn"], a: 1,
+              why: "Warning signs are the road telling you to look more carefully." }
+    },
+    { title: "Prohibitory signs",
+      objective: "Recognise what you must not do.",
+      color: ["#991b1b", "#dc2626"], scene: "signs", icon: "&#9940;",
+      steps: [
+        { kind: "learn", t: "What prohibitory signs look like",
+          d: "Red circles with a white interior, or red circles with a diagonal red bar. They tell you what is not allowed: no entry, no overtaking, speed limits, no parking." },
+        { kind: "tip", t: "Safety tip",
+          d: "Speed limits are the maximum, not the target. Drive to the conditions, which are often slower." }
+      ],
+      quiz: { q: "A red circle with a diagonal bar means:", opts: ["You must do something", "You must not do something", "Warning", "Information"], a: 1,
+              why: "Red circle + diagonal bar = prohibited. Red circle without bar = mandatory." }
+    },
+    { title: "Mandatory and priority signs",
+      objective: "Understand orders and who goes first.",
+      color: ["#1e40af", "#3b82f6"], scene: "roundabout", icon: "&#8505;",
+      steps: [
+        { kind: "learn", t: "Blue means order",
+          d: "Blue circles with white symbols give orders: turn left, turn right, keep right. You must follow the direction shown." },
+        { kind: "learn", t: "Diamonds mean priority",
+          d: "Yellow diamonds give you priority. A yellow diamond with a black bar means priority ends. Give way signs let the other road go first." }
+      ],
+      quiz: { q: "A blue circle with a white arrow means:", opts: ["A warning", "A mandatory direction", "Information", "A prohibition"], a: 1,
+              why: "Blue circles are mandatory directions. You must go where the arrow points." }
+    },
+    { title: "Information signs",
+      objective: "Read the signs that inform, not order.",
+      color: ["#1e3a8a", "#60a5fa"], scene: "city", icon: "&#8505;",
+      steps: [
+        { kind: "learn", t: "Information you need to know",
+          d: "Blue or green rectangles tell you useful things: hospital nearby, fuel station, bus stop, one-way street. They do not give orders - they inform." }
+      ],
+      quiz: { q: "A blue rectangle sign usually:", opts: ["Warns", "Orders", "Informs", "Prohibits"], a: 2,
+              why: "Blue rectangles inform. Circles warn or order. Triangles warn." }
     }
   ],
+
   rules: [
-    {
-      title: "The core rules of the road",
+    { title: "The core rules of the road",
       objective: "The fundamental rules every Rwandan driver must know.",
-      color: ["#2563eb", "#3b82f6"],
+      color: ["#2563eb", "#3b82f6"], scene: "city", icon: "&#128220;",
       steps: [
         { kind: "learn", t: "Keep left, overtake right",
           d: "In Rwanda, drive on the left side of the road. Overtake on the right. Signal before every turn or lane change - always." },
         { kind: "learn", t: "Speed is always contextual",
-          d: "There is no single 'safe speed'. Your safe speed depends on the road, the weather, the traffic, and your visibility. Drive to the conditions, not to a number." },
+          d: "There is no single safe speed. Your safe speed depends on the road, the weather, the traffic, and your visibility. Drive to the conditions, not to a number." },
         { kind: "tip", t: "Safety tip",
           d: "If you cannot see far enough ahead to stop safely, you are going too fast." }
       ],
-      quiz: { q: "You should drive on which side?", opts: ["Right", "Left", "Either side", "Middle"], a: 1 }
+      quiz: { q: "You should drive on which side?", opts: ["Right", "Left", "Either side", "Middle"], a: 1,
+              why: "Rwanda drives on the left, like many Commonwealth countries." }
+    },
+    { title: "Traffic lights and signals",
+      objective: "Interpret lights and police signals confidently.",
+      color: ["#1d4ed8", "#60a5fa"], scene: "intersection", icon: "&#128678;",
+      steps: [
+        { kind: "learn", t: "Red, amber, green - no ambiguity",
+          d: "Red = stop. Amber = prepare to stop (unless already too close to stop safely). Green = proceed, but only when you have checked the junction is clear." },
+        { kind: "mistake", t: "Common mistake",
+          d: "Rushing the green light. Green means you MAY go, not that you MUST. If a pedestrian is still crossing, you wait." }
+      ],
+      quiz: { q: "Amber light means:", opts: ["Speed up to beat the red", "Prepare to stop unless unsafe", "Always continue", "Sound the horn"], a: 1,
+              why: "Amber is a warning. Stop unless stopping would itself be unsafe." }
+    },
+    { title: "Overtaking safely",
+      objective: "Know when it is legal and safe to overtake.",
+      color: ["#1e40af", "#2563eb"], scene: "city", icon: "&#128661;",
+      steps: [
+        { kind: "learn", t: "Overtake only when it is safe",
+          d: "You need clear visibility, no oncoming traffic, and enough road to complete the manoeuvre and return. Never overtake at pedestrian crossings, bends, or anywhere signs prohibit it." },
+        { kind: "tip", t: "Safety tip",
+          d: "If you have to wonder whether you have enough time, you do not. Wait." }
+      ],
+      quiz: { q: "Overtaking is unsafe when:", opts: ["You cannot see far enough ahead", "The road is straight", "You are on a highway", "You have time"], a: 0,
+              why: "If you cannot see the whole manoeuvre through safely, do not start it." }
+    },
+    { title: "Following distance",
+      objective: "Keep enough distance to stop safely.",
+      color: ["#2563eb", "#60a5fa"], scene: "city", icon: "&#128207;",
+      steps: [
+        { kind: "learn", t: "The three-second rule",
+          d: "Pick a fixed point on the road ahead. When the vehicle in front passes it, count three seconds. You should reach the same point in no less than three seconds. In rain, double it." },
+        { kind: "practice", t: "Try it",
+          d: "On your next trip, count three seconds on every straight. Notice how your spacing changes." }
+      ],
+      quiz: { q: "The three-second rule helps you:", opts: ["Time traffic lights", "Keep a safe following distance", "Judge speed limits", "Park"], a: 1,
+              why: "Three seconds of following distance gives you time to react and stop safely." }
+    },
+    { title: "Signalling and observation",
+      objective: "Signal early and observe always.",
+      color: ["#1e40af", "#3b82f6"], scene: "intersection", icon: "&#128680;",
+      steps: [
+        { kind: "learn", t: "Mirror - Signal - Manoeuvre",
+          d: "Before every turn, lane change, or manoeuvre: check your mirrors, signal your intention, then move. In that exact order. Every time." },
+        { kind: "mistake", t: "Common mistake",
+          d: "Signalling after you start moving. The signal is a warning, not a description. It should come first." }
+      ],
+      quiz: { q: "The correct order before a manoeuvre:", opts: ["Mirror, Signal, Manoeuvre", "Signal, Mirror, Manoeuvre", "Accelerate, Mirror, Manoeuvre", "Horn, Mirror, Move"], a: 0,
+              why: "Mirror-Signal-Manoeuvre is the universal routine. In that order, every time." }
     }
   ],
+
   rightofway: [
-    {
-      title: "Right of way fundamentals",
+    { title: "Right of way fundamentals",
       objective: "Who goes first, and why.",
-      color: ["#7c3aed", "#a855f7"],
+      color: ["#7c3aed", "#a855f7"], scene: "roundabout", icon: "&#10145;",
       steps: [
         { kind: "learn", t: "Right of way is not a privilege",
           d: "Right of way exists to make traffic predictable. Signs, markings and signals tell you who goes first. Never assume. Observe." },
         { kind: "tip", t: "Safety tip",
           d: "If you have to wonder who has priority, you have already found the safest answer: give way." }
       ],
-      quiz: { q: "At an unmarked crossroads:", opts: ["You always go first", "Slow and be ready to give way", "Speed up to clear it", "Sound the horn"], a: 1 }
+      quiz: { q: "At an unmarked crossroads:", opts: ["You always go first", "Slow and be ready to give way", "Speed up to clear it", "Sound the horn"], a: 1,
+              why: "Unmarked junctions require extra caution. Slow, observe, and be ready to give way." }
+    },
+    { title: "Roundabouts",
+      objective: "Enter, navigate, and exit a roundabout safely.",
+      color: ["#6d28d9", "#c084fc"], scene: "roundabout", icon: "&#8635;",
+      steps: [
+        { kind: "learn", t: "Give way to the roundabout",
+          d: "Traffic already on the roundabout has priority. Enter only when there is a safe gap. Signal before exiting." }
+      ],
+      quiz: { q: "In a roundabout you give way to:", opts: ["Traffic already on it", "Traffic behind you", "Cyclists only", "Nobody"], a: 0,
+              why: "The roundabout has priority. You give way to it." }
     }
   ],
+
   vehicle: [
-    {
-      title: "The controls you must know",
+    { title: "The controls you must know",
       objective: "Every control, what it does, and when to use it.",
-      color: ["#047857", "#22c55e"],
+      color: ["#047857", "#22c55e"], scene: "vehicle", icon: "&#128296;",
       steps: [
         { kind: "learn", t: "The essential controls",
-          d: "Steering wheel for direction. Accelerator for speed. Brake for slowing. Clutch to engage. Gears to match engine power. Indicators to signal. Mirrors to observe behind. Handbrake to hold when parked." },
+          d: "Steering wheel for direction. Accelerator for speed. Brake for slowing. Clutch to engage (manual). Gears to match power to speed. Indicators to signal. Mirrors to observe. Handbrake to hold when parked." },
         { kind: "tip", t: "Safety tip",
           d: "Before every trip: seat, mirrors, belt, controls. In that order. Every time." }
       ],
-      quiz: { q: "First step before driving:", opts: ["Start the engine", "Adjust seat, mirrors, belt", "Turn on the radio", "Sound the horn"], a: 1 }
+      quiz: { q: "First step before driving:", opts: ["Start the engine", "Adjust seat, mirrors, belt", "Turn on the radio", "Sound the horn"], a: 1,
+              why: "Set yourself up before you set off." }
     }
   ],
+
   users: [
-    {
-      title: "Vulnerable road users",
+    { title: "Vulnerable road users",
       objective: "Protect pedestrians, cyclists, and motorcyclists.",
-      color: ["#be185d", "#ec4899"],
+      color: ["#be185d", "#ec4899"], scene: "pedestrian", icon: "&#128694;",
       steps: [
         { kind: "learn", t: "Who is most at risk",
-          d: "Pedestrians, cyclists, and motorcyclists (especially moto taxis) have little to no protection. As a car driver, you have a duty of care toward them. Give them space." },
+          d: "Pedestrians, cyclists, and motorcyclists (especially moto taxis) have little to no protection. As a car driver, you have a duty of care. Give them space." },
         { kind: "learn", t: "Children and elderly",
-          d: "Children may dart into the road without warning. Elderly pedestrians may be slower than you expect. Both deserve extra caution near schools, markets and residential areas." }
+          d: "Children may dart into the road. Elderly pedestrians may be slower than you expect. Both deserve extra caution near schools, markets and residential areas." }
       ],
-      quiz: { q: "Near a school you should:", opts: ["Drive normally", "Reduce speed and watch for children", "Sound the horn", "Speed up to pass quickly"], a: 1 }
+      quiz: { q: "Near a school you should:", opts: ["Drive normally", "Reduce speed and watch for children", "Sound the horn", "Speed up to pass quickly"], a: 1,
+              why: "Children are unpredictable. Slow down and be ready to stop." }
     }
   ],
+
   safety: [
-    {
-      title: "Defensive driving",
+    { title: "Defensive driving",
       objective: "Anticipate. Observe. Decide. The habits that save lives.",
-      color: ["#b45309", "#facc15"],
+      color: ["#b45309", "#facc15"], scene: "city", icon: "&#128737;",
       steps: [
         { kind: "learn", t: "What defensive driving means",
-          d: "Defensive driving is assuming that other road users may make mistakes. You drive not only for yourself, but for the driver who runs a red light, the pedestrian who steps out, the moto that swerves." },
-        { kind: "learn", t: "The three-second rule",
-          d: "Pick a fixed point on the road ahead. When the vehicle in front passes it, count three seconds. You should reach the same point in no less than three seconds. In rain, double it." },
+          d: "Defensive driving assumes other road users may make mistakes. You drive not only for yourself, but for the driver who runs a red light, the pedestrian who steps out, the moto that swerves." },
         { kind: "tip", t: "Safety tip",
           d: "The safest drivers are not the slowest. They are the ones who leave room for other people's mistakes." }
       ],
-      quiz: { q: "The three-second rule helps you:", opts: ["Time traffic lights", "Keep a safe following distance", "Judge speed limits", "Park"], a: 1 }
+      quiz: { q: "Defensive driving means:", opts: ["Driving slowly", "Anticipating other people's mistakes", "Using the horn", "Avoiding all trips"], a: 1,
+              why: "You assume others may make mistakes and plan for them." }
     }
   ],
+
   reallife: [
-    {
-      title: "Driving in real Rwandan conditions",
+    { title: "Driving in real Rwandan conditions",
       objective: "Rain, hills, night, busy Kigali traffic.",
-      color: ["#0d9488", "#5eead4"],
+      color: ["#0d9488", "#5eead4"], scene: "rain", icon: "&#127783;",
       steps: [
         { kind: "learn", t: "Adapt to the conditions",
           d: "Wet roads need longer stopping distances. Steep hills need correct gear selection. Night driving needs lower speed and higher alertness. Busy Kigali traffic needs patience and prediction." },
         { kind: "tip", t: "Safety tip",
           d: "If it is raining, slow down by at least 20 percent. Your brake distance will roughly double." }
       ],
-      quiz: { q: "In heavy rain you should:", opts: ["Drive normally", "Reduce speed and increase distance", "Use hazard lights continuously", "Turn off wipers"], a: 1 }
+      quiz: { q: "In heavy rain you should:", opts: ["Drive normally", "Reduce speed and increase distance", "Use hazard lights continuously", "Turn off wipers"], a: 1,
+              why: "Wet roads are twice as long to stop on. Slow down and increase your gap." }
+    },
+    { title: "Night driving",
+      objective: "See and be seen after dark.",
+      color: ["#0f766e", "#14b8a6"], scene: "night", icon: "&#127769;",
+      steps: [
+        { kind: "learn", t: "Lower speed, higher alertness",
+          d: "At night your visibility is dramatically reduced. Slow down. Use headlights correctly. Avoid staring at oncoming lights." }
+      ],
+      quiz: { q: "At night you should:", opts: ["Drive faster to arrive sooner", "Slow down and increase following distance", "Use high beams always", "Ignore the road markings"], a: 1,
+              why: "You cannot see as far at night. Slow down, increase gap." }
     }
   ],
+
   hazard: [
-    {
-      title: "Hazard awareness and scanning",
+    { title: "Hazard awareness and scanning",
       objective: "See danger before it becomes a crash.",
-      color: ["#991b1b", "#dc2626"],
+      color: ["#991b1b", "#dc2626"], scene: "city", icon: "&#9888;",
       steps: [
         { kind: "learn", t: "Scan, do not stare",
           d: "Move your eyes constantly: far ahead, near, mirrors, instruments. A driver who stares at one point will miss everything else happening on the road." },
         { kind: "learn", t: "Anticipate the likely hazard",
           d: "A parked car with a driver inside - expect the door to open. A child on the pavement near a crossing - expect them to run. A bus at a stop - expect pedestrians stepping out." }
       ],
-      quiz: { q: "Hazard perception means:", opts: ["Driving faster", "Spotting potential dangers early", "Using the horn more", "Parking carefully"], a: 1 }
+      quiz: { q: "Hazard perception means:", opts: ["Driving faster", "Spotting potential dangers early", "Using the horn more", "Parking carefully"], a: 1,
+              why: "Hazard perception is anticipating danger before it becomes an emergency." }
     }
   ],
+
   theory: [
-    {
-      title: "Preparing for the theory examination",
+    { title: "Preparing for the theory examination",
       objective: "Systematic preparation that actually works.",
-      color: ["#4338ca", "#818cf8"],
+      color: ["#4338ca", "#818cf8"], scene: "dashboard", icon: "&#128221;",
       steps: [
         { kind: "learn", t: "Practice, do not memorise",
           d: "The best preparation is repeated practice with immediate feedback on every wrong answer. Memorising answers fades. Understanding why answers are correct stays." },
         { kind: "tip", t: "Study tip",
           d: "Do a little every day. Fifteen focused minutes daily beats three hours on Sunday - every time." }
       ],
-      quiz: { q: "Best way to prepare for the theory exam:", opts: ["Memorise everything the night before", "Practice with feedback, daily", "Watch videos only", "Ask a friend"], a: 1 }
+      quiz: { q: "Best way to prepare for the theory exam:", opts: ["Memorise everything the night before", "Practice with feedback, daily", "Watch videos only", "Ask a friend"], a: 1,
+              why: "Daily practice with feedback beats a last-minute cram every time." }
     }
   ],
+
   practical: [
-    {
-      title: "Preparing for practical driving",
+    { title: "Preparing for practical driving",
       objective: "Make your instructor's time count.",
-      color: ["#c2410c", "#fb923c"],
+      color: ["#c2410c", "#fb923c"], scene: "vehicle", icon: "&#128736;",
       steps: [
         { kind: "learn", t: "Understand before you drive",
           d: "You cannot learn to drive from a book - but you can arrive at your first practical lesson already knowing the vehicle layout, the controls, the mirror-signal-manoeuvre routine, and the rules." },
         { kind: "tip", t: "Preparation tip",
           d: "Before your first lesson, sit in a parked car and find every control by touch. Your instructor will thank you." }
       ],
-      quiz: { q: "The best use of practical lessons is:", opts: ["Learning signs", "Practising driving with the instructor", "Reading rules", "Watching videos"], a: 1 }
+      quiz: { q: "The best use of practical lessons is:", opts: ["Learning signs", "Practising driving with the instructor", "Reading rules", "Watching videos"], a: 1,
+              why: "Practical lessons are for driving. Do your theory learning here first." }
     }
   ],
+
   final: [
-    {
-      title: "Final readiness check",
+    { title: "Final readiness check",
       objective: "Are you ready for the official process?",
-      color: ["#166534", "#22c55e"],
+      color: ["#166534", "#22c55e"], scene: "city", icon: "&#127891;",
       steps: [
-        { kind: "learn", t: "What 'ready' means",
+        { kind: "learn", t: "What ready means",
           d: "You are ready when you can explain - not just recall - the rules, recognise every common road sign, describe safe decision-making in a real scenario, and demonstrate that understanding in a mock examination." },
         { kind: "tip", t: "Next step",
           d: "When your mock exam scores consistently above 85 percent, you are ready to move to the official process with a qualified instructor." }
       ],
-      quiz: { q: "You are ready for the official process when:", opts: ["You feel like it", "Your mock scores are consistently high", "A friend says so", "You memorised a book"], a: 1 }
+      quiz: { q: "You are ready for the official process when:", opts: ["You feel like it", "Your mock scores are consistently high", "A friend says so", "You memorised a book"], a: 1,
+              why: "Consistent mock scores above 85 percent are a strong sign of readiness." }
     }
   ]
 };
 
+// Fill in missing lessons for levels that only have 1-2, using a fallback generator
+LEVELS.forEach(function(lvl){
+  if (!LESSONS[lvl.topic]) LESSONS[lvl.topic] = [];
+  while (LESSONS[lvl.topic].length < 5){
+    var idx = LESSONS[lvl.topic].length + 1;
+    LESSONS[lvl.topic].push({
+      title: lvl.en + " - Lesson " + idx,
+      objective: "Continue building your understanding of " + lvl.en.toLowerCase() + ".",
+      color: ["#0891b2", "#22d3ee"], scene: "city", icon: lvl.icon,
+      steps: [
+        { kind: "learn", t: "Applying what you know",
+          d: "This lesson builds on the fundamentals of " + lvl.en + ". Focus on understanding why the correct action is correct - not just what the correct action is." },
+        { kind: "tip", t: "Safety tip",
+          d: "Understanding beats memorisation. Every time." }
+      ],
+      quiz: { q: "The main goal of this lesson is:", opts: ["Memorise rules", "Understand why rules exist", "Pass a test", "Drive fast"], a: 1,
+              why: "Understanding the WHY makes the rules stick." }
+    });
+  }
+});
+
 var SIGNS = [
   { id: "stop", en: "STOP", rw: "HAGARARA", cat: "prohibitory", shape: "octagon", color: "#ef4444", text: "STOP" },
   { id: "yield", en: "Give Way", rw: "Tanga Uburyo", cat: "priority", shape: "triangle", color: "#f8fafc", text: "" },
-  { id: "noentry", en: "No Entry", rw: "Nta Kwinjira", cat: "prohibitory", shape: "circle", color: "#ef4444", text: "-" },
+  { id: "noentry", en: "No Entry", rw: "Nta Kwinjira", cat: "prohibitory", shape: "circle", color: "#ef4444", text: "X" },
   { id: "speed50", en: "Speed Limit 50", rw: "Umuvuduko 50", cat: "prohibitory", shape: "circle", color: "#f8fafc", text: "50" },
   { id: "noparking", en: "No Parking", rw: "Nta Guhagarika", cat: "prohibitory", shape: "circle", color: "#3b82f6", text: "P" },
   { id: "pedestrian", en: "Pedestrian Crossing", rw: "Abanyamaguru", cat: "warning", shape: "triangle", color: "#f8fafc", text: "" },
@@ -999,84 +1417,181 @@ var SIGNS = [
 
 var QUESTIONS = [
   { topic: "signs", q: "What does a red octagonal sign mean?", opts: ["STOP", "Give Way", "No Entry", "Yield"], a: 0,
-    why: "The octagon is reserved for STOP. The red colour and the shape together make it unmistakable." },
+    why: "The octagon is reserved for STOP. Red colour and octagon shape together make it unmistakable." },
   { topic: "signs", q: "A red triangle sign usually means:", opts: ["Warning", "Mandatory", "Information", "Priority"], a: 0,
-    why: "Red-bordered triangles warn you of a hazard ahead. Slow down and observe." },
-  { topic: "rightofway", q: "At a give-way sign, you should:", opts: ["Slow and prepare to stop", "Speed up", "Sound the horn and continue", "Ignore it if the road looks clear"], a: 0,
-    why: "Give-way means you must be ready to stop. Never assume - observe and decide." },
+    why: "Red-bordered triangles warn you of a hazard ahead." },
+  { topic: "rightofway", q: "At a give-way sign, you should:", opts: ["Slow and prepare to stop", "Speed up", "Sound the horn and continue", "Ignore it"], a: 0,
+    why: "Give-way means you must be ready to stop." },
   { topic: "rules", q: "A red traffic light means:", opts: ["Stop", "Go if clear", "Slow down", "Sound the horn"], a: 0,
-    why: "Red means stop, full stop. No exceptions." },
-  { topic: "rules", q: "An amber light means:", opts: ["Prepare to stop unless unsafe", "Speed up to beat the red", "Always continue", "Ignore if no police"], a: 0,
-    why: "Amber is a warning to stop - unless you are already past the point of safe stopping." },
+    why: "Red means stop. Full stop. No exceptions." },
+  { topic: "rules", q: "An amber light means:", opts: ["Prepare to stop unless unsafe", "Speed up", "Always continue", "Ignore if no police"], a: 0,
+    why: "Amber warns you to stop unless stopping would be unsafe." },
   { topic: "vehicle", q: "The brake pedal is used to:", opts: ["Slow or stop the vehicle", "Increase speed", "Change gear", "Signal"], a: 0,
-    why: "Brakes slow or stop the vehicle. Press progressively - never suddenly, unless in emergency." },
+    why: "Brakes slow or stop. Press progressively." },
   { topic: "vehicle", q: "Before driving, mirrors should be:", opts: ["Adjusted for clear view", "Removed", "Turned inward", "Covered"], a: 0,
-    why: "Mirrors must be adjusted every time, before every trip. No exceptions." },
+    why: "Mirrors must be adjusted every trip." },
   { topic: "safety", q: "A seat belt should be worn by:", opts: ["All occupants", "Only the driver", "Only on long trips", "Only on highways"], a: 0,
-    why: "Every occupant. Every trip. Seat belts save lives in every type of collision." },
+    why: "Every occupant. Every trip." },
   { topic: "hazard", q: "Hazard perception means:", opts: ["Spotting potential dangers early", "Driving faster", "Horn usage", "Parking awareness"], a: 0,
-    why: "Hazard perception is the skill of anticipating danger before it develops into an accident." },
+    why: "Anticipating danger before it becomes an emergency." },
   { topic: "pedestrians", q: "If a pedestrian is on a crossing, you should:", opts: ["Stop and give way", "Pass quickly", "Sound the horn", "Pass closely"], a: 0,
-    why: "Pedestrians on crossings have the right of way. You stop. Always." },
+    why: "Pedestrians on crossings have right of way." },
   { topic: "safety", q: "Following distance should increase when:", opts: ["Roads are wet or visibility is poor", "You are in a hurry", "Following a bus", "It is sunny"], a: 0,
-    why: "Rain and poor visibility roughly double stopping distance. Increase your following gap." },
+    why: "Rain doubles stopping distance." },
   { topic: "rules", q: "Overtaking is unsafe when:", opts: ["You cannot see far enough ahead", "The road is straight", "You are on a highway", "You have time"], a: 0,
-    why: "Never overtake unless you can see the whole manoeuvre through safely. No guesses." },
+    why: "Never overtake unless you can see the whole manoeuvre through safely." },
   { topic: "rightofway", q: "At an unmarked crossroads, you should:", opts: ["Slow and be ready to give way", "Always proceed first", "Sound the horn and continue", "Accelerate"], a: 0,
-    why: "Unmarked junctions need extra caution. Slow down, look, decide - never assume priority." },
+    why: "Unmarked junctions need extra caution." },
   { topic: "safety", q: "The correct order before a manoeuvre:", opts: ["Mirror, Signal, Manoeuvre", "Signal, Mirror, Manoeuvre", "Accelerate, Mirror, Manoeuvre", "Horn, Mirror, Move"], a: 0,
-    why: "Mirror-Signal-Manoeuvre is the universal routine for every turn and lane change." },
-  { topic: "roundabouts", q: "When entering a roundabout, you generally give way to:", opts: ["Traffic already on the roundabout", "Traffic behind you", "Cyclists only", "Nobody, you have priority"], a: 0,
-    why: "Give way to the roundabout. Only enter when there is a safe gap." }
+    why: "Mirror-Signal-Manoeuvre is the universal routine." },
+  { topic: "roundabouts", q: "In a roundabout you give way to:", opts: ["Traffic already on the roundabout", "Traffic behind you", "Cyclists only", "Nobody"], a: 0,
+    why: "The roundabout has priority." }
 ];
 
+// ─── DASHBOARD ───
 var Dashboard = {
   render: function(){
     var d = State.data;
     var level = LEVELS[d.progress.currentLevel - 1] || LEVELS[0];
     var mastery = this.overallMastery();
-    var acc = d.stats.attempts ? Math.round(d.stats.correct / d.stats.attempts * 100) + "%" : "-";
+    var lessonsPct = Math.min(100, Object.keys(d.progress.lessons).length * 4);
+    var questionsPct = d.stats.attempts ? Math.round(d.stats.correct / d.stats.attempts * 100) : 0;
     var av = d.photoURL
       ? '<div class="avatar"><img src="' + esc(d.photoURL) + '" alt=""></div>'
       : '<div class="avatar">' + (d.displayName || "L")[0].toUpperCase() + '</div>';
     var weak = this.weakAreas();
+    var curLesson = d.progress.currentLesson || { level: 1, idx: 0 };
 
     return ''
+      // HERO
       + '<div class="dash-hero">'
       +   '<div class="inner">'
-      +     '<div class="who">' + av
+      +     '<div class="who">'
+      +       av
       +       '<div>'
       +         '<h1>Welcome back, ' + esc((d.displayName || "learner").split(" ")[0]) + '.</h1>'
-      +         '<div class="sub">' + esc(d.email || (State.demo ? "Demo mode - progress saved on this device" : "")) + '</div>'
+      +         '<div class="sub">' + esc(d.email || (State.demo ? "Demo mode - saved on this device" : "")) + '</div>'
+      +         '<div class="streak-badge"><span class="flame">&#128293;</span> ' + d.stats.streak + ' day streak</div>'
       +       '</div>'
       +     '</div>'
-      +     '<button class="btn btn-primary" onclick="Levels.openLevel(' + d.progress.currentLevel + ')">Continue learning</button>'
+      +     '<button class="btn btn-primary" onclick="Levels.openLevel(' + curLesson.level + ')">Continue learning</button>'
       +   '</div>'
       + '</div>'
 
-      + '<div class="kpis">'
-      +   '<div class="kpi c1"><div class="k">Current level</div><div class="v">' + String(d.progress.currentLevel).padStart(2, "0") + '</div><div class="h">' + esc(level.en) + '</div></div>'
-      +   '<div class="kpi c2"><div class="k">Overall mastery</div><div class="v">' + mastery + '%</div><div class="h">' + (mastery >= 80 ? "Excellent progress" : mastery >= 50 ? "Good momentum" : "Keep going") + '</div></div>'
-      +   '<div class="kpi c3"><div class="k">Questions</div><div class="v">' + d.stats.attempts + '</div><div class="h">' + acc + ' accuracy</div></div>'
-      +   '<div class="kpi c4"><div class="k">Streak</div><div class="v">' + d.stats.streak + '</div><div class="h">Active days</div></div>'
+      // RINGS
+      + '<div class="panel">'
+      +   '<h3><span class="ic">&#127919;</span>Your progress</h3>'
+      +   '<div class="rings">'
+      +     this.ringSVG("Mastery", mastery, "#22d3ee")
+      +     this.ringSVG("Lessons", lessonsPct, "#22c55e")
+      +     this.ringSVG("Accuracy", questionsPct, "#a855f7")
+      +   '</div>'
       + '</div>'
 
-      + '<div class="reco">'
-      +   '<div class="tag">Recommended next step</div>'
-      +   (weak.length
-            ? '<h3>Strengthen ' + esc(weak[0].label) + '</h3><p>Your mastery is ' + weak[0].pct + '%. A few targeted questions will lift it quickly.</p><button class="btn btn-primary" style="margin-top:14px" onclick="Practice.startTopic(\'' + weak[0].topic + '\')">Practice ' + esc(weak[0].label) + '</button>'
-            : '<h3>Start ' + esc(level.en) + '</h3><p>Focus: ' + esc(level.intro) + '</p><button class="btn btn-primary" style="margin-top:14px" onclick="Levels.openLevel(' + d.progress.currentLevel + ')">Open learning path</button>')
+      // CONTINUE
+      + '<div class="continue-card">'
+      +   '<div class="inner">'
+      +     '<div class="illus">' + (LESSONS[LEVELS[curLesson.level-1].topic][curLesson.idx] || {}).icon + '</div>'
+      +     '<div class="info">'
+      +       '<div class="tag">Continue where you left off</div>'
+      +       '<h3>' + esc((LESSONS[LEVELS[curLesson.level-1].topic][curLesson.idx] || {}).title || "Start Level 1") + '</h3>'
+      +       '<p>Level ' + curLesson.level + ' - ' + esc(LEVELS[curLesson.level-1].en) + '</p>'
+      +       '<div class="bar" style="margin-top:12px"><i style="width:' + mastery + '%;background:#fff"></i></div>'
+      +     '</div>'
+      +     '<button class="btn btn-primary" onclick="Levels.openLevel(' + curLesson.level + ')">Resume</button>'
+      +   '</div>'
       + '</div>'
 
+      // RADAR + WEEK GOAL
+      + '<div class="grid grid-2" style="margin-bottom:20px">'
+      +   '<div class="panel">'
+      +     '<h3><span class="ic">&#128200;</span>Skill balance</h3>'
+      +     '<div class="radar-wrap">' + this.radarSVG() + '</div>'
+      +   '</div>'
+      +   '<div class="panel">'
+      +     '<h3><span class="ic">&#128197;</span>This week</h3>'
+      +     '<div id="weekGoal"></div>'
+      +     '<div style="margin-top:18px"><div class="mini dim">Last 12 weeks</div>'
+      +       '<div class="heatmap" id="heatmap"></div>'
+      +       '<div class="heat-legend"><span>Less</span><div class="dot l1"></div><div class="dot l2"></div><div class="dot l3"></div><div class="dot l4"></div><span>More</span></div>'
+      +     '</div>'
+      +   '</div>'
+      + '</div>'
+
+      // MASTERY + WEAK
       + '<div class="grid grid-2" style="margin-bottom:20px">'
       +   '<div class="panel"><h3><span class="ic">&#128202;</span>Topic mastery</h3>' + this.masteryHTML() + '</div>'
       +   '<div class="panel"><h3><span class="ic">&#127919;</span>Weak areas</h3>' + this.weakAreasPanelHTML() + '</div>'
       + '</div>'
 
+      // ACHIEVEMENTS
       + '<div class="panel">'
       +   '<h3><span class="ic">&#127942;</span>Achievements</h3>'
-      +   '<div class="grid grid-3">' + this.achievementsHTML() + '</div>'
+      +   '<div class="achv-grid">' + this.achievementsHTML() + '</div>'
+      + '</div>'
+
+      // TIMELINE
+      + '<div class="panel">'
+      +   '<h3><span class="ic">&#128340;</span>Recent activity</h3>'
+      +   '<div class="timeline">' + this.timelineHTML() + '</div>'
       + '</div>';
+  },
+
+  ringSVG: function(label, pct, color){
+    var r = 38;
+    var c = 2 * Math.PI * r;
+    var off = c * (1 - pct / 100);
+    return '<div class="ring-card">'
+      + '<svg viewBox="0 0 90 90">'
+      +   '<circle class="ring-bg" cx="45" cy="45" r="' + r + '"></circle>'
+      +   '<circle class="ring-val" cx="45" cy="45" r="' + r + '" stroke="' + color + '" stroke-dasharray="' + c + '" stroke-dashoffset="' + off + '"></circle>'
+      + '</svg>'
+      + '<div class="v">' + pct + '%</div>'
+      + '<div class="l">' + label + '</div>'
+      + '</div>';
+  },
+
+  radarSVG: function(){
+    var labels = ["Signs", "Rules", "Right of Way", "Safety", "Hazards", "Vehicle"];
+    var keys = ["signs", "rules", "rightofway", "safety", "hazard", "vehicle"];
+    var t = State.data.progress.topics;
+    var vals = keys.map(function(k){ return Math.max(0.05, (t[k] || 0) / 100); });
+    var cx = 140, cy = 130, max = 95;
+    var pts = [];
+    for (var i = 0; i < 6; i++){
+      var a = -Math.PI / 2 + i * Math.PI / 3;
+      var rr = max * vals[i];
+      pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]);
+    }
+    var polyPts = pts.map(function(p){ return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ");
+    var grid = '';
+    [0.25, 0.5, 0.75, 1].forEach(function(f){
+      var g = [];
+      for (var i = 0; i < 6; i++){
+        var a = -Math.PI / 2 + i * Math.PI / 3;
+        g.push((cx + Math.cos(a) * max * f).toFixed(1) + "," + (cy + Math.sin(a) * max * f).toFixed(1));
+      }
+      grid += '<polygon points="' + g.join(" ") + '" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"></polygon>';
+    });
+    var axes = '';
+    for (var i = 0; i < 6; i++){
+      var a = -Math.PI / 2 + i * Math.PI / 3;
+      axes += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + Math.cos(a) * max) + '" y2="' + (cy + Math.sin(a) * max) + '" stroke="rgba(255,255,255,.08)"></line>';
+    }
+    var lbls = '';
+    for (var i = 0; i < 6; i++){
+      var a = -Math.PI / 2 + i * Math.PI / 3;
+      var lx = cx + Math.cos(a) * (max + 18);
+      var ly = cy + Math.sin(a) * (max + 18);
+      lbls += '<text x="' + lx + '" y="' + ly + '" fill="#7b88a8" font-size="10" text-anchor="middle" dominant-baseline="middle">' + labels[i] + '</text>';
+    }
+    return '<svg viewBox="0 0 280 260">'
+      + '<defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#a855f7" stop-opacity=".4"/></linearGradient></defs>'
+      + grid + axes
+      + '<polygon points="' + polyPts + '" fill="url(#rg)" stroke="#22d3ee" stroke-width="2"></polygon>'
+      + pts.map(function(p){ return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3.5" fill="#22d3ee"></circle>'; }).join("")
+      + lbls
+      + '</svg>';
   },
 
   overallMastery: function(){
@@ -1114,8 +1629,7 @@ var Dashboard = {
     var map = { signs: "Road Signs", rules: "Rules", rightofway: "Right of Way",
       safety: "Safety", hazard: "Hazard Awareness", vehicle: "Vehicle",
       pedestrians: "Pedestrians", roundabouts: "Roundabouts" };
-    return Object.keys(t)
-      .filter(function(k){ return map[k] && t[k] < 60; })
+    return Object.keys(t).filter(function(k){ return map[k] && t[k] < 60; })
       .sort(function(a, b){ return t[a] - t[b]; })
       .slice(0, 4)
       .map(function(k){ return { topic: k, label: map[k], pct: Math.round(t[k]) }; });
@@ -1130,7 +1644,7 @@ var Dashboard = {
         + '<div class="bar" style="margin-top:5px"><i style="width:' + x.pct + '%;background:linear-gradient(90deg,#ef4444,#f59e0b)"></i></div>'
         + '</div>';
     }).join("")
-      + '<button class="btn btn-primary btn-block" style="margin-top:8px" onclick="Practice.startTopic(\'' + w[0].topic + '\')">Practice ' + esc(w[0].label) + '</button>';
+      + '<button class="btn btn-primary btn-block btn-sm" style="margin-top:8px" onclick="Practice.startTopic(\'' + w[0].topic + '\')">Practice ' + esc(w[0].label) + '</button>';
   },
 
   weakAreasPanelHTML: function(){
@@ -1145,33 +1659,52 @@ var Dashboard = {
         + '<div class="val" style="color:' + col + '">' + x.pct + '%</div>'
         + '</div>';
     }).join("")
-      + '<button class="btn btn-ghost btn-block" style="margin-top:14px" onclick="Practice.startTopic(\'' + w[0].topic + '\')">Practice now</button>';
+      + '<button class="btn btn-ghost btn-block btn-sm" style="margin-top:14px" onclick="Practice.startTopic(\'' + w[0].topic + '\')">Practice now</button>';
   },
 
   achievementsHTML: function(){
     var ACH = [
-      { id: "first", emoji: "&#127919;", en: "First Lesson", on: function(s){ return Object.keys(s.progress.lessons).length >= 1; } },
-      { id: "s5", emoji: "&#128721;", en: "Sign Explorer", on: function(s){ return Object.keys(s.progress.signsLearned).length >= 5; } },
-      { id: "r40", emoji: "&#128214;", en: "Rules Reader", on: function(s){ return (s.progress.topics.rules || 0) >= 40; } },
-      { id: "h40", emoji: "&#9888;", en: "Hazard Spotter", on: function(s){ return (s.progress.topics.hazard || 0) >= 40; } },
-      { id: "q10", emoji: "&#127942;", en: "Quiz Champion", on: function(s){ return s.stats.correct >= 10; } },
-      { id: "ready", emoji: "&#127891;", en: "Ready", on: function(s){ return s.progress.levelsCompleted.length >= 10; } }
+      { id: "first", emoji: "&#127919;", en: "First Lesson", target: 1, cur: function(s){ return Object.keys(s.progress.lessons).length; } },
+      { id: "s5", emoji: "&#128721;", en: "Sign Explorer", target: 5, cur: function(s){ return Object.keys(s.progress.signsLearned).length; } },
+      { id: "r40", emoji: "&#128214;", en: "Rules Reader", target: 40, cur: function(s){ return s.progress.topics.rules || 0; } },
+      { id: "h40", emoji: "&#9888;", en: "Hazard Spotter", target: 40, cur: function(s){ return s.progress.topics.hazard || 0; } },
+      { id: "q10", emoji: "&#127942;", en: "Quiz Champion", target: 10, cur: function(s){ return s.stats.correct; } },
+      { id: "ready", emoji: "&#127891;", en: "Ready", target: 10, cur: function(s){ return s.progress.levelsCompleted.length; } },
+      { id: "streak7", emoji: "&#128293;", en: "7 Day Streak", target: 7, cur: function(s){ return s.stats.streak; } },
+      { id: "all5", emoji: "&#11088;", en: "Five Lessons", target: 5, cur: function(s){ return Object.keys(s.progress.lessons).length; } }
     ];
     return ACH.map(function(a){
-      var got = a.on(State.data);
+      var cur = Math.min(a.target, a.cur(State.data));
+      var got = cur >= a.target;
+      var pct = Math.round(cur / a.target * 100);
       var bg = got
         ? "linear-gradient(135deg,rgba(250,204,21,.18),rgba(245,158,11,.06))"
         : "linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.005))";
       var bc = got ? "rgba(250,204,21,.4)" : "var(--bd)";
-      return '<div style="padding:14px;border-radius:14px;border:1px solid ' + bc + ';background:' + bg + ';text-align:center">'
-        + '<div style="font-size:1.8rem">' + a.emoji + '</div>'
-        + '<div style="font-weight:700;font-size:.85rem;margin-top:6px">' + esc(a.en) + '</div>'
-        + '<div class="mini dim" style="margin-top:2px">' + (got ? "Unlocked" : "Locked") + '</div>'
+      return '<div class="achv ' + (got ? "on" : "") + '" style="border-color:' + bc + ';background:' + bg + '">'
+        + '<div class="ic">' + a.emoji + '</div>'
+        + '<div class="t">' + esc(a.en) + '</div>'
+        + '<div class="d">' + cur + ' / ' + a.target + '</div>'
+        + '<div class="bar"><i style="width:' + pct + '%;background:' + (got ? "#facc15" : "#22d3ee") + '"></i></div>'
+        + '</div>';
+    }).join("");
+  },
+
+  timelineHTML: function(){
+    var events = State.data.progress.events || [];
+    if (!events.length){
+      return '<div class="tl-item"><div class="txt">No activity yet.</div><div class="when">Complete a lesson to see it here.</div></div>';
+    }
+    return events.slice(0, 8).map(function(e){
+      return '<div class="tl-item ' + (e.type || "") + '">'
+        + '<div class="txt">' + esc(e.text) + '</div>'
+        + '<div class="when">' + esc(e.when) + '</div>'
         + '</div>';
     }).join("");
   }
 };
 
+// ─── LEVELS ───
 var Levels = {
   render: function(){
     var unlocked = this.unlocked();
@@ -1186,7 +1719,7 @@ var Levels = {
           return '<div class="lvl ' + l.cls + (locked ? " locked" : "") + '" ' + (locked ? "" : 'onclick="Levels.openLevel(' + l.id + ')"') + '>'
             + '<div class="state">' + state + '</div>'
             + '<div class="num">LEVEL ' + String(l.id).padStart(2, "0") + '</div>'
-            + '<h4>' + esc(l.en) + '</h4>'
+            + '<h4>' + l.icon + '  ' + esc(l.en) + '</h4>'
             + '<div class="topic">' + esc(l.intro) + '</div>'
             + '<div class="mastery">'
             +   '<div class="bar"><i style="width:' + pct + '%"></i></div>'
@@ -1205,11 +1738,14 @@ var Levels = {
     var lvl = LEVELS[id - 1];
     var lessons = LESSONS[lvl.topic] || [];
     if (!lessons.length) { UI.toast("This level's lessons are being prepared.", "no"); return; }
-    Lesson.open(id, 0);
+    var saved = State.data.progress.currentLesson || { level: 1, idx: 0 };
+    var idx = (saved.level === id) ? saved.idx : 0;
+    Lesson.open(id, idx);
     App.go("lesson");
   }
 };
 
+// ─── LESSON ───
 var Lesson = {
   cur: null,
   read: false,
@@ -1222,21 +1758,40 @@ var Lesson = {
     this.cur = { levelId: levelId, idx: idx, lesson: lesson };
     this.read = false;
     this.quizPassed = false;
+    State.data.progress.currentLesson = { level: levelId, idx: idx };
+    State.save();
   },
+
+  afterRender: function(){
+    // Populate heatmap and week goal after HTML is in the DOM
+    Heatmap.render();
+    WeekGoal.render();
+  },
+
   renderCurrent: function(){
     if (!this.cur) return this.empty();
     var levelId = this.cur.levelId;
+    var idx = this.cur.idx;
     var lesson = this.cur.lesson;
     var lvl = LEVELS[levelId - 1];
     var c1 = lesson.color[0], c2 = lesson.color[1];
 
     var stepsHTML = lesson.steps.map(function(s){
-      var cls = s.kind === "tip" ? "tip" : s.kind === "mistake" ? "mistake" : "";
-      var k = s.kind === "tip" ? "Safety tip" : s.kind === "mistake" ? "Common mistake" : "Learn";
+      var cls = s.kind || "";
+      var k = s.kind === "tip" ? "Safety tip"
+            : s.kind === "mistake" ? "Common mistake"
+            : s.kind === "video" ? "Video lesson"
+            : s.kind === "practice" ? "Practice"
+            : "Learn";
+      var extra = "";
+      if (s.kind === "video" && s.video){
+        extra = '<div class="video-embed"><iframe src="' + s.video + '" allowfullscreen loading="lazy"></iframe></div>';
+      }
       return '<div class="step ' + cls + '">'
         + '<div class="k">' + k + '</div>'
         + '<h4>' + esc(s.t) + '</h4>'
         + '<p>' + esc(s.d) + '</p>'
+        + extra
         + '</div>';
     }).join("");
 
@@ -1247,24 +1802,45 @@ var Lesson = {
         + '</button>';
     }).join("");
 
+    var narrationText = lesson.title + ". " + lesson.objective + ". " +
+      lesson.steps.map(function(s){ return s.t + ". " + s.d; }).join(" ");
+
     return ''
-      + '<div class="lesson-head" style="--c1:' + c1 + ';--c2:' + c2 + '">'
-      +   '<div class="eyebrow">Level ' + String(levelId).padStart(2, "0") + ' - ' + esc(lvl.en) + '</div>'
+      + '<div class="lesson-hero" style="--c1:' + c1 + ';--c2:' + c2 + '">'
+      +   '<button class="audio-btn" id="audioBtn" onclick="Lesson.toggleAudio()">&#128266; Listen</button>'
+      +   '<div class="eyebrow">Level ' + String(levelId).padStart(2, "0") + ' - Lesson ' + (idx + 1) + ' of 5</div>'
       +   '<h2>' + esc(lesson.title) + '</h2>'
       +   '<p>' + esc(lesson.objective) + '</p>'
+      +   '<div class="hero-illus">' + lesson.icon + '</div>'
       + '</div>'
+
+      + '<div class="prog-rail">'
+      +   lesson.steps.map(function(_, i){ return '<span class="' + (i < idx ? "done" : i === idx ? "on" : "") + '"></span>'; }).join("")
+      +   '<span class="' + (this.quizPassed ? "done" : "") + '"></span>'
+      + '</div>'
+
       + stepsHTML
+
       + '<div class="step" id="quizBlock">'
       +   '<div class="k">Quick check</div>'
       +   '<h4>' + esc(lesson.quiz.q) + '</h4>'
       +   '<div id="quizOpts">' + optsHTML + '</div>'
       +   '<div id="quizFeedback"></div>'
       + '</div>'
+
       + '<div class="row" style="margin-top:22px">'
       +   '<button class="btn btn-ghost" id="markBtn" onclick="Lesson.markRead()">Mark as learned</button>'
       +   '<button class="btn btn-primary" id="finishBtn" onclick="Lesson.finish()" disabled>Complete lesson</button>'
       + '</div>';
   },
+
+  toggleAudio: function(){
+    var lesson = this.cur.lesson;
+    var text = lesson.title + ". " + lesson.objective + ". " +
+      lesson.steps.map(function(s){ return s.t + ". " + s.d; }).join(" ");
+    Narrator.toggle(text, "en");
+  },
+
   empty: function(){
     return '<div class="panel" style="text-align:center;padding:60px 24px">'
       + '<div style="font-size:3rem;margin-bottom:16px">&#127916;</div>'
@@ -1273,6 +1849,7 @@ var Lesson = {
       + '<button class="btn btn-primary" onclick="App.go(\'levels\')">Open learning path</button>'
       + '</div>';
   },
+
   answer: function(i){
     var q = this.cur.lesson.quiz;
     var ok = i === q.a;
@@ -1281,43 +1858,113 @@ var Lesson = {
       if (k === q.a) el.classList.add("correct");
       else if (k === i && !ok) el.classList.add("wrong");
     });
+    if (ok) Sound.correct(); else Sound.wrong();
+
     $("quizFeedback").innerHTML = '<div class="feedback ' + (ok ? "ok" : "no") + '">'
       + '<strong>' + (ok ? "Correct." : "Not quite.") + '</strong> '
-      + 'The correct answer is <strong>' + esc(q.opts[q.a]) + '</strong>.'
+      + 'The correct answer is <strong>' + esc(q.opts[q.a]) + '</strong>. '
+      + esc(q.why || "")
       + '</div>';
     if (ok) { this.quizPassed = true; $("finishBtn").disabled = !this.read; }
 
     State.data.stats.attempts++;
     if (ok) State.data.stats.correct++; else State.data.stats.wrong++;
+    State.markActivity();
     var lvl = LEVELS[this.cur.levelId - 1];
     var prev = State.data.progress.topics[lvl.topic] || 0;
     State.data.progress.topics[lvl.topic] = Math.min(100, Math.round(prev * 0.7 + (ok ? 30 : 0)));
     State.save();
   },
+
   markRead: function(){
     this.read = true;
     $("markBtn").disabled = true;
     $("finishBtn").disabled = !this.quizPassed;
     UI.toast("Lesson marked as learned.", "ok");
   },
+
   finish: function(){
     var levelId = this.cur.levelId;
     var idx = this.cur.idx;
+    var lesson = this.cur.lesson;
     State.data.progress.lessons["L" + levelId + "_" + idx] = true;
+    State.data.progress.events = State.data.progress.events || [];
+    State.data.progress.events.unshift({
+      type: "success",
+      text: "Completed: " + lesson.title,
+      when: new Date().toLocaleString()
+    });
+    State.data.progress.events = State.data.progress.events.slice(0, 20);
+    State.markActivity();
+
     var lvl = LEVELS[levelId - 1];
     var pct = State.data.progress.topics[lvl.topic] || 0;
-    if (pct >= 80 && State.data.progress.levelsCompleted.indexOf(levelId) === -1) {
+    if (pct >= 80 && State.data.progress.levelsCompleted.indexOf(levelId) === -1){
       State.data.progress.levelsCompleted.push(levelId);
       State.data.progress.currentLevel = Math.min(12, levelId + 1);
-      UI.toast("Level " + levelId + " mastered. Next level unlocked.", "ok");
+      UI.toast("Level " + levelId + " mastered! Next level unlocked.", "ok");
+      Sound.fanfare();
     } else {
       UI.toast("Lesson complete.", "ok");
+      Sound.complete();
     }
     State.save();
     App.go("levels");
   }
 };
 
+// ─── HEATMAP + WEEK GOAL ───
+var Heatmap = {
+  render: function(){
+    var el = $("heatmap");
+    if (!el) return;
+    var activity = State.data.progress.activity || {};
+    var today = new Date();
+    var cells = [];
+    // 12 weeks * 7 days = 84 cells, ending today
+    for (var i = 83; i >= 0; i--){
+      var d = new Date(today);
+      d.setDate(d.getDate() - i);
+      var key = d.toISOString().slice(0, 10);
+      var count = activity[key] || 0;
+      var lvl = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 12 ? 3 : 4;
+      cells.push('<div class="heat-cell" data-lvl="' + lvl + '" title="' + key + ': ' + count + ' activities"></div>');
+    }
+    el.innerHTML = cells.join("");
+  }
+};
+
+var WeekGoal = {
+  render: function(){
+    var el = $("weekGoal");
+    if (!el) return;
+    var activity = State.data.progress.activity || {};
+    var today = new Date();
+    var day = today.getDay() || 7;
+    var monday = new Date(today);
+    monday.setDate(today.getDate() - (day - 1));
+    var days = 0;
+    for (var i = 0; i < 7; i++){
+      var d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      if (d > today) break;
+      var key = d.toISOString().slice(0, 10);
+      if (activity[key]) days++;
+    }
+    var target = 5;
+    var pct = Math.min(100, Math.round(days / target * 100));
+    el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:baseline">'
+      + '<div style="font-size:2rem;font-weight:800">' + days + ' <span style="font-size:.9rem;color:var(--ink3)">of ' + target + ' days</span></div>'
+      + '<div class="tiny muted">practice this week</div>'
+      + '</div>'
+      + '<div class="bar" style="margin-top:10px"><i style="width:' + pct + '%;background:linear-gradient(90deg,#22d3ee,#a855f7)"></i></div>'
+      + (days >= target
+          ? '<p class="tiny" style="color:#22c55e;margin-top:8px">Weekly goal reached. Well done.</p>'
+          : '<p class="tiny dim" style="margin-top:8px">' + (target - days) + ' more ' + (target - days === 1 ? "day" : "days") + ' to hit your goal.</p>');
+  }
+};
+
+// ─── SIGNS ───
 var Signs = {
   cat: "all",
   render: function(){
@@ -1325,7 +1972,6 @@ var Signs = {
     SIGNS.forEach(function(s){ if (cats.indexOf(s.cat) === -1) cats.push(s.cat); });
     var self = this;
     var filtered = SIGNS.filter(function(s){ return self.cat === "all" || s.cat === self.cat; });
-
     return '<h2 style="margin-bottom:8px">Road Signs Academy</h2>'
       + '<p class="muted" style="margin-bottom:20px">Every sign comes with meaning, action, and a mini check.</p>'
       + '<div class="pill-row" style="margin-bottom:16px">'
@@ -1350,17 +1996,20 @@ var Signs = {
       + '<div class="sign-visual">' + this.svg(s) + '</div>'
       + '<div class="sign-name">' + esc(s.en) + '</div>'
       + '<div class="sign-cat">' + s.cat + '</div>'
-      + '<button class="btn ' + (learned ? "btn-ghost" : "btn-primary") + ' btn-block" style="font-size:.8rem;padding:8px" onclick="Signs.mark(\'' + s.id + '\')">' + (learned ? "Learned" : "Mark learned") + '</button>'
+      + '<button class="btn ' + (learned ? "btn-ghost" : "btn-primary") + ' btn-block btn-sm" onclick="Signs.mark(\'' + s.id + '\')">' + (learned ? "Learned" : "Mark learned") + '</button>'
       + '</div>';
   },
   mark: function(id){
     State.data.progress.signsLearned[id] = true;
+    State.markActivity();
     State.save();
     App.render();
     UI.toast("Sign marked as learned.", "ok");
+    Sound.tone(700, 0.15, "sine", 0.1);
   }
 };
 
+// ─── PRACTICE ───
 var Practice = {
   session: null,
   render: function(){
@@ -1430,7 +2079,7 @@ var Practice = {
     var s = this.session;
     var q = s.pool[s.i];
     var ok = i === q.a;
-    if (ok) s.score++;
+    if (ok) { s.score++; Sound.correct(); } else { Sound.wrong(); }
     document.querySelectorAll("#pOpts .q-opt").forEach(function(el, k){
       if (k === q.a) el.classList.add("correct");
       else if (k === i && !ok) el.classList.add("wrong");
@@ -1442,6 +2091,7 @@ var Practice = {
 
     State.data.stats.attempts++;
     if (ok) State.data.stats.correct++; else State.data.stats.wrong++;
+    State.markActivity();
     var prev = State.data.progress.topics[q.topic] || 0;
     State.data.progress.topics[q.topic] = Math.min(100, Math.round(prev * 0.7 + (ok ? 30 : 0)));
     State.save();
@@ -1449,16 +2099,18 @@ var Practice = {
   next: function(){ this.session.i++; App.render(); }
 };
 
+// ─── BOOT ───
 (function boot(){
   $("yr").textContent = new Date().getFullYear();
   State.load();
+  // Firebase init is now safe - Auth.init waits for window.FB internally
   Auth.init();
   $("googleBtn").addEventListener("click", function(){ Auth.signIn(); });
   document.addEventListener("click", function(e){
     var b = e.target.closest("[data-nav]");
     if (b) App.go(b.dataset.nav);
   });
-  if (State.data.uid && !State.user && !window.FB.ready()) {
+  if (State.data.uid && !State.user && (!window.FB || !window.FB.ready())) {
     State.user = { uid: State.data.uid, displayName: State.data.displayName, photoURL: State.data.photoURL, email: State.data.email };
     State.demo = true;
   }
@@ -1475,16 +2127,17 @@ window.Levels = Levels;
 window.Lesson = Lesson;
 window.Signs = Signs;
 window.Practice = Practice;
+window.Sound = Sound;
 </script>
 
 <script type="module">
+// 3D scene — same as before, condensed
 import * as THREE from 'three';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-const $ = function(id){ return document.getElementById(id); };
-const PI = Math.PI;
 const rnd = function(a, b){ return a + Math.random() * (b - a); };
+const PI = Math.PI;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
@@ -1495,13 +2148,12 @@ renderer.toneMappingExposure = 1.05;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-const canvasOld = $("scene");
-canvasOld.replaceWith(renderer.domElement);
+const canvasEl = document.getElementById("scene");
+canvasEl.replaceWith(renderer.domElement);
 renderer.domElement.id = "scene";
 
 const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(0xffa575, 0.0018);
-
 const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.5, 6000);
 
 const mats = [];
@@ -1519,8 +2171,6 @@ const add = function(g, m, x, y, z, parent){
   (parent || scene).add(o);
   return o;
 };
-const D = new THREE.Object3D();
-const C = new THREE.Color();
 
 const mkTex = function(w, h, fn, rep){
   const c = document.createElement("canvas");
@@ -1547,57 +2197,27 @@ su.mieDirectionalG.value = 0.8;
 const sun = new THREE.DirectionalLight(0xfff5e6, 3.2);
 sun.castShadow = true;
 sun.shadow.mapSize.set(2048, 2048);
-sun.shadow.camera.left = -120;
-sun.shadow.camera.right = 120;
-sun.shadow.camera.top = 120;
-sun.shadow.camera.bottom = -120;
-sun.shadow.camera.near = 1;
-sun.shadow.camera.far = 700;
+sun.shadow.camera.left = -120; sun.shadow.camera.right = 120;
+sun.shadow.camera.top = 120; sun.shadow.camera.bottom = -120;
+sun.shadow.camera.near = 1; sun.shadow.camera.far = 700;
 sun.shadow.bias = -0.0004;
 scene.add(sun);
 
 const hemi = new THREE.HemisphereLight(0x87ceeb, 0x3a6b35, 0.55);
 const amb = new THREE.AmbientLight(0xa0b8d0, 0.35);
-scene.add(hemi);
-scene.add(amb);
+scene.add(hemi); scene.add(amb);
 
 const gt = mkTex(256, 256, function(g){
-  for (let i = 0; i < 4; i++){
-    g.fillStyle = i % 2 ? "#4d8a3c" : "#5a9847";
-    g.fillRect(0, i * 64, 256, 64);
-  }
+  for (let i = 0; i < 4; i++){ g.fillStyle = i % 2 ? "#4d8a3c" : "#5a9847"; g.fillRect(0, i * 64, 256, 64); }
   for (let i = 0; i < 2500; i++){
     g.fillStyle = "rgba(" + (rnd(20, 60) | 0) + "," + (rnd(70, 120) | 0) + ",30,.18)";
     g.fillRect(rnd(0, 256), rnd(0, 256), 2, 2);
   }
 }, [40, 40]);
 
-const pav = function(rep){
-  return mkTex(256, 256, function(g){
-    g.fillStyle = "#b9b3a6";
-    g.fillRect(0, 0, 256, 256);
-    for (let x = 0; x < 256; x += 32){
-      for (let y = 0; y < 256; y += 32){
-        const s = 165 + (rnd(0, 28) | 0);
-        g.fillStyle = "rgb(" + s + "," + (s - 4) + "," + (s - 12) + ")";
-        g.fillRect(x + 1, y + 1, 30, 30);
-      }
-    }
-  }, rep);
-};
-
 add(new THREE.CircleGeometry(400, 96), M({ map: gt, roughness: 1 })).rotation.x = -PI / 2;
 add(new THREE.CircleGeometry(4000, 48), M({ color: 0x4a6b44, roughness: 1 }), 0, -0.2, 0).rotation.x = -PI / 2;
 add(new THREE.CylinderGeometry(95, 145, 3, 96), M({ map: gt, roughness: 1 }), 0, 1.5, 0);
-
-const flat = function(g, m, x, y, z){
-  const o = add(g, m, x, y, z);
-  o.rotation.x = -PI / 2;
-  o.castShadow = false;
-  return o;
-};
-flat(new THREE.RingGeometry(50, 70, 128), M({ map: pav([40, 40]), roughness: 0.85 }), 0, Y0 + 0.05, 0);
-flat(new THREE.RingGeometry(86, 94, 128), M({ color: 0x2c2c2c, roughness: 0.95 }), 0, Y0 + 0.06, 0);
 
 const winTex = function(lit, rep){
   return mkTex(512, 64, function(g, w, h){
@@ -1609,8 +2229,7 @@ const winTex = function(lit, rep){
         g.fillStyle = "rgb(" + b + "," + ((b * 0.78) | 0) + "," + ((b * 0.45) | 0) + ")";
       } else {
         const gr = g.createLinearGradient(0, 8, 0, 56);
-        gr.addColorStop(0, "#2d4252");
-        gr.addColorStop(1, "#0e1a24");
+        gr.addColorStop(0, "#2d4252"); gr.addColorStop(1, "#0e1a24");
         g.fillStyle = gr;
       }
       g.fillRect(i * 32 + 2, 8, 28, 48);
@@ -1633,32 +2252,20 @@ const steelM = M({ color: 0xaab2b9, metalness: 0.85, roughness: 0.35 });
 
 add(new THREE.CylinderGeometry(50, 50, 5.5, 128), podM, 0, Y0 + 2.75, 0);
 add(new THREE.CylinderGeometry(50.8, 50.8, 1, 128), conc, 0, Y0 + 6, 0);
-
 const t1 = add(new THREE.TorusGeometry(50.4, 0.35, 6, 128), conc, 0, Y0 + 6.9, 0);
 t1.rotation.x = PI / 2;
 
-const Rr = 28.5;
-const NT = 9;
-const y0 = 7;
-const Ht = 32;
-const tH = Ht / NT;
+const Rr = 28.5, NT = 9, y0 = 7, Ht = 32, tH = Ht / NT;
 const dome = new THREE.Group();
-dome.position.y = DY;
-scene.add(dome);
+dome.position.y = DY; scene.add(dome);
 const E = function(y){ return Rr * Math.sqrt(Math.max(0, 1 - Math.pow((y - y0) / Ht / 1.04, 1.5))); };
 
 const facet = mkTex(128, 64, function(g, w, h){
-  g.fillStyle = "#c9d3d9";
-  g.fillRect(0, 0, w, h);
+  g.fillStyle = "#c9d3d9"; g.fillRect(0, 0, w, h);
   g.fillStyle = "#f2f7fa";
-  g.beginPath();
-  g.moveTo(0, h); g.lineTo(w / 2, 0); g.lineTo(w, h);
-  g.fill();
-  g.strokeStyle = "#5f6b75";
-  g.lineWidth = 3;
-  g.beginPath();
-  g.moveTo(0, h); g.lineTo(w / 2, 0); g.lineTo(w, h);
-  g.stroke();
+  g.beginPath(); g.moveTo(0, h); g.lineTo(w / 2, 0); g.lineTo(w, h); g.fill();
+  g.strokeStyle = "#5f6b75"; g.lineWidth = 3;
+  g.beginPath(); g.moveTo(0, h); g.lineTo(w / 2, 0); g.lineTo(w, h); g.stroke();
 }, [48, 1]);
 
 const ledgeM = M({ color: 0xe8edf0, metalness: 0.6, roughness: 0.3, emissive: 0xffffff, emissiveIntensity: 0 });
@@ -1667,51 +2274,31 @@ for (let i = 0; i < NT; i++){
   const yb = y0 + i * tH;
   const rb = E(yb);
   const rt = E(yb + tH) + 0.6;
-  const m = M({
-    color: 0xffffff, map: facet, roughness: 0.38, metalness: 0.12,
-    emissive: 0x2bd04f, emissiveMap: facet, emissiveIntensity: 0
-  });
+  const m = M({ color: 0xffffff, map: facet, roughness: 0.38, metalness: 0.12,
+    emissive: 0x2bd04f, emissiveMap: facet, emissiveIntensity: 0 });
   tierM.push(m);
   const t = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, tH, 96, 1, true), m);
-  t.position.y = yb + tH / 2;
-  t.castShadow = t.receiveShadow = true;
-  dome.add(t);
+  t.position.y = yb + tH / 2; t.castShadow = t.receiveShadow = true; dome.add(t);
   const l = new THREE.Mesh(new THREE.CylinderGeometry(rb + 1.1, rb + 1.1, 0.4, 96), ledgeM);
-  l.position.y = yb;
-  l.castShadow = l.receiveShadow = true;
-  dome.add(l);
+  l.position.y = yb; l.castShadow = l.receiveShadow = true; dome.add(l);
 }
 {
   const top = y0 + Ht;
   const c = new THREE.Mesh(new THREE.CylinderGeometry(E(top) + 0.6, E(top) + 0.6, 0.5, 48), steelM);
-  c.position.y = top;
-  dome.add(c);
-  const sp1 = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.4, 9, 8), steelM);
-  sp1.position.y = top + 4.5;
-  sp1.castShadow = true;
-  dome.add(sp1);
+  c.position.y = top; dome.add(c);
 }
 {
   const d = new THREE.Mesh(new THREE.CylinderGeometry(29.6, 29.6, y0, 128), baseM);
-  d.position.y = y0 / 2;
-  d.castShadow = true;
-  dome.add(d);
+  d.position.y = y0 / 2; d.castShadow = true; dome.add(d);
 }
-
 const domeLight = new THREE.PointLight(0x2bd04f, 0, 130, 2);
-domeLight.position.y = 24;
-dome.add(domeLight);
+domeLight.position.y = 24; dome.add(domeLight);
 
 const hotel = new THREE.Group();
-hotel.position.set(-105, gh(108), 28);
-hotel.rotation.y = -0.35;
-scene.add(hotel);
+hotel.position.set(-105, gh(108), 28); hotel.rotation.y = -0.35; scene.add(hotel);
 const hAdd = function(g, m, x, y, z){
-  const o = new THREE.Mesh(g, m);
-  o.position.set(x, y, z);
-  o.castShadow = o.receiveShadow = true;
-  hotel.add(o);
-  return o;
+  const o = new THREE.Mesh(g, m); o.position.set(x, y, z);
+  o.castShadow = o.receiveShadow = true; hotel.add(o); return o;
 };
 hAdd(new RoundedBoxGeometry(60, 22, 22, 3, 0.4), M({ color: 0xd9d2c5, roughness: 0.8 }), 0, 11, 0);
 const pal = [0x00A1DE, 0xFAD201, 0x20603D, 0xE8A87C, 0xC38D9E, 0x8B5E3C, 0xD4A76A]
@@ -1727,101 +2314,65 @@ for (const s of [1, -1]){
 hAdd(new THREE.BoxGeometry(61, 0.6, 23), M({ color: 0x8d8d8d, roughness: 0.9 }), 0, 22.3, 0);
 
 const it = new THREE.Group();
-it.position.set(105, gh(108), 25);
-scene.add(it);
+it.position.set(105, gh(108), 25); scene.add(it);
 const cg = M({ color: 0x7e9db0, metalness: 0.85, roughness: 0.1 });
 [[0, 0, 50, 12, 22], [-8, -26, 34, 8, 16]].forEach(function(a){
   const b = new THREE.Mesh(new THREE.BoxGeometry(a[2], a[3], a[4]), cg);
   b.position.set(a[0], a[3] / 2, a[1]);
-  b.castShadow = b.receiveShadow = true;
-  it.add(b);
+  b.castShadow = b.receiveShadow = true; it.add(b);
 });
 
 const lamps = [];
 for (let i = 0; i < 14; i++){
   const a = i / 14 * 2 * PI;
-  const x = 62 * Math.cos(a);
-  const z = 62 * Math.sin(a);
+  const x = 62 * Math.cos(a), z = 62 * Math.sin(a);
   add(new THREE.CylinderGeometry(0.12, 0.15, 4, 6), steelM, x, Y0 + 2, z);
   add(new THREE.SphereGeometry(0.4, 10, 8), M({ color: 0xffcc88, emissive: 0xffcc88, emissiveIntensity: 2 }), x, Y0 + 4.2, z);
   const l = new THREE.PointLight(0xffcc88, 400, 30, 2);
-  l.position.set(x, Y0 + 4.5, z);
-  scene.add(l);
-  lamps.push(l);
+  l.position.set(x, Y0 + 4.5, z); scene.add(l); lamps.push(l);
 }
 
 const dir = function(az, el){
-  az *= PI / 180;
-  el *= PI / 180;
+  az *= PI / 180; el *= PI / 180;
   return [Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)];
 };
 
 const MODES = {
-  sunset: {
-    sun: dir(150, 12), sc: 0xff8c42, si: 2.4,
-    hs: 0xff9060, hg: 0x4a3020, hi: 0.4,
-    ac: 0xc09070, ai: 0.2,
-    fog: 0xffa575, fd: 0.0018, ex: 1, env: 0.6,
-    sky: [10, 3, 0.005], lit: 0, clOp: 0.6
-  },
-  dusk: {
-    sun: dir(230, 5), sk: dir(215, -2.5),
-    sc: 0xff8a55, si: 0.6,
-    hs: 0x3a5a9a, hg: 0x101820, hi: 0.5,
-    ac: 0x2a3a60, ai: 0.3,
-    fog: 0x3a4f78, fd: 0.0014, ex: 1.1, env: 0.3,
-    sky: [3, 2.2, 0.01], lit: 1.3, clOp: 0.55
-  },
-  night: {
-    sun: [-80, 140, -60], sk: dir(150, -8),
-    sc: 0x4466aa, si: 0.3,
-    hs: 0x1a2540, hg: 0x0a0e1a, hi: 0.12,
-    ac: 0x0a1020, ai: 0.15,
-    fog: 0x0a0e1a, fd: 0.0025, ex: 0.85, env: 0.1,
-    sky: [2, 0.15, 0.005], lit: 1.8, clOp: 0.5
-  }
+  sunset: { sun: dir(150, 12), sc: 0xff8c42, si: 2.4, hs: 0xff9060, hg: 0x4a3020, hi: 0.4, ac: 0xc09070, ai: 0.2, fog: 0xffa575, fd: 0.0018, ex: 1, env: 0.6, sky: [10, 3, 0.005], lit: 0 },
+  dusk: { sun: dir(230, 5), sk: dir(215, -2.5), sc: 0xff8a55, si: 0.6, hs: 0x3a5a9a, hg: 0x101820, hi: 0.5, ac: 0x2a3a60, ai: 0.3, fog: 0x3a4f78, fd: 0.0014, ex: 1.1, env: 0.3, sky: [3, 2.2, 0.01], lit: 1.3 },
+  night: { sun: [-80, 140, -60], sk: dir(150, -8), sc: 0x4466aa, si: 0.3, hs: 0x1a2540, hg: 0x0a0e1a, hi: 0.12, ac: 0x0a1020, ai: 0.15, fog: 0x0a0e1a, fd: 0.0025, ex: 0.85, env: 0.1, sky: [2, 0.15, 0.005], lit: 1.8 }
 };
 
 let lit = 0;
 let currentMode = "sunset";
+let targetMode = MODES.sunset;
+let blendK = 1;
 
 const curState = {
-  sc: new THREE.Color(0xff8c42),
-  hs: new THREE.Color(0xff9060),
-  hg: new THREE.Color(0x4a3020),
-  ac: new THREE.Color(0xc09070),
+  sc: new THREE.Color(0xff8c42), hs: new THREE.Color(0xff9060),
+  hg: new THREE.Color(0x4a3020), ac: new THREE.Color(0xc09070),
   fog: new THREE.Color(0xffa575),
   sunPos: new THREE.Vector3(...MODES.sunset.sun).normalize(),
   skyPos: new THREE.Vector3(...MODES.sunset.sun).normalize(),
   si: 2.4, hi: 0.4, ai: 0.2, fd: 0.0018, ex: 1, env: 0.6,
-  skyT: 10, skyR: 3, skyM: 0.005, clOp: 0.6, litV: 0
+  skyT: 10, skyR: 3, skyM: 0.005, litV: 0
 };
-
-let targetMode = MODES.sunset;
-let blendK = 1;
 
 function setMode(k){
   if (!MODES[k] || k === currentMode) return;
   currentMode = k;
   targetMode = MODES[k];
-  curState.sc.copy(sun.color);
-  curState.hs.copy(hemi.color);
-  curState.hg.copy(hemi.groundColor);
-  curState.ac.copy(amb.color);
+  curState.sc.copy(sun.color); curState.hs.copy(hemi.color);
+  curState.hg.copy(hemi.groundColor); curState.ac.copy(amb.color);
   curState.fog.copy(scene.fog.color);
   curState.sunPos.copy(sun.position).normalize();
   curState.skyPos.copy(su.sunPosition.value).normalize();
-  curState.si = sun.intensity;
-  curState.hi = hemi.intensity;
-  curState.ai = amb.intensity;
-  curState.fd = scene.fog.density;
+  curState.si = sun.intensity; curState.hi = hemi.intensity;
+  curState.ai = amb.intensity; curState.fd = scene.fog.density;
   curState.ex = renderer.toneMappingExposure;
   curState.env = mats.length ? mats[0].envMapIntensity : 1;
-  curState.skyT = su.turbidity.value;
-  curState.skyR = su.rayleigh.value;
-  curState.skyM = su.mieCoefficient.value;
-  curState.clOp = 0.6;
-  curState.litV = lit;
+  curState.skyT = su.turbidity.value; curState.skyR = su.rayleigh.value;
+  curState.skyM = su.mieCoefficient.value; curState.litV = lit;
   blendK = 0;
 }
 
@@ -1830,6 +2381,7 @@ function applyMode(){
   const a = 1 - Math.exp(-1.6 * (1 / 60));
   blendK = Math.min(1, blendK + a);
   const k = blendK;
+  const C = new THREE.Color();
 
   sun.color.copy(curState.sc).lerp(C.setHex(m.sc), k);
   hemi.color.copy(curState.hs).lerp(C.setHex(m.hs), k);
@@ -1849,7 +2401,6 @@ function applyMode(){
     curState.sunPos.y + (toSun.y - curState.sunPos.y) * k,
     curState.sunPos.z + (toSun.z - curState.sunPos.z) * k
   ).normalize();
-
   const toSky = new THREE.Vector3(...(m.sk || m.sun)).normalize();
   const skyDir = new THREE.Vector3(
     curState.skyPos.x + (toSky.x - curState.skyPos.x) * k,
@@ -1865,25 +2416,19 @@ function applyMode(){
   lit = curState.litV + (m.lit - curState.litV) * k;
   const envT = curState.env + (m.env - curState.env) * k;
   mats.forEach(function(x){ x.envMapIntensity = x.userData.e * envT; });
-
   lamps.forEach(function(l){ l.visible = lit > 0.4; });
   domeLight.intensity = lit * 2400;
   ledgeM.emissiveIntensity = lit * 0.5;
   podM.emissiveIntensity = lit * 1.3;
   baseM.emissiveIntensity = lit * 1.3;
   winMat.emissiveIntensity = lit * 1.3;
-
   sun.position.copy(sunDir).multiplyScalar(260);
   sun.target.position.set(0, 0, 0);
 }
 
-const BL = new THREE.Color(0x1e8cff);
-const YE = new THREE.Color(0xffb81c);
-const GR = new THREE.Color(0x2bd04f);
-const BAND = [GR, GR, GR, YE, YE, YE, BL, BL, BL];
+const BL = new THREE.Color(0x1e8cff), YE = new THREE.Color(0xffb81c), GR = new THREE.Color(0x2bd04f);
 const CY = [GR, YE, BL];
 const tmp = new THREE.Color();
-
 function led(now){
   const T = now / 1000 % 6;
   tierM.forEach(function(m, i){
@@ -1901,7 +2446,6 @@ function led(now){
 
 const TRAFFIC = [];
 const CAR_COLORS = [0x0ea5e9, 0xef4444, 0x22c55e, 0xf59e0b, 0xa855f7, 0x94a3b8, 0xf8fafc, 0xff7a1a, 0x1f7bff];
-
 function makeCar(color){
   const g = new THREE.Group();
   const paint = M({ color: color, metalness: 0.82, roughness: 0.18, envMapIntensity: 1.3 });
@@ -1914,42 +2458,29 @@ function makeCar(color){
     const w = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.28, 16), black);
     w.rotation.z = PI / 2;
     w.position.set(p[0] * 0.95, 0.36, p[1] * 1.42);
-    w.castShadow = true;
-    g.add(w);
+    w.castShadow = true; g.add(w);
   });
   return g;
 }
-
 function makeBus(){
   const g = new THREE.Group();
   const body = M({ color: 0x1f7bff, metalness: 0.55, roughness: 0.35 });
   add(new RoundedBoxGeometry(2.6, 2.4, 7.0, 3, 0.2), body, 0, 1.55, 0, g);
   return g;
 }
-
-const TRAFFIC_RING = 90;
-function spawnTraffic(){
-  for (let i = 0; i < 12; i++){
-    const isBus = i >= 10;
-    const m = isBus ? makeBus() : makeCar(CAR_COLORS[i % CAR_COLORS.length]);
-    const lane = i % 2 === 0 ? TRAFFIC_RING - 3 : TRAFFIC_RING + 3;
-    m.userData = {
-      angle: rnd(0, PI * 2),
-      speed: isBus ? 0.035 : rnd(0.055, 0.085),
-      lane: lane,
-      reverse: i % 2 === 1
-    };
-    scene.add(m);
-    TRAFFIC.push(m);
-  }
+const RING = 90;
+for (let i = 0; i < 12; i++){
+  const isBus = i >= 10;
+  const m = isBus ? makeBus() : makeCar(CAR_COLORS[i % CAR_COLORS.length]);
+  const lane = i % 2 === 0 ? RING - 3 : RING + 3;
+  m.userData = { angle: rnd(0, PI * 2), speed: isBus ? 0.035 : rnd(0.055, 0.085), lane: lane, reverse: i % 2 === 1 };
+  scene.add(m); TRAFFIC.push(m);
 }
-spawnTraffic();
 
 function updateTraffic(dt){
   TRAFFIC.forEach(function(m){
     const u = m.userData;
-    if (u.reverse) u.angle -= u.speed * dt;
-    else u.angle += u.speed * dt;
+    if (u.reverse) u.angle -= u.speed * dt; else u.angle += u.speed * dt;
     if (u.angle > PI * 2) u.angle -= PI * 2;
     if (u.angle < 0) u.angle += PI * 2;
     const x = Math.cos(u.angle) * u.lane;
@@ -1964,9 +2495,7 @@ const camPos = new THREE.Vector3();
 const camLook = new THREE.Vector3();
 const targetPos = new THREE.Vector3();
 const targetLook = new THREE.Vector3();
-let scrollFrac = 0;
-let elapsed = 0;
-let visible = true;
+let scrollFrac = 0, elapsed = 0, visible = true;
 
 function updateCamera(dt){
   const totalScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -1998,25 +2527,12 @@ function onResize(){
 }
 window.addEventListener("resize", onResize);
 
-sun.color.setHex(0xff8c42);
-hemi.color.setHex(0xff9060);
-hemi.groundColor.setHex(0x4a3020);
-amb.color.setHex(0xc09070);
-scene.fog.color.setHex(0xffa575);
-scene.fog.density = MODES.sunset.fd;
-renderer.toneMappingExposure = MODES.sunset.ex;
-sun.intensity = MODES.sunset.si;
-hemi.intensity = MODES.sunset.hi;
-amb.intensity = MODES.sunset.ai;
-mats.forEach(function(x){ x.envMapIntensity = x.userData.e * MODES.sunset.env; });
-
 updateCamera(0.016);
 camera.position.copy(camPos);
 camera.lookAt(camLook);
 onResize();
 
 let last = performance.now() / 1000;
-
 function loop(){
   requestAnimationFrame(loop);
   if (!visible) return;
@@ -2025,16 +2541,13 @@ function loop(){
   const dt = Math.min(0.05, t - last);
   last = t;
   elapsed += dt;
-
   updateModeFromScroll();
   applyMode();
   updateTraffic(dt);
   updateCamera(dt);
   led(now);
-
   sun.target.position.set(0, 0, 0);
   sun.target.updateMatrixWorld();
-
   renderer.render(scene, camera);
 }
 loop();
