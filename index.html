@@ -3,698 +3,145 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>iMENA Drive — Learn. Practice. Prepare. Drive.</title>
+<title>iMENA Drive — Digital Driving Academy for Rwanda</title>
 <link rel="icon" type="image/png" href="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png">
-<link rel="apple-touch-icon" href="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png">
-<meta property="og:title" content="iMENA Drive — Digital Driving Academy for Rwanda">
-<meta property="og:description" content="Learn driving theory, practice with real scenarios, prepare for the official examination.">
 <meta property="og:image" content="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png">
-
 <script type="importmap">
-{"imports":{
-  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-}}
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
 </script>
-
 <style>
-:root{
-  --bg:#060810;--card:#0d1424;--card2:#111a2e;
-  --ink:#eef2fa;--ink2:#b9c4dc;--ink3:#7b88a8;
-  --cyan:#22d3ee;--cyan2:#67e8f9;
-  --green:#22c55e;--green2:#4ade80;
-  --yellow:#facc15;--red:#ef4444;
-  --purple:#a855f7;--pink:#ec4899;--orange:#ff7a1a;--amber:#f59e0b;
-  --bd:rgba(255,255,255,.10);--bd2:rgba(255,255,255,.22);
-  --ease:cubic-bezier(.22,.61,.36,1);
-}
+:root{--bg:#060810;--card:#0d1424;--ink:#eef2fa;--ink2:#b9c4dc;--ink3:#7b88a8;--cyan:#22d3ee;--cyan2:#67e8f9;--green:#22c55e;--green2:#4ade80;--yellow:#facc15;--red:#ef4444;--purple:#a855f7;--bd:rgba(255,255,255,.10);--bd2:rgba(255,255,255,.22);--ease:cubic-bezier(.22,.61,.36,1)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
-  background:var(--bg);color:var(--ink);line-height:1.55;overflow-x:hidden;
-  -webkit-font-smoothing:antialiased}
-.hidden{display:none!important}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-weight:800;letter-spacing:-.02em;line-height:1.15}
 a{color:var(--cyan);text-decoration:none}
 .muted{color:var(--ink2)}.dim{color:var(--ink3)}
 .tiny{font-size:.78rem}.mini{font-size:.7rem}
-.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-
-/* ═══════════ 3D CANVAS (fixed, homepage only) ═══════════ */
 #scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
-
-/* ═══════════ LOADING ═══════════ */
-#loading{position:fixed;inset:0;background:#060810;z-index:900;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
-  transition:opacity .8s}
+#loading{position:fixed;inset:0;background:#060810;z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .8s}
 #loading.hide{opacity:0;pointer-events:none}
-#loading img{width:100px;height:100px;object-fit:contain;
-  filter:drop-shadow(0 8px 30px rgba(34,211,238,.5));
-  animation:pulse 1.6s ease-in-out infinite}
+#loading img{width:100px;height:100px;object-fit:contain;filter:drop-shadow(0 8px 30px rgba(34,211,238,.5));animation:pulse 1.6s ease-in-out infinite}
 #loading h1{font-size:1.15rem;font-weight:800;letter-spacing:.2em;color:#fff}
 #loading .st{font-size:.74rem;color:var(--ink3);letter-spacing:.12em}
 #loading .bar-l{width:240px;height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
-#loading .bar-l i{display:block;height:100%;width:0;
-  background:linear-gradient(90deg,var(--cyan),var(--green));
-  animation:ld 1.8s ease-out forwards}
-@keyframes ld{to{width:100%}}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.85}}
-
-/* ═══════════ HOME HEADER ═══════════ */
-header.home{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(180deg,rgba(6,8,16,.85),rgba(6,8,16,0));
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  transition:background .3s,padding .3s}
+#loading .bar-l i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));animation:ld 1.8s ease-out forwards}
+@keyframes ld{to{width:100%}}@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.85}}
+header.home{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(6,8,16,.85),rgba(6,8,16,0));backdrop-filter:blur(14px);transition:background .3s,padding .3s}
 header.home.scrolled{background:rgba(6,8,16,.95);border-bottom:1px solid var(--bd);padding:10px 20px}
 .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1rem;cursor:pointer;background:none;border:none;color:inherit;font-family:inherit}
-.brand img{width:42px;height:42px;object-fit:contain;flex-shrink:0;
-  filter:drop-shadow(0 4px 12px rgba(34,211,238,.4))}
-.brand small{display:block;font-size:.66rem;color:var(--ink3);font-weight:500;letter-spacing:.02em}
+.brand img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(34,211,238,.4))}
+.brand small{display:block;font-size:.66rem;color:var(--ink3);font-weight:500}
 nav.hm{display:none;gap:2px;align-items:center}
 @media(min-width:900px){nav.hm{display:flex}}
-nav.hm a{color:var(--ink2);font-size:.88rem;font-weight:500;padding:9px 15px;border-radius:999px;
-  transition:.2s;cursor:pointer}
+nav.hm a{color:var(--ink2);font-size:.88rem;font-weight:500;padding:9px 15px;border-radius:999px;transition:.2s;cursor:pointer}
 nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
 .right-hm{display:flex;align-items:center;gap:10px}
-
-.btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;
-  padding:12px 22px;border-radius:999px;border:1px solid transparent;
-  font-weight:600;font-size:.92rem;font-family:inherit;cursor:pointer;
-  transition:.2s;min-height:44px;text-decoration:none;color:var(--ink);white-space:nowrap}
-.btn-primary{background:linear-gradient(135deg,var(--cyan),#0ea5b7);color:#02121a;
-  box-shadow:0 8px 30px rgba(34,211,238,.35)}
+.btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;padding:12px 22px;border-radius:999px;border:1px solid transparent;font-weight:600;font-size:.92rem;font-family:inherit;cursor:pointer;transition:.2s;min-height:44px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),#0ea5b7);color:#02121a;box-shadow:0 8px 30px rgba(34,211,238,.35)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(34,211,238,.5)}
-.btn-ghost{border-color:var(--bd2);color:var(--ink);background:rgba(6,8,16,.4);backdrop-filter:blur(8px)}
+.btn-ghost{border-color:var(--bd2);background:rgba(6,8,16,.4);backdrop-filter:blur(8px)}
 .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:var(--cyan)}
-.btn-block{width:100%}
-.btn-sm{padding:9px 16px;font-size:.84rem;min-height:38px}
 .btn-lg{padding:16px 30px;font-size:1rem;min-height:54px}
-.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none!important}
-
-.google-btn{display:inline-flex;align-items:center;gap:10px;
-  padding:10px 18px;border-radius:999px;background:#fff;color:#1f2937;
-  font-weight:600;font-size:.86rem;font-family:inherit;cursor:pointer;
-  border:1px solid rgba(255,255,255,.3);transition:.2s;min-height:44px}
+.google-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:#fff;color:#1f2937;font-weight:600;font-size:.86rem;font-family:inherit;cursor:pointer;border:1px solid rgba(255,255,255,.3);transition:.2s;min-height:44px}
 .google-btn:hover{box-shadow:0 10px 30px rgba(255,255,255,.22);transform:translateY(-2px)}
 .google-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-
-/* ═══════════ HERO — Premium Interactive ═══════════ */
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;
-  padding:130px 24px 100px;max-width:1280px;margin:0 auto;width:100%;z-index:2}
-.hero-inner{max-width:840px;opacity:0;transform:translateY(30px);
-  animation:heroIn 1.2s var(--ease) .3s forwards}
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:130px 24px 100px;max-width:1280px;margin:0 auto;width:100%;z-index:2}
+.hero-inner{max-width:840px;opacity:0;transform:translateY(30px);animation:heroIn 1.2s var(--ease) .3s forwards}
 @keyframes heroIn{to{opacity:1;transform:none}}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;
-  font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
-  color:#67e8f9;margin-bottom:20px;padding:8px 16px;border-radius:999px;
-  background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);
-  backdrop-filter:blur(8px)}
-.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;
-  animation:blink 1.6s ease-in-out infinite}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan2);margin-bottom:20px;padding:8px 16px;border-radius:999px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);backdrop-filter:blur(8px)}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.6s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-size:clamp(2.4rem,6.5vw,4.8rem);font-weight:800;letter-spacing:-.035em;
-  line-height:1.02;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.9)}
-.hero h1 span{background:linear-gradient(120deg,var(--cyan) 0%,var(--green2) 55%,var(--cyan2) 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:200% auto;animation:shine 4s linear infinite}
+.hero h1{font-size:clamp(2.4rem,6.5vw,4.8rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.9)}
+.hero h1 span{background:linear-gradient(120deg,var(--cyan),var(--green2) 55%,var(--cyan2));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 4s linear infinite}
 @keyframes shine{to{background-position:200% center}}
-.hero .sub{max-width:640px;margin-top:26px;font-size:clamp(1rem,1.5vw,1.18rem);
-  color:#dde4f0;text-shadow:0 2px 14px rgba(0,0,0,.9);line-height:1.65}
+.hero .sub{max-width:640px;margin-top:26px;font-size:clamp(1rem,1.5vw,1.18rem);color:#dde4f0;text-shadow:0 2px 14px rgba(0,0,0,.9);line-height:1.65}
 .hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
 .hero .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:48px}
-.hero .badge{font-size:.72rem;padding:8px 16px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.22);background:rgba(6,8,16,.6);
-  color:#cbd5e1;backdrop-filter:blur(10px);display:inline-flex;align-items:center;gap:8px}
-
-/* Floating stat cards in hero */
-.hero-stats{position:absolute;right:40px;top:50%;transform:translateY(-50%);
-  display:none;flex-direction:column;gap:14px;z-index:3}
+.hero .badge{font-size:.72rem;padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(6,8,16,.6);color:#cbd5e1;backdrop-filter:blur(10px);display:inline-flex;align-items:center;gap:8px}
+.hero-stats{position:absolute;right:40px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:14px;z-index:3}
 @media(min-width:1100px){.hero-stats{display:flex}}
-.stat-card{padding:18px 22px;border-radius:18px;background:rgba(10,16,32,.7);
-  backdrop-filter:blur(16px);border:1px solid var(--bd2);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  opacity:0;transform:translateX(40px);
-  animation:statIn .8s var(--ease) forwards}
-.stat-card:nth-child(1){animation-delay:.8s}
-.stat-card:nth-child(2){animation-delay:1s}
-.stat-card:nth-child(3){animation-delay:1.2s}
+.stat-card{padding:18px 22px;border-radius:18px;background:rgba(10,16,32,.7);backdrop-filter:blur(16px);border:1px solid var(--bd2);box-shadow:0 20px 60px rgba(0,0,0,.5);opacity:0;transform:translateX(40px);animation:statIn .8s var(--ease) forwards}
+.stat-card:nth-child(1){animation-delay:.8s}.stat-card:nth-child(2){animation-delay:1s}.stat-card:nth-child(3){animation-delay:1.2s}
 @keyframes statIn{to{opacity:1;transform:none}}
-.stat-card .v{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;
-  background:linear-gradient(135deg,var(--cyan),var(--green2));
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.stat-card .k{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink3);font-weight:700;margin-top:4px}
-
-/* ═══════════ SECTIONS ═══════════ */
-.section{padding:100px 24px;position:relative;z-index:2;
-  max-width:1280px;margin:0 auto;width:100%}
+.stat-card .v{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--cyan),var(--green2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-card .k{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:700;margin-top:4px}
+.section{padding:100px 24px;position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%}
 .section.tight{padding:60px 24px}
 .sec-head{text-align:center;max-width:760px;margin:0 auto 60px}
-.sec-head .pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.24em;
-  text-transform:uppercase;color:#67e8f9;margin-bottom:16px;
-  padding:7px 16px;border-radius:999px;background:rgba(34,211,238,.08);
-  border:1px solid rgba(34,211,238,.25)}
+.sec-head .pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan2);margin-bottom:16px;padding:7px 16px;border-radius:999px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25)}
 .sec-head h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:18px;color:#fff}
 .sec-head p{color:var(--ink2);font-size:1.05rem;max-width:600px;margin:0 auto;line-height:1.65}
-
-/* Reveal on scroll */
-.reveal{opacity:0;transform:translateY(40px);
-  transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.on{opacity:1;transform:none}
-
-/* Feature cards */
 .feature-grid{display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:640px){.feature-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.feature-grid{grid-template-columns:repeat(3,1fr)}}
-.feature{padding:30px;border-radius:24px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
-  backdrop-filter:blur(12px);transition:.35s var(--ease);position:relative;overflow:hidden}
-.feature::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:0;transition:.35s}
-.feature:hover{transform:translateY(-6px);border-color:var(--bd2);
-  box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.feature{padding:30px;border-radius:24px;border:1px solid var(--bd);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));backdrop-filter:blur(12px);transition:.35s var(--ease);position:relative;overflow:hidden}
+.feature::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:0;transition:.35s}
+.feature:hover{transform:translateY(-6px);border-color:var(--bd2);box-shadow:0 24px 60px rgba(0,0,0,.4)}
 .feature:hover::before{opacity:1}
-.feature .icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;
-  font-size:1.6rem;background:linear-gradient(135deg,rgba(34,211,238,.15),rgba(168,85,247,.1));
-  border:1px solid rgba(34,211,238,.25);margin-bottom:18px}
+.feature .icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;background:linear-gradient(135deg,rgba(34,211,238,.15),rgba(168,85,247,.1));border:1px solid rgba(34,211,238,.25);margin-bottom:18px}
 .feature h3{font-size:1.15rem;margin-bottom:10px;color:#fff}
 .feature p{color:var(--ink2);font-size:.9rem;line-height:1.65}
-
-/* Stats strip */
-.stats-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
-  padding:40px 24px;border-radius:28px;border:1px solid var(--bd);
-  background:linear-gradient(135deg,rgba(34,211,238,.06),rgba(168,85,247,.05));
-  backdrop-filter:blur(16px);max-width:1100px;margin:0 auto}
+.stats-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:40px 24px;border-radius:28px;border:1px solid var(--bd);background:linear-gradient(135deg,rgba(34,211,238,.06),rgba(168,85,247,.05));backdrop-filter:blur(16px);max-width:1100px;margin:0 auto}
 @media(min-width:768px){.stats-strip{grid-template-columns:repeat(4,1fr)}}
 .stat-item{text-align:center}
-.stat-item .num{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;
-  background:linear-gradient(135deg,var(--cyan),var(--green2));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  font-variant-numeric:tabular-nums}
-.stat-item .label{font-size:.8rem;color:var(--ink3);margin-top:6px;
-  letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-
-/* Journey timeline */
-.journey{display:flex;gap:20px;overflow-x:auto;padding:20px 0 40px;
-  scrollbar-width:thin;scroll-snap-type:x mandatory}
+.stat-item .num{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--cyan),var(--green2));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stat-item .label{font-size:.8rem;color:var(--ink3);margin-top:6px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.journey{display:flex;gap:20px;overflow-x:auto;padding:20px 0 40px;scroll-snap-type:x mandatory}
 .journey::-webkit-scrollbar{height:6px}
 .journey::-webkit-scrollbar-thumb{background:rgba(34,211,238,.3);border-radius:3px}
-.stage{flex:0 0 240px;padding:26px 22px;border-radius:22px;border:1px solid var(--bd);
-  background:rgba(10,16,32,.6);backdrop-filter:blur(14px);
-  scroll-snap-align:start;position:relative;transition:.3s}
-.stage:hover{border-color:var(--cyan);transform:translateY(-4px);
-  box-shadow:0 20px 50px rgba(34,211,238,.15)}
-.stage .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--cyan),var(--green));
-  color:#02121a;font-weight:800;font-size:.95rem;margin-bottom:16px}
+.stage{flex:0 0 240px;padding:26px 22px;border-radius:22px;border:1px solid var(--bd);background:rgba(10,16,32,.6);backdrop-filter:blur(14px);scroll-snap-align:start;transition:.3s}
+.stage:hover{border-color:var(--cyan);transform:translateY(-4px);box-shadow:0 20px 50px rgba(34,211,238,.15)}
+.stage .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--green));color:#02121a;font-weight:800;font-size:.95rem;margin-bottom:16px}
 .stage h4{font-size:1rem;color:#fff;margin-bottom:8px}
 .stage p{font-size:.82rem;color:var(--ink2);line-height:1.55}
-
-/* Testimonials */
 .testimonials{display:grid;gap:20px;grid-template-columns:1fr}
 @media(min-width:768px){.testimonials{grid-template-columns:repeat(3,1fr)}}
-.testimonial{padding:26px;border-radius:22px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));
-  backdrop-filter:blur(12px)}
-.testimonial .quote{color:var(--ink2);font-size:.94rem;line-height:1.7;margin-bottom:20px;
-  font-style:italic;position:relative;padding-left:20px}
-.testimonial .quote::before{content:'"';position:absolute;left:0;top:-4px;
-  font-size:2.4rem;color:var(--cyan);font-weight:800;font-family:Georgia,serif}
-.testimonial .who{display:flex;gap:12px;align-items:center;
-  padding-top:16px;border-top:1px solid var(--bd)}
-.testimonial .avatar{width:44px;height:44px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  display:grid;place-items:center;font-weight:800;color:#02121a;font-size:.95rem}
+.testimonial{padding:26px;border-radius:22px;border:1px solid var(--bd);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));backdrop-filter:blur(12px)}
+.testimonial .quote{color:var(--ink2);font-size:.94rem;line-height:1.7;margin-bottom:20px;font-style:italic;position:relative;padding-left:20px}
+.testimonial .quote::before{content:'"';position:absolute;left:0;top:-4px;font-size:2.4rem;color:var(--cyan);font-weight:800;font-family:Georgia,serif}
+.testimonial .who{display:flex;gap:12px;align-items:center;padding-top:16px;border-top:1px solid var(--bd)}
+.testimonial .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:grid;place-items:center;font-weight:800;color:#02121a;font-size:.95rem}
 .testimonial .name{font-weight:700;font-size:.9rem;color:#fff}
 .testimonial .role{font-size:.76rem;color:var(--ink3)}
-
-/* FAQ */
 .faq{max-width:780px;margin:0 auto}
-.faq-item{border:1px solid var(--bd);border-radius:16px;margin-bottom:12px;
-  background:rgba(255,255,255,.02);overflow:hidden;transition:.3s}
+.faq-item{border:1px solid var(--bd);border-radius:16px;margin-bottom:12px;background:rgba(255,255,255,.02);overflow:hidden;transition:.3s}
 .faq-item.open{border-color:var(--cyan);background:rgba(34,211,238,.04)}
-.faq-q{width:100%;text-align:left;padding:20px 24px;background:none;border:none;
-  color:#fff;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;gap:16px}
-.faq-q::after{content:'+';font-size:1.5rem;color:var(--cyan);transition:.3s;
-  font-weight:400;line-height:1}
+.faq-q{width:100%;text-align:left;padding:20px 24px;background:none;border:none;color:#fff;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q::after{content:'+';font-size:1.5rem;color:var(--cyan);transition:.3s;font-weight:400}
 .faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease);
-  padding:0 24px;color:var(--ink2);font-size:.92rem;line-height:1.7}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease);padding:0 24px;color:var(--ink2);font-size:.92rem;line-height:1.7}
 .faq-item.open .faq-a{max-height:300px;padding:0 24px 22px}
-
-/* Final CTA */
-.final-cta{padding:70px 40px;border-radius:32px;text-align:center;
-  background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(168,85,247,.1));
-  border:1px solid rgba(34,211,238,.25);position:relative;overflow:hidden;
-  backdrop-filter:blur(16px)}
-.final-cta::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(600px 300px at 50% 0%,rgba(34,211,238,.15),transparent 70%);
-  pointer-events:none}
+.final-cta{padding:70px 40px;border-radius:32px;text-align:center;background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(168,85,247,.1));border:1px solid rgba(34,211,238,.25);position:relative;overflow:hidden;backdrop-filter:blur(16px)}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%,rgba(34,211,238,.15),transparent 70%);pointer-events:none}
 .final-cta h2{font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin-bottom:16px;position:relative}
 .final-cta p{color:var(--ink2);max-width:560px;margin:0 auto 30px;position:relative;font-size:1rem}
 .final-cta .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
-
-/* ═══════════ PROFESSIONAL FOOTER ═══════════ */
-.footer{border-top:1px solid var(--bd);padding:70px 24px 40px;margin-top:80px;
-  background:linear-gradient(0deg,rgba(0,0,0,.5),transparent);
-  position:relative;z-index:2}
+.footer{border-top:1px solid var(--bd);padding:70px 24px 40px;margin-top:80px;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent);position:relative;z-index:2}
 .footer-inner{max-width:1280px;margin:0 auto}
 .footer-grid{display:grid;gap:36px;grid-template-columns:1fr;margin-bottom:48px}
 @media(min-width:700px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
-.footer h5{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink3);margin-bottom:16px;font-weight:700}
-.footer a{color:var(--ink2);font-size:.88rem;display:block;padding:6px 0;
-  cursor:pointer;transition:.2s}
-.footer a:hover{color:#67e8f9;transform:translateX(3px)}
+.footer h5{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;font-weight:700}
+.footer a{color:var(--ink2);font-size:.88rem;display:block;padding:6px 0;cursor:pointer;transition:.2s}
+.footer a:hover{color:var(--cyan2);transform:translateX(3px)}
 .footer .desc{color:var(--ink3);font-size:.88rem;max-width:360px;line-height:1.7;margin-top:12px}
-.footer .disclaimer{margin-top:20px;padding:16px 18px;border-radius:14px;
-  border:1px solid rgba(250,204,21,.3);background:rgba(250,204,21,.06);
-  color:var(--ink2);font-size:.78rem;line-height:1.65;max-width:440px}
+.footer .disclaimer{margin-top:20px;padding:16px 18px;border-radius:14px;border:1px solid rgba(250,204,21,.3);background:rgba(250,204,21,.06);color:var(--ink2);font-size:.78rem;line-height:1.65;max-width:440px}
 .footer .disclaimer strong{color:var(--yellow)}
-.footer-dev{display:flex;justify-content:space-between;align-items:center;
-  gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--bd)}
-.footer-dev .dev-link{display:inline-flex;align-items:center;gap:10px;
-  padding:10px 20px;border-radius:999px;background:rgba(34,211,238,.1);
-  border:1px solid rgba(34,211,238,.35);color:#67e8f9;font-size:.86rem;
-  font-weight:600;cursor:pointer;transition:.25s;text-decoration:none}
-.footer-dev .dev-link:hover{background:rgba(34,211,238,.2);transform:translateY(-2px);
-  box-shadow:0 10px 30px rgba(34,211,238,.25)}
+.footer-dev{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--bd)}
+.footer-dev .dev-link{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.35);color:var(--cyan2);font-size:.86rem;font-weight:600;cursor:pointer;transition:.25s;text-decoration:none}
+.footer-dev .dev-link:hover{background:rgba(34,211,238,.2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(34,211,238,.25)}
 .footer-dev .copyright{font-size:.8rem;color:var(--ink3)}
 .footer-dev .socials{display:flex;gap:10px}
-.footer-dev .socials a{width:40px;height:40px;border-radius:50%;
-  display:grid;place-items:center;background:rgba(255,255,255,.04);
-  border:1px solid var(--bd);color:var(--ink2);font-size:1.05rem;
-  transition:.25s;padding:0}
-.footer-dev .socials a:hover{background:rgba(34,211,238,.15);border-color:var(--cyan);
-  color:#67e8f9;transform:translateY(-3px)}
-
-/* ═══════════ APP (dashboard) ═══════════ */
-#app{min-height:100vh;background:
-  radial-gradient(1200px 500px at 10% 0%,rgba(34,211,238,.06),transparent 60%),
-  radial-gradient(1000px 500px at 100% 20%,rgba(168,85,247,.06),transparent 55%),
-  var(--bg);position:relative;z-index:1}
-.app-shell{display:grid;grid-template-columns:1fr;max-width:1440px;margin:0 auto;padding:0 20px 100px}
-@media(min-width:1000px){.app-shell{grid-template-columns:260px 1fr;gap:32px;padding-top:24px}}
-.app-side{display:none;position:sticky;top:80px;align-self:start}
-@media(min-width:1000px){.app-side{display:block}}
-.side-card{padding:18px;border-radius:18px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
-  margin-bottom:14px}
-.side-card .lbl{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink3);font-weight:700}
-.side-nav{display:flex;flex-direction:column;gap:3px;margin-top:12px}
-.side-nav button{text-align:left;padding:12px 14px;border-radius:12px;background:none;
-  border:none;color:var(--ink2);font-family:inherit;font-size:.9rem;cursor:pointer;
-  transition:.2s;display:flex;align-items:center;gap:12px;font-weight:500}
-.side-nav button:hover{background:rgba(255,255,255,.06);color:#fff}
-.side-nav button.on{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(168,85,247,.12));
-  color:#fff;font-weight:600}
-.side-nav button .ic{font-size:1.05rem}
-
-.topbar{position:sticky;top:0;z-index:40;background:rgba(6,8,16,.85);
-  backdrop-filter:blur(18px);border-bottom:1px solid var(--bd);padding:12px 0}
-.topbar-inner{max-width:1440px;margin:0 auto;padding:0 20px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px}
-.avatar{width:42px;height:42px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  display:grid;place-items:center;font-weight:800;font-size:1.05rem;color:#02121a;
-  overflow:hidden;flex-shrink:0}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.xp-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;
-  border-radius:999px;background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.35);
-  font-size:.74rem;font-weight:800;color:#67e8f9}
-.lvl-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;
-  border-radius:999px;background:rgba(250,204,21,.15);border:1px solid rgba(250,204,21,.4);
-  font-size:.74rem;font-weight:800;color:#fde047}
-.sync-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;
-  border-radius:999px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);
-  font-size:.68rem;font-weight:700;color:#4ade80}
-.sync-badge.off{background:rgba(250,204,21,.15);border-color:rgba(250,204,21,.4);color:#fde047}
-
-/* Dashboard hero */
-.dash-hero{position:relative;padding:40px 36px;border-radius:28px;margin-bottom:24px;
-  overflow:hidden;
-  background:linear-gradient(120deg,#0a1730 0%,#12244d 30%,#281863 70%,#3d1f5e 100%);
-  border:1px solid rgba(255,255,255,.12)}
-.dash-hero::before{content:'';position:absolute;top:-50%;right:-15%;width:460px;height:460px;
-  background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);
-  filter:blur(50px);animation:aurora 12s ease-in-out infinite}
-.dash-hero::after{content:'';position:absolute;bottom:-40%;left:-10%;width:400px;height:400px;
-  background:radial-gradient(circle,rgba(236,72,153,.30),transparent 65%);
-  filter:blur(50px);animation:aurora 14s ease-in-out infinite reverse}
-@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-30px) scale(1.15)}}
-.dash-hero .inner{position:relative;z-index:2;display:flex;justify-content:space-between;
-  align-items:center;gap:24px;flex-wrap:wrap}
-.dash-hero h1{font-size:clamp(1.6rem,3.2vw,2.4rem);color:#fff;margin-bottom:8px}
-.dash-hero .sub{color:#c8d2ea;font-size:.94rem}
-.dash-hero .who{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.dash-hero .avatar{width:76px;height:76px;font-size:1.8rem;
-  box-shadow:0 14px 40px rgba(0,0,0,.5);border:3px solid rgba(255,255,255,.18)}
-.dash-hero .badges-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.streak-badge{display:inline-flex;align-items:center;gap:6px;
-  padding:6px 14px;border-radius:999px;background:rgba(255,122,26,.2);
-  border:1px solid rgba(255,122,26,.4);font-size:.78rem;font-weight:700;color:#ffb37a}
-.streak-badge .flame{animation:pulse 1.6s ease-in-out infinite}
-.lvl-progress{margin-top:16px;max-width:340px}
-.lvl-progress .bar{height:7px;background:rgba(0,0,0,.35)}
-.lvl-progress .bar>i{background:linear-gradient(90deg,#22d3ee,#facc15);transition:width .8s}
-.lvl-progress .txt{font-size:.72rem;color:rgba(255,255,255,.75);margin-top:6px;display:flex;justify-content:space-between}
-
-/* Grid */
-.grid{display:grid;gap:18px}
-.grid-2{grid-template-columns:1fr}
-.grid-3{grid-template-columns:1fr}
-.grid-4{grid-template-columns:repeat(2,1fr)}
-@media(min-width:700px){
-  .grid-2{grid-template-columns:1fr 1fr}
-  .grid-3{grid-template-columns:repeat(3,1fr)}
-  .grid-4{grid-template-columns:repeat(4,1fr)}
-}
-.panel{padding:24px;border-radius:22px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
-  margin-bottom:22px;transition:.25s}
-.panel:hover{border-color:var(--bd2)}
-.panel h3{font-size:1.05rem;margin-bottom:18px;display:flex;align-items:center;gap:10px;
-  font-weight:700;justify-content:space-between}
-.panel h3 .left{display:flex;align-items:center;gap:10px}
-.panel h3 .ic{font-size:1.2rem}
-
-/* Quest */
-.quest{display:flex;align-items:center;gap:14px;padding:15px;border-radius:16px;
-  border:1px solid var(--bd);background:rgba(255,255,255,.02);margin-bottom:10px;transition:.2s}
-.quest:hover{background:rgba(255,255,255,.04)}
-.quest.done{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.06)}
-.quest .qi{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
-  font-size:1.3rem;flex-shrink:0;background:rgba(34,211,238,.12)}
-.quest.done .qi{background:rgba(34,197,94,.2)}
-.quest .qt{font-weight:700;font-size:.92rem}
-.quest .qd{font-size:.76rem;color:var(--ink3);margin-top:2px}
-.quest .qp{margin-left:auto;font-size:.8rem;font-weight:800;color:#67e8f9}
-.quest.done .qp{color:#4ade80}
-.quest .qbar{width:80px;height:5px;background:rgba(255,255,255,.08);
-  border-radius:3px;overflow:hidden;margin-left:auto;flex-shrink:0}
-.quest .qbar>i{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#a855f7)}
-
-/* Rings */
-.rings{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.ring-card{display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:20px 16px;border-radius:18px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.005));
-  transition:.25s}
-.ring-card:hover{border-color:var(--bd2);transform:translateY(-3px)}
-.ring-card svg{width:100px;height:100px;transform:rotate(-90deg)}
-.ring-card .ring-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:8}
-.ring-card .ring-val{fill:none;stroke-width:8;stroke-linecap:round;
-  transition:stroke-dashoffset 1.2s ease-out}
-.ring-card .v{font-weight:800;font-size:1.4rem;margin-top:-62px;color:#fff;
-  letter-spacing:-.03em;z-index:2}
-.ring-card .l{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink3);margin-top:40px;font-weight:600}
-
-.heatmap{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:14px}
-.heat-cell{aspect-ratio:1;border-radius:3px;background:rgba(255,255,255,.05);
-  transition:.2s;cursor:pointer}
-.heat-cell:hover{transform:scale(1.3);z-index:2}
-.heat-cell[data-lvl="1"]{background:#0e4429}
-.heat-cell[data-lvl="2"]{background:#166c3a}
-.heat-cell[data-lvl="3"]{background:#22a04d}
-.heat-cell[data-lvl="4"]{background:#22d3ee}
-.heat-legend{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--ink3);margin-top:12px}
-.heat-legend .dot{width:10px;height:10px;border-radius:2px}
-
-.radar-wrap{display:flex;justify-content:center;align-items:center;padding:10px}
-.radar-wrap svg{width:100%;max-width:280px;height:auto}
-
-.continue-card{padding:0;border-radius:22px;border:1px solid rgba(34,211,238,.35);
-  background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(168,85,247,.08));
-  position:relative;overflow:hidden;margin-bottom:24px}
-.continue-card::before{content:'';position:absolute;right:-30px;top:-30px;width:220px;height:220px;
-  background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);filter:blur(30px)}
-.continue-card .inner{position:relative;z-index:2;padding:26px;display:flex;gap:22px;
-  align-items:center;flex-wrap:wrap}
-.continue-card .thumb{width:140px;height:140px;border-radius:20px;flex-shrink:0;
-  background:linear-gradient(135deg,#0891b2,#22d3ee);display:grid;place-items:center;
-  box-shadow:0 14px 40px rgba(0,0,0,.45);overflow:hidden}
-.continue-card .thumb svg{width:100%;height:100%}
-.continue-card .info{flex:1;min-width:220px}
-.continue-card .tag{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
-  color:#67e8f9;font-weight:800}
-.continue-card h3{margin:8px 0 6px;font-size:1.25rem}
-.continue-card p{color:var(--ink2);font-size:.88rem}
-.continue-card .bar{margin-top:14px;height:7px}
-.continue-card .bar>i{background:#fff}
-
-.achv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:600px){.achv-grid{grid-template-columns:repeat(4,1fr)}}
-.achv{position:relative;padding:18px;border-radius:16px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
-  text-align:center;overflow:hidden;transition:.25s}
-.achv:hover{transform:translateY(-3px);border-color:var(--bd2)}
-.achv.on{border-color:rgba(250,204,21,.5);
-  background:linear-gradient(135deg,rgba(250,204,21,.14),rgba(245,158,11,.04))}
-.achv .ic{font-size:2.2rem;filter:grayscale(1);opacity:.4}
-.achv.on .ic{filter:none;opacity:1}
-.achv .t{font-weight:700;font-size:.84rem;margin-top:8px}
-.achv .d{font-size:.7rem;color:var(--ink3);margin-top:2px}
-.achv .bar{margin-top:10px;height:5px}
-
-.timeline{position:relative;padding-left:26px}
-.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;
-  background:linear-gradient(180deg,var(--cyan),var(--purple),transparent)}
-.tl-item{position:relative;padding:12px 0 16px;display:flex;gap:12px;align-items:flex-start}
-.tl-item::before{content:'';position:absolute;left:-23px;top:18px;width:12px;height:12px;
-  border-radius:50%;background:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.15)}
-.tl-item.success::before{background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.15)}
-.tl-item.warn::before{background:var(--yellow);box-shadow:0 0 0 3px rgba(250,204,21,.15)}
-.tl-item.error::before{background:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.15)}
-.tl-item .ticon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
-  font-size:1.1rem;background:rgba(34,211,238,.12);flex-shrink:0}
-.tl-item.success .ticon{background:rgba(34,197,94,.15)}
-.tl-item.warn .ticon{background:rgba(250,204,21,.15)}
-.tl-item .body{flex:1}
-.tl-item .txt{font-size:.88rem;color:var(--ink);font-weight:500}
-.tl-item .when{font-size:.7rem;color:var(--ink3);margin-top:2px}
-
-/* Level grid */
-.level-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:600px){.level-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.level-grid{grid-template-columns:repeat(3,1fr)}}
-.lvl{position:relative;padding:26px;border-radius:22px;overflow:hidden;
-  border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:.3s var(--ease);
-  background:linear-gradient(135deg,var(--a1),var(--a2));min-height:220px;
-  display:flex;flex-direction:column}
-.lvl:hover{transform:translateY(-5px);box-shadow:0 28px 70px rgba(0,0,0,.6)}
-.lvl::after{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;
-  border-radius:50%;background:#fff;opacity:.08;filter:blur(24px)}
-.lvl .num{font-size:.7rem;letter-spacing:.18em;color:rgba(255,255,255,.9);
-  font-weight:800;position:relative;z-index:2}
-.lvl h4{font-size:1.1rem;margin:10px 0 8px;color:#fff;position:relative;z-index:2}
-.lvl .topic{font-size:.78rem;color:rgba(255,255,255,.78);position:relative;z-index:2;
-  line-height:1.5;flex:1}
-.lvl .state{position:absolute;top:18px;right:18px;font-size:.64rem;
-  letter-spacing:.1em;text-transform:uppercase;font-weight:800;
-  padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.35);
-  color:#fff;z-index:3;backdrop-filter:blur(8px)}
-.lvl .mastery{margin-top:18px;position:relative;z-index:2}
-.lvl .mastery .bar{background:rgba(0,0,0,.35);height:7px}
-.lvl .mastery .bar>i{background:#fff}
-.lvl .mastery .v{font-size:.72rem;color:rgba(255,255,255,.9);margin-top:8px;font-weight:600}
-.lvl.locked{opacity:.45;cursor:not-allowed;filter:grayscale(.5)}
-.lvl.t1{--a1:#0891b2;--a2:#22d3ee}
-.lvl.t2{--a1:#dc2626;--a2:#f97316}
-.lvl.t3{--a1:#2563eb;--a2:#06b6d4}
-.lvl.t4{--a1:#7c3aed;--a2:#c084fc}
-.lvl.t5{--a1:#059669;--a2:#4ade80}
-.lvl.t6{--a1:#db2777;--a2:#f9a8d4}
-.lvl.t7{--a1:#ca8a04;--a2:#facc15}
-.lvl.t8{--a1:#0d9488;--a2:#5eead4}
-.lvl.t9{--a1:#991b1b;--a2:#ef4444}
-.lvl.t10{--a1:#4338ca;--a2:#818cf8}
-.lvl.t11{--a1:#c2410c;--a2:#fb923c}
-.lvl.t12{--a1:#166534;--a2:#22c55e}
-
-/* Lesson */
-.lesson-wrap{padding:22px 0 80px;max-width:960px;margin:0 auto}
-.lesson-header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.crumb{font-size:.82rem;color:var(--ink3)}
-.crumb b{color:var(--ink2)}
-.lesson-hero{padding:36px 32px;border-radius:26px;margin-bottom:24px;
-  position:relative;overflow:hidden;color:#fff;
-  background:linear-gradient(135deg,var(--c1),var(--c2))}
-.lesson-hero::after{content:'';position:absolute;right:-80px;top:-60px;
-  width:280px;height:280px;border-radius:50%;background:#fff;opacity:.1}
-.lesson-hero .eyebrow{color:rgba(255,255,255,.9);position:relative;z-index:2;background:rgba(0,0,0,.2);border-color:rgba(255,255,255,.25)}
-.lesson-hero h2{position:relative;z-index:2;font-size:clamp(1.4rem,2.8vw,2rem);margin-bottom:10px}
-.lesson-hero p{position:relative;z-index:2;color:rgba(255,255,255,.92);
-  margin-top:8px;font-size:.96rem;line-height:1.6;max-width:640px}
-.lesson-hero .hero-scene{position:relative;z-index:2;margin-top:22px;
-  border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.2);
-  background:#0a1020;box-shadow:0 16px 50px rgba(0,0,0,.4)}
-.lesson-hero .hero-scene img{display:block;width:100%;height:240px;object-fit:cover}
-.lesson-hero .hero-scene svg{display:block;width:100%;height:auto}
-.audio-btn{position:absolute;top:18px;right:18px;z-index:3;
-  background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.3);color:#fff;
-  border-radius:999px;padding:9px 16px;font-size:.8rem;font-weight:600;
-  cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;
-  backdrop-filter:blur(8px);transition:.2s}
-.audio-btn:hover{background:rgba(0,0,0,.6)}
-.audio-btn.on{background:rgba(34,211,238,.9);color:#02121a;border-color:transparent}
-
-.step{padding:30px;border-radius:22px;margin-bottom:18px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.005));
-  position:relative;overflow:hidden;
-  animation:slideIn .4s cubic-bezier(.22,.61,.36,1)}
-@keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-.step .k{display:inline-block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-  font-weight:800;margin-bottom:16px;color:#67e8f9;padding:6px 14px;border-radius:999px;
-  background:rgba(34,211,238,.12)}
-.step h3{font-size:1.3rem;margin-bottom:16px;line-height:1.25}
-.step p{color:var(--ink2);font-size:1rem;line-height:1.7;margin-bottom:18px}
-.step .media{margin:22px -8px 0;border-radius:18px;overflow:hidden;
-  border:1px solid var(--bd);background:#0a1020;position:relative}
-.step .media img{display:block;width:100%;height:300px;object-fit:cover}
-.step .media svg{display:block;width:100%;height:auto}
-.step .media .credit{position:absolute;bottom:10px;right:12px;font-size:.66rem;
-  color:rgba(255,255,255,.85);background:rgba(0,0,0,.6);padding:4px 10px;border-radius:999px}
-.step .media .real-tag{position:absolute;top:12px;left:12px;font-size:.64rem;
-  color:#fff;background:rgba(34,197,94,.9);padding:5px 12px;border-radius:999px;
-  font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.step.tip{border-left:4px solid var(--green);
-  background:linear-gradient(135deg,rgba(34,197,94,.10),rgba(34,197,94,.02))}
-.step.tip .k{color:#4ade80;background:rgba(34,197,94,.15)}
-.step.mistake{border-left:4px solid var(--red);
-  background:linear-gradient(135deg,rgba(239,68,68,.10),rgba(239,68,68,.02))}
-.step.mistake .k{color:#fca5a5;background:rgba(239,68,68,.15)}
-.step.video{border-left:4px solid var(--purple);
-  background:linear-gradient(135deg,rgba(168,85,247,.10),rgba(168,85,247,.02))}
-.step.video .k{color:#d8b4fe;background:rgba(168,85,247,.15)}
-.step.practice{border-left:4px solid var(--yellow);
-  background:linear-gradient(135deg,rgba(250,204,21,.10),rgba(250,204,21,.02))}
-.step.practice .k{color:#fde047;background:rgba(250,204,21,.15)}
-.video-embed{margin-top:18px;border-radius:18px;overflow:hidden;
-  position:relative;padding-bottom:56.25%;background:#000}
-.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-.lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:14px;
-  margin-top:24px;padding-top:24px;border-top:1px solid var(--bd);flex-wrap:wrap}
-.lesson-nav .step-count{font-size:.84rem;color:var(--ink3)}
-.lesson-nav .step-count b{color:var(--ink);font-weight:800}
-
-.prog-dots{display:flex;gap:8px;margin-bottom:24px;padding:16px 20px;
-  border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--bd);
-  overflow-x:auto;scrollbar-width:none}
-.prog-dots::-webkit-scrollbar{display:none}
-.pdot{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
-  font-size:.7rem;font-weight:800;flex-shrink:0;border:2px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.03);color:var(--ink3);cursor:pointer;transition:.2s}
-.pdot.on{border-color:var(--cyan);background:rgba(34,211,238,.15);color:#67e8f9}
-.pdot.done{border-color:var(--green);background:rgba(34,197,94,.15);color:#4ade80}
-.pdot.q{border-color:var(--purple);background:rgba(168,85,247,.15);color:#d8b4fe}
-
-.q-opt{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:18px;
-  border:1px solid var(--bd);background:rgba(255,255,255,.02);cursor:pointer;
-  text-align:left;color:var(--ink);font-size:1rem;font-family:inherit;
-  transition:.2s;width:100%;margin-top:14px}
-.q-opt:hover{border-color:var(--cyan);background:rgba(34,211,238,.07);transform:translateX(4px)}
-.q-opt.correct{border-color:var(--green);background:rgba(34,197,94,.14);animation:pop .3s ease-out}
-.q-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.14);animation:shake .3s ease-out}
-.q-opt[disabled]{cursor:default;transform:none}
-@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.q-opt .kbd{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.08);
-  display:grid;place-items:center;font-size:.9rem;font-weight:800;flex-shrink:0}
-.feedback{margin-top:20px;padding:20px;border-radius:16px;
-  border-left:4px solid var(--cyan);background:rgba(34,211,238,.08);font-size:.96rem;
-  line-height:1.6}
-.feedback.ok{border-color:var(--green);background:rgba(34,197,94,.12)}
-.feedback.no{border-color:var(--red);background:rgba(239,68,68,.12)}
-.feedback strong{display:block;margin-bottom:8px;font-size:1.02rem}
-
-/* Sign picker modal */
-#modal-bg{position:fixed;inset:0;background:rgba(2,4,10,.85);backdrop-filter:blur(10px);
-  display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
-#modal-bg.on{display:flex;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{width:100%;max-width:540px;background:var(--card2);
-  border:1px solid var(--bd2);border-radius:26px;padding:40px 34px;text-align:center;
-  box-shadow:0 28px 90px rgba(0,0,0,.75);animation:modalIn .4s cubic-bezier(.22,.61,.36,1);
-  max-height:90vh;overflow-y:auto}
-@keyframes modalIn{from{opacity:0;transform:scale(.92) translateY(24px)}to{opacity:1;transform:none}}
-.modal .success-ring{width:100px;height:100px;border-radius:50%;margin:0 auto 22px;
-  display:grid;place-items:center;font-size:2.8rem;
-  background:linear-gradient(135deg,rgba(34,197,94,.25),rgba(34,211,238,.15));
-  border:3px solid rgba(34,197,94,.5);position:relative}
-.modal .success-ring::after{content:'';position:absolute;inset:-8px;border-radius:50%;
-  border:2px solid rgba(34,197,94,.3);animation:pulse 1.6s ease-in-out infinite}
-.modal h2{font-size:1.6rem;margin-bottom:14px;color:#fff}
-.modal p{color:var(--ink2);font-size:.96rem;margin-bottom:10px;line-height:1.65}
-.modal .next-card{margin:24px 0;padding:18px;border-radius:16px;
-  border:1px solid rgba(34,211,238,.3);background:rgba(34,211,238,.08);text-align:left}
-.modal .next-card .tag{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-  color:#67e8f9;font-weight:800}
-.modal .next-card .title{font-weight:700;margin-top:8px;font-size:1.05rem}
-.modal .next-card .meta{font-size:.8rem;color:var(--ink3);margin-top:4px}
-.modal .actions{display:flex;gap:12px;flex-direction:column}
-.modal .actions .btn{width:100%}
-
-/* Signs */
-.sign-tile{display:flex;flex-direction:column;align-items:center;text-align:center;
-  gap:12px;padding:18px;border-radius:18px;border:1px solid var(--bd);
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
-  transition:.25s}
-.sign-tile:hover{border-color:var(--bd2);transform:translateY(-3px)}
-.sign-visual{width:100%;aspect-ratio:1/1;max-width:100px;display:grid;place-items:center}
-.sign-svg{width:100%;height:100%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
-.sign-name{font-size:.88rem;font-weight:700}
-.sign-cat{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
-.pill-row{display:flex;gap:8px;padding-bottom:4px;overflow-x:auto;scrollbar-width:none}
-.pill-row::-webkit-scrollbar{display:none}
-.pill{white-space:nowrap;padding:9px 16px;border-radius:999px;
-  border:1px solid var(--bd2);background:transparent;color:var(--ink2);
-  font-size:.84rem;cursor:pointer;font-family:inherit;transition:.2s}
-.pill.on{background:linear-gradient(135deg,var(--cyan),#0ea5b7);color:#02121a;
-  border-color:transparent;font-weight:700}
-
-.bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
-.bar>i{display:block;height:100%;border-radius:999px;transition:width 1s cubic-bezier(.22,.61,.36,1)}
-
-.row-topic{display:flex;align-items:center;gap:14px;padding:13px 0;
-  border-bottom:1px solid rgba(255,255,255,.05)}
-.row-topic:last-child{border-bottom:none}
-.row-topic .lbl{flex:0 0 130px;font-size:.88rem;font-weight:600;color:var(--ink)}
-.row-topic .tr{flex:1}
-.row-topic .val{flex:0 0 52px;text-align:right;font-size:.86rem;font-weight:800}
-
-/* Toast */
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(200%);
-  background:#111a2e;border:1px solid var(--bd2);border-radius:14px;padding:15px 24px;
-  font-size:.9rem;z-index:900;transition:transform .4s cubic-bezier(.22,.61,.36,1);
-  max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.75);color:#fff;line-height:1.5}
+.footer-dev .socials a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--ink2);font-size:1.05rem;transition:.25s;padding:0}
+.footer-dev .socials a:hover{background:rgba(34,211,238,.15);border-color:var(--cyan);color:var(--cyan2);transform:translateY(-3px)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(200%);background:#111a2e;border:1px solid var(--bd2);border-radius:14px;padding:15px 24px;font-size:.9rem;z-index:900;transition:transform .4s var(--ease);max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.75);color:#fff;line-height:1.5}
 #toast.on{transform:translateX(-50%) translateY(0)}
-#toast.ok{border-color:rgba(34,197,94,.6)}
-#toast.no{border-color:rgba(239,68,68,.6)}
-
-.bottom-nav{display:flex;position:fixed;bottom:14px;left:14px;right:14px;z-index:60;
-  justify-content:space-around;padding:8px;border-radius:24px;
-  background:rgba(10,16,32,.95);backdrop-filter:blur(20px);
-  border:1px solid var(--bd2);box-shadow:0 20px 60px rgba(0,0,0,.75)}
-@media(min-width:1000px){.bottom-nav{display:none}}
-.bottom-nav button{flex:1;background:none;border:none;color:var(--ink2);
-  font-family:inherit;font-size:.64rem;display:flex;flex-direction:column;
-  align-items:center;gap:4px;padding:8px 4px;border-radius:16px;cursor:pointer;
-  transition:.2s}
-.bottom-nav button.on{color:#67e8f9;background:rgba(34,211,238,.12)}
-.bottom-nav .ic{font-size:1.25rem}
-
-/* Sign-in modal overlay (Google auth in progress) */
-#signin-overlay{position:fixed;inset:0;background:rgba(2,4,10,.9);backdrop-filter:blur(12px);
-  display:none;align-items:center;justify-content:center;z-index:800;flex-direction:column;gap:20px}
+#toast.ok{border-color:rgba(34,197,94,.6)}#toast.no{border-color:rgba(239,68,68,.6)}
+#signin-overlay{position:fixed;inset:0;background:rgba(2,4,10,.9);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;z-index:800;flex-direction:column;gap:20px}
 #signin-overlay.on{display:flex}
-#signin-overlay .spin{width:64px;height:64px;border-radius:50%;
-  border:4px solid rgba(34,211,238,.2);border-top-color:var(--cyan);
-  animation:spin 1s linear infinite}
+#signin-overlay .spin{width:64px;height:64px;border-radius:50%;border:4px solid rgba(34,211,238,.2);border-top-color:var(--cyan);animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 #signin-overlay .txt{color:#fff;font-weight:600;font-size:1.05rem}
 #signin-overlay .hint{color:var(--ink3);font-size:.82rem;max-width:400px;text-align:center}
@@ -702,7 +149,6 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
 </head>
 <body>
 
-<!-- ═══════════ LOADING ═══════════ -->
 <div id="loading">
   <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive">
   <h1>iMENA DRIVE</h1>
@@ -710,20 +156,17 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
   <div class="st">Preparing your journey through Kigali…</div>
 </div>
 
-<!-- ═══════════ SIGN-IN PROGRESS OVERLAY ═══════════ -->
 <div id="signin-overlay">
   <div class="spin"></div>
   <div class="txt" id="signin-text">Signing you in…</div>
-  <div class="hint" id="signin-hint">A Google window should appear. If it doesn't, check that popups are allowed for this site.</div>
+  <div class="hint" id="signin-hint">A Google window should appear. If it doesn't, allow popups for this site.</div>
 </div>
 
-<!-- ═══════════ 3D CANVAS ═══════════ -->
 <canvas id="scene"></canvas>
 
-<!-- ═══════════ HOME ═══════════ -->
 <div id="home">
   <header class="home" id="homeHeader">
-    <button class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <button class="brand" onclick="scrollTo({top:0,behavior:'smooth'})">
       <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive">
       <div style="text-align:left">iMENA DRIVE<small>Digital Driving Academy · Rwanda</small></div>
     </button>
@@ -736,18 +179,12 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
     </nav>
     <div class="right-hm">
       <button class="google-btn" id="googleBtn">
-        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
-          <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.9 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
-          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
-          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.3 26.7 36 24 36c-5.3 0-9.8-3-11.3-7.6l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
-          <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.2-.1-2.4-.4-3.5z"/>
-        </svg>
+        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.9 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.3 26.7 36 24 36c-5.3 0-9.8-3-11.3-7.6l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.2-.1-2.4-.4-3.5z"/></svg>
         <span id="gbtnText">Sign in with Google</span>
       </button>
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div class="eyebrow"><span class="dot"></span>A product of iMENA Hub · Rwanda</div>
@@ -771,7 +208,6 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
     </div>
   </section>
 
-  <!-- STATS STRIP -->
   <section class="section tight reveal">
     <div class="stats-strip">
       <div class="stat-item"><div class="num" data-counter="12">0</div><div class="label">Structured Levels</div></div>
@@ -781,251 +217,87 @@ nav.hm a:hover{color:#fff;background:rgba(255,255,255,.06)}
     </div>
   </section>
 
-  <!-- FEATURES -->
   <section class="section reveal" id="features">
-    <div class="sec-head">
-      <div class="pill">Why iMENA Drive</div>
-      <h2>Built for Rwandan learners</h2>
-      <p>Everything you need to go from complete beginner to exam-ready — with a real digital academy experience.</p>
-    </div>
+    <div class="sec-head"><div class="pill">Why iMENA Drive</div><h2>Built for Rwandan learners</h2><p>Everything you need to go from complete beginner to exam-ready.</p></div>
     <div class="feature-grid">
-      <div class="feature reveal">
-        <div class="icon">📚</div>
-        <h3>Structured 12-Level Curriculum</h3>
-        <p>A clear path from driving foundations to final readiness. Mastery-gated: you advance by demonstrating understanding, not by clicking next.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="icon">🧠</div>
-        <h3>Understanding, not memorisation</h3>
-        <p>Every concept is anchored to real Kigali road scenarios you will actually meet — intersections, roundabouts, pedestrian crossings.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="icon">🌍</div>
-        <h3>Bilingual EN / RW</h3>
-        <p>Lessons, questions, and signs in both English and Kinyarwanda. Switch languages at any time without losing progress.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="icon">🎬</div>
-        <h3>Real Driving Videos</h3>
-        <p>Learn from real driving footage. See the situations you will face, not just diagrams and text.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="icon">📊</div>
-        <h3>Adaptive Weak-Area Practice</h3>
-        <p>The academy detects which topics you find difficult and generates targeted practice to lift your mastery.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="icon">🏆</div>
-        <h3>XP, Levels, Achievements</h3>
-        <p>Every action earns experience. Track your progress, unlock achievements, and build momentum with daily streaks.</p>
-      </div>
+      <div class="feature reveal"><div class="icon">📚</div><h3>Structured 12-Level Curriculum</h3><p>A clear path from driving foundations to final readiness. Mastery-gated: you advance by demonstrating understanding.</p></div>
+      <div class="feature reveal"><div class="icon">🧠</div><h3>Understanding, not memorisation</h3><p>Every concept is anchored to real Kigali road scenarios — intersections, roundabouts, pedestrian crossings.</p></div>
+      <div class="feature reveal"><div class="icon">🌍</div><h3>Bilingual EN / RW</h3><p>Lessons, questions, and signs in both English and Kinyarwanda. Switch anytime without losing progress.</p></div>
+      <div class="feature reveal"><div class="icon">🎬</div><h3>Real Driving Videos</h3><p>Learn from real footage. See the situations you will face on the road.</p></div>
+      <div class="feature reveal"><div class="icon">📊</div><h3>Adaptive Weak-Area Practice</h3><p>The academy detects which topics you find difficult and generates targeted practice.</p></div>
+      <div class="feature reveal"><div class="icon">🏆</div><h3>XP, Levels, Certificates</h3><p>Earn XP for every action. Unlock levels, complete achievements, and receive your completion certificate.</p></div>
     </div>
   </section>
 
-  <!-- JOURNEY -->
   <section class="section reveal" id="journey">
-    <div class="sec-head">
-      <div class="pill">The Learning Journey</div>
-      <h2>From beginner to exam-ready</h2>
-      <p>Six stages. Twelve levels. One destination: confidence on the road.</p>
-    </div>
+    <div class="sec-head"><div class="pill">The Learning Journey</div><h2>From beginner to exam-ready</h2><p>Six stages. Twelve levels. One destination.</p></div>
     <div class="journey">
-      <div class="stage"><div class="n">01</div><h4>Learn</h4><p>Understand the road, the rules, and the vehicle — through illustrated lessons and real driving videos.</p></div>
-      <div class="stage"><div class="n">02</div><h4>Practice</h4><p>Reinforce each concept with adaptive questions that detect your weak areas and lift them fast.</p></div>
-      <div class="stage"><div class="n">03</div><h4>Simulate</h4><p>Make safe decisions in real scenarios — intersections, roundabouts, night driving, rain.</p></div>
-      <div class="stage"><div class="n">04</div><h4>Assess</h4><p>Test your knowledge with mock examinations and readiness checks before the official process.</p></div>
-      <div class="stage"><div class="n">05</div><h4>Improve</h4><p>The academy shows you exactly what still needs work and generates targeted practice.</p></div>
-      <div class="stage"><div class="n">06</div><h4>Prepare</h4><p>Walk into your official examination with confidence, knowing you understand the road.</p></div>
+      <div class="stage"><div class="n">01</div><h4>Learn</h4><p>Understand the road, the rules, and the vehicle.</p></div>
+      <div class="stage"><div class="n">02</div><h4>Practice</h4><p>Reinforce each concept with adaptive questions.</p></div>
+      <div class="stage"><div class="n">03</div><h4>Simulate</h4><p>Make safe decisions in real scenarios.</p></div>
+      <div class="stage"><div class="n">04</div><h4>Assess</h4><p>Test your knowledge with mock examinations.</p></div>
+      <div class="stage"><div class="n">05</div><h4>Improve</h4><p>Targeted practice on your weak areas.</p></div>
+      <div class="stage"><div class="n">06</div><h4>Prepare</h4><p>Walk into your official examination with confidence.</p></div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section class="section reveal" id="learn">
-    <div class="sec-head">
-      <div class="pill">What learners say</div>
-      <h2>Real progress, real confidence</h2>
-      <p>From complete beginners to confident drivers preparing for their official examination.</p>
-    </div>
+    <div class="sec-head"><div class="pill">What learners say</div><h2>Real progress, real confidence</h2></div>
     <div class="testimonials">
-      <div class="testimonial">
-        <p class="quote">I started knowing nothing about driving. After the first 3 levels I already understood what the signs meant and how a roundabout works. The illustrations made everything click.</p>
-        <div class="who"><div class="avatar">A</div><div><div class="name">Aline U.</div><div class="role">Learner · Kigali</div></div></div>
-      </div>
-      <div class="testimonial">
-        <p class="quote">The practice questions showed me exactly which topics I was weak on. I lifted my mastery from 40% to 85% in three weeks before my official test.</p>
-        <div class="who"><div class="avatar">J</div><div><div class="name">Jean-Claude M.</div><div class="role">Learner · Kigali</div></div></div>
-      </div>
-      <div class="testimonial">
-        <p class="quote">Being able to switch between English and Kinyarwanda was very useful. My parents don't speak English, and now they can review my lessons with me.</p>
-        <div class="who"><div class="avatar">C</div><div><div class="name">Claudine K.</div><div class="role">Learner · Musanze</div></div></div>
-      </div>
+      <div class="testimonial"><p class="quote">I started knowing nothing. After the first 3 levels I already understood what the signs meant and how a roundabout works.</p><div class="who"><div class="avatar">A</div><div><div class="name">Aline U.</div><div class="role">Learner · Kigali</div></div></div></div>
+      <div class="testimonial"><p class="quote">The practice questions showed me exactly which topics I was weak on. I lifted my mastery from 40% to 85% in three weeks.</p><div class="who"><div class="avatar">J</div><div><div class="name">Jean-Claude M.</div><div class="role">Learner · Kigali</div></div></div></div>
+      <div class="testimonial"><p class="quote">Being able to switch between English and Kinyarwanda was very useful. My parents can review my lessons with me.</p><div class="who"><div class="avatar">C</div><div><div class="name">Claudine K.</div><div class="role">Learner · Musanze</div></div></div></div>
     </div>
   </section>
 
-  <!-- FAQ -->
   <section class="section reveal" id="faq">
-    <div class="sec-head">
-      <div class="pill">Common questions</div>
-      <h2>Frequently asked</h2>
-    </div>
+    <div class="sec-head"><div class="pill">Common questions</div><h2>Frequently asked</h2></div>
     <div class="faq">
-      <div class="faq-item">
-        <button class="faq-q" onclick="Home.toggleFaq(this)">Is iMENA Drive the official Rwanda driving examination?</button>
-        <div class="faq-a">No. iMENA Drive is an educational preparation platform. It helps you understand the road and prepare for the official examination process, but it is not the official government examination and does not issue a driving licence.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="Home.toggleFaq(this)">Is iMENA Drive free?</button>
-        <div class="faq-a">Yes. All 12 levels, all lessons, all practice questions, and the mock examinations are completely free.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="Home.toggleFaq(this)">Does it work on my phone?</button>
-        <div class="faq-a">Yes. iMENA Drive is designed mobile-first. It works on any modern smartphone, tablet, or computer. Your progress syncs across devices when you sign in with Google.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="Home.toggleFaq(this)">Is my progress saved?</button>
-        <div class="faq-a">Yes. When you sign in with Google, your progress is saved to your account and syncs automatically. You can resume on any device, any time.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="Home.toggleFaq(this)">Is it in Kinyarwanda?</button>
-        <div class="faq-a">Yes. Every lesson, question, and road sign is available in both English and Kinyarwanda. You can switch languages at any time without losing progress.</div>
-      </div>
+      <div class="faq-item"><button class="faq-q" onclick="Home.toggleFaq(this)">Is iMENA Drive the official Rwanda driving examination?</button><div class="faq-a">No. iMENA Drive is an educational preparation platform. It helps you prepare for the official examination process, but it is not the official government examination and does not issue a driving licence.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="Home.toggleFaq(this)">Is iMENA Drive free?</button><div class="faq-a">Yes. All 12 levels, all lessons, all practice questions, and the mock examinations are completely free.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="Home.toggleFaq(this)">Does it work on my phone?</button><div class="faq-a">Yes. iMENA Drive is designed mobile-first. It works on any modern smartphone, tablet, or computer.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="Home.toggleFaq(this)">Is my progress saved?</button><div class="faq-a">Yes. When you sign in with Google, your progress is saved to your account and syncs across devices.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="Home.toggleFaq(this)">Is it in Kinyarwanda?</button><div class="faq-a">Yes. Every lesson, question, and road sign is available in both English and Kinyarwanda.</div></div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section class="section reveal" id="about">
-    <div class="sec-head">
-      <div class="pill">About</div>
-      <h2>Digital driving education for Rwanda</h2>
-      <p>iMENA Drive is a product of iMENA Hub, built with care in Kigali to make high-quality driving theory education accessible to every Rwandan learner.</p>
-    </div>
+    <div class="sec-head"><div class="pill">About</div><h2>Digital driving education for Rwanda</h2><p>iMENA Drive is a product of iMENA Hub, built with care in Kigali to make high-quality driving theory education accessible to every Rwandan learner.</p></div>
     <div class="final-cta reveal">
       <h2>Start your driving journey today</h2>
-      <p>Join thousands of Rwandan learners building the knowledge and confidence to drive safely on Rwandan roads.</p>
-      <div class="cta">
-        <button class="btn btn-primary btn-lg" onclick="Auth.signIn()">Sign in with Google →</button>
-      </div>
+      <p>Join Rwandan learners building the knowledge and confidence to drive safely on Rwandan roads.</p>
+      <div class="cta"><button class="btn btn-primary btn-lg" onclick="Auth.signIn()">Sign in with Google →</button></div>
     </div>
   </section>
 
-  <!-- PROFESSIONAL FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-grid">
         <div>
-          <div class="brand" style="cursor:default">
-            <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive">
-            <div style="text-align:left">iMENA DRIVE<small>A product of iMENA Hub</small></div>
-          </div>
+          <div class="brand" style="cursor:default"><img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive"><div style="text-align:left">iMENA DRIVE<small>A product of iMENA Hub</small></div></div>
           <p class="desc">Rwanda's digital driving education platform. Built to help learners understand the road, prepare for official examinations, and become safer drivers.</p>
-          <div class="disclaimer">
-            <strong>Educational platform.</strong> iMENA Drive is not the official government examination and does not issue a driving licence. Practical driving must be completed with a qualified instructor through the authorised Rwandan process.
-          </div>
+          <div class="disclaimer"><strong>Educational platform.</strong> iMENA Drive is not the official government examination and does not issue a driving licence. Practical driving must be completed with a qualified instructor through the authorised Rwandan process.</div>
         </div>
-        <div>
-          <h5>Learn</h5>
-          <a onclick="Auth.signIn()">Start learning</a>
-          <a onclick="Auth.signIn()">Learning path</a>
-          <a onclick="Auth.signIn()">Road signs</a>
-          <a onclick="Auth.signIn()">Practice</a>
-        </div>
-        <div>
-          <h5>Company</h5>
-          <a onclick="Home.scrollTo('about')">About</a>
-          <a onclick="Home.scrollTo('faq')">FAQ</a>
-          <a href="mailto:hello@imenahub.rw">Contact</a>
-          <a href="mailto:hello@imenahub.rw">Partnerships</a>
-        </div>
-        <div>
-          <h5>Legal</h5>
-          <a onclick="Home.showLegal()">Privacy</a>
-          <a onclick="Home.showLegal()">Terms</a>
-          <a onclick="Home.showLegal()">Disclaimer</a>
-          <a onclick="Home.showLegal()">Content sources</a>
-        </div>
+        <div><h5>Learn</h5><a onclick="Auth.signIn()">Start learning</a><a onclick="Auth.signIn()">Learning path</a><a onclick="Auth.signIn()">Road signs</a><a onclick="Auth.signIn()">Practice</a></div>
+        <div><h5>Company</h5><a onclick="Home.scrollTo('about')">About</a><a onclick="Home.scrollTo('faq')">FAQ</a><a href="mailto:hello@imenahub.rw">Contact</a><a href="mailto:hello@imenahub.rw">Partnerships</a></div>
+        <div><h5>Legal</h5><a onclick="Home.showLegal()">Privacy</a><a onclick="Home.showLegal()">Terms</a><a onclick="Home.showLegal()">Disclaimer</a></div>
       </div>
       <div class="footer-dev">
-        <a class="dev-link" href="https://imena-hub.vercel.app" target="_blank" rel="noopener">
-          <span>🚀</span>
-          <span>Developed by <strong>iMENA Hub</strong></span>
-        </a>
-        <div class="socials">
-          <a href="mailto:hello@imenahub.rw" title="Email">✉</a>
-          <a href="https://imena-hub.vercel.app" target="_blank" rel="noopener" title="Website">🌐</a>
-        </div>
+        <a class="dev-link" href="https://imena-hub.vercel.app" target="_blank" rel="noopener"><span>🚀</span><span>Developed by <strong>iMENA Hub</strong></span></a>
+        <div class="socials"><a href="mailto:hello@imenahub.rw" title="Email">✉</a><a href="https://imena-hub.vercel.app" target="_blank" rel="noopener" title="Website">🌐</a></div>
         <div class="copyright">© <span id="yr"></span> iMENA Hub · All rights reserved.</div>
       </div>
     </div>
   </footer>
 </div>
 
-<!-- ═══════════ APP ═══════════ -->
-<div id="app" class="hidden">
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="brand" style="cursor:pointer" onclick="App.go('dashboard')">
-        <img src="https://i.postimg.cc/1RWBntYM/i-MENA-drive-logo.png" alt="iMENA Drive" style="width:36px;height:36px">
-        <div>iMENA DRIVE<small style="display:block;font-size:.66rem;color:var(--ink3)">Digital Driving Academy</small></div>
-      </div>
-      <div class="row">
-        <div id="topBadges"></div>
-        <div class="avatar" id="topAvatar">L</div>
-        <button class="btn btn-ghost btn-sm" onclick="Auth.signOut()">Sign out</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="app-shell">
-    <aside class="app-side">
-      <div class="side-card">
-        <div class="lbl">Academy</div>
-        <nav class="side-nav" id="sideNav">
-          <button data-nav="dashboard" class="on"><span class="ic">◆</span> Dashboard</button>
-          <button data-nav="levels"><span class="ic">📚</span> Learning path</button>
-          <button data-nav="lesson"><span class="ic">🎬</span> Current lesson</button>
-          <button data-nav="signs"><span class="ic">🛑</span> Road signs</button>
-          <button data-nav="practice"><span class="ic">🧠</span> Practice</button>
-        </nav>
-      </div>
-      <div class="side-card">
-        <div class="lbl">Focus areas</div>
-        <div id="sideWeak" style="margin-top:10px"></div>
-      </div>
-      <div class="side-card" id="syncStatus"></div>
-    </aside>
-
-    <main id="appMain"></main>
-  </div>
-
-  <div class="bottom-nav" id="bottomNav">
-    <button data-nav="dashboard" class="on"><span class="ic">◆</span>Home</button>
-    <button data-nav="levels"><span class="ic">📚</span>Learn</button>
-    <button data-nav="practice"><span class="ic">🧠</span>Practice</button>
-    <button data-nav="signs"><span class="ic">🛑</span>Signs</button>
-    <button data-nav="lesson"><span class="ic">🎬</span>Lesson</button>
-  </div>
-</div>
-
-<div id="modal-bg" onclick="if(event.target===this)UI.closeModal()">
-  <div class="modal" id="modalContent"></div>
-</div>
-
 <div id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     FIREBASE MODULE
-     ═══════════════════════════════════════════════════════════ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect,
-         getRedirectResult, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-console.log("[iMENA] Firebase module loading...");
-window.FB = { ready: () => false, dbReady: false };
-
+window.FB = { ready: () => false };
 const cfg = {
   apiKey: "AIzaSyAV51yfKMG7erFy8NRNuFRaU1PAnBJj0gQ",
   authDomain: "imena-drive-18cf0.firebaseapp.com",
@@ -1035,1484 +307,156 @@ const cfg = {
   appId: "1:732515497157:web:f4c2be480f544a5b692cac"
 };
 
-let saveTimer = null;
-
 try {
   const app = initializeApp(cfg);
   const auth = getAuth(app);
   setPersistence(auth, browserLocalPersistence).catch(()=>{});
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
-  const db = getFirestore(app);
 
   window.FB = {
     ready: () => true,
-    dbReady: true,
-
     signIn: async () => {
-      console.log("[iMENA] signIn() called. Protocol:", location.protocol, "Host:", location.hostname);
-      // Hard guard against file://
-      if (location.protocol !== "http:" && location.protocol !== "https:") {
-        throw Object.assign(new Error("Page must be served over http:// or https://, not file://"),
-                            { code: "auth/invalid-protocol" });
-      }
+      if (location.protocol !== "http:" && location.protocol !== "https:")
+        throw Object.assign(new Error("file:// protocol not supported"), { code: "auth/invalid-protocol" });
       try {
         const r = await signInWithPopup(auth, provider);
-        console.log("[iMENA] Popup success:", r.user.email);
-        return { user: r.user, viaRedirect: false };
-      } catch (popupErr) {
-        const code = (popupErr && (popupErr.code || popupErr.message)) || "";
-        console.warn("[iMENA] Popup failed:", code);
-        if (code.includes("popup-blocked") ||
-            code.includes("popup-closed-by-user") ||
-            code.includes("cancelled-popup-request") ||
-            code.includes("operation-not-supported")) {
-          console.log("[iMENA] Falling back to redirect...");
-          await signInWithRedirect(auth, provider);
-          return { user: null, viaRedirect: true };
-        }
-        throw popupErr;
-      }
-    },
-
-    consumeRedirect: async () => {
-      try {
-        const r = await getRedirectResult(auth);
-        if (r && r.user) { console.log("[iMENA] Redirect result:", r.user.email); return r.user; }
-        return null;
+        return { user: r.user };
       } catch (e) {
-        console.warn("[iMENA] Redirect error:", e);
+        const code = (e && (e.code || e.message)) || "";
+        if (/popup-blocked|popup-closed-by-user|cancelled-popup-request|operation-not-supported/.test(code)) {
+          await signInWithRedirect(auth, provider);
+          return { user: null };
+        }
         throw e;
       }
     },
-
-    signOut: async () => { try { await signOut(auth); } catch(e){} },
-    observe: (cb) => onAuthStateChanged(auth, cb),
-
-    load: async (uid) => {
-      try {
-        const s = await getDoc(doc(db, "users", uid));
-        if (s.exists()) { console.log("[iMENA] Firestore doc loaded"); return s.data(); }
-        console.log("[iMENA] New user — no doc yet");
-        return null;
-      } catch (e) {
-        console.warn("[iMENA] Firestore load error:", e);
-        return null;
-      }
+    consumeRedirect: async () => {
+      try { const r = await getRedirectResult(auth); return r?.user || null; }
+      catch (e) { throw e; }
     },
-
-    save: async (uid, data) => {
-      if (saveTimer) clearTimeout(saveTimer);
-      saveTimer = setTimeout(async () => {
-        try {
-          const clean = JSON.parse(JSON.stringify(data));
-          const payload = Object.assign({}, clean, {
-            updatedAt: serverTimestamp(), _v: 1
-          });
-          await setDoc(doc(db, "users", uid), payload, { merge: true });
-          console.log("[iMENA] Firestore save OK");
-          if (window.SyncStatus) window.SyncStatus.ok();
-        } catch (e) {
-          console.warn("[iMENA] Firestore save error:", e);
-          if (window.SyncStatus) window.SyncStatus.fail();
-        }
-      }, 1000);
-    }
+    signOut: async () => { try { await signOut(auth); } catch(e){} },
+    observe: (cb) => onAuthStateChanged(auth, cb)
   };
-  console.log("[iMENA] Firebase initialized ✓");
-} catch (e) {
-  console.warn("[iMENA] Firebase failed to initialize", e);
-}
+  console.log("[iMENA] Firebase initialized");
+} catch(e){ console.warn("[iMENA] Firebase unavailable", e); }
 </script>
 
-<!-- ═══════════════════════════════════════════════════════════
-     APP RUNTIME
-     ═══════════════════════════════════════════════════════════ -->
 <script>
-/* ══════════ UTILS ══════════ */
 const $ = id => document.getElementById(id);
-const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-const UI = {
-  toast(msg, kind){
-    const t = $("toast");
-    t.textContent = msg;
-    t.className = "on " + (kind || "");
-    clearTimeout(this._t);
-    this._t = setTimeout(() => t.className = "", 4200);
-  },
-  openModal(html){ $("modalContent").innerHTML = html; $("modal-bg").classList.add("on"); },
-  closeModal(){ $("modal-bg").classList.remove("on"); },
-  showSignin(msg, hint){
-    $("signin-text").textContent = msg || "Signing you in…";
-    $("signin-hint").textContent = hint || "A Google window should appear. If it doesn't, check that popups are allowed for this site.";
-    $("signin-overlay").classList.add("on");
-  },
-  hideSignin(){ $("signin-overlay").classList.remove("on"); }
-};
-
-const SyncStatus = {
-  ok(){
-    const el = $("syncStatus"); if (!el) return;
-    el.innerHTML = '<div class="lbl">Data sync</div>'
-      + '<div style="margin-top:8px"><span class="sync-badge">✓ Synced to cloud</span></div>'
-      + '<p class="tiny dim" style="margin-top:8px;line-height:1.5">Your progress is saved to your Google account.</p>';
-  },
-  fail(){
-    const el = $("syncStatus"); if (!el) return;
-    el.innerHTML = '<div class="lbl">Data sync</div>'
-      + '<div style="margin-top:8px"><span class="sync-badge off">⚠ Offline</span></div>'
-      + '<p class="tiny dim" style="margin-top:8px;line-height:1.5">Progress saved locally. Will sync when connection returns.</p>';
-  },
-  local(){
-    const el = $("syncStatus"); if (!el) return;
-    el.innerHTML = '<div class="lbl">Data sync</div>'
-      + '<div style="margin-top:8px"><span class="sync-badge off">🔒 Local only</span></div>'
-      + '<p class="tiny dim" style="margin-top:8px;line-height:1.5">Sign in with Google to sync your progress.</p>';
-  }
-};
-window.SyncStatus = SyncStatus;
-
-const Sound = {
-  ctx: null,
-  init(){ if (this.ctx) return; try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} },
-  tone(freq, dur, type, vol){
-    this.init(); if (!this.ctx) return;
-    const o = this.ctx.createOscillator(), g = this.ctx.createGain();
-    o.type = type || "sine"; o.frequency.value = freq;
-    g.gain.setValueAtTime(vol || 0.15, this.ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (dur || 0.2));
-    o.connect(g); g.connect(this.ctx.destination);
-    o.start(); o.stop(this.ctx.currentTime + (dur || 0.2));
-  },
-  correct(){ this.tone(660, 0.15, "sine", 0.14); setTimeout(()=>this.tone(880, 0.2, "sine", 0.14), 100); },
-  wrong(){ this.tone(180, 0.28, "sawtooth", 0.12); setTimeout(()=>this.tone(140, 0.35, "sawtooth", 0.12), 120); },
-  complete(){
-    this.tone(523, 0.15, "sine", 0.13);
-    setTimeout(()=>this.tone(659, 0.15, "sine", 0.13), 130);
-    setTimeout(()=>this.tone(784, 0.35, "sine", 0.13), 260);
-  },
-  fanfare(){
-    [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => Sound.tone(f, 0.4, "triangle", 0.15), i * 130));
-  }
-};
-
-/* ══════════ HOME PAGE ══════════ */
 const Home = {
-  scrollTo(id){
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  },
+  scrollTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior:"smooth", block:"start" }); },
   toggleFaq(btn){
     const item = btn.parentElement;
     const wasOpen = item.classList.contains("open");
     document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
     if (!wasOpen) item.classList.add("open");
   },
-  showLegal(){
-    UI.openModal(
-      '<h2 style="font-size:1.4rem;margin-bottom:16px">Legal & content</h2>'
-      + '<div style="text-align:left;color:var(--ink2);font-size:.9rem;line-height:1.7">'
-      + '<p style="margin-bottom:12px"><strong style="color:var(--ink)">Educational platform.</strong> iMENA Drive is a preparation tool. It is not the official government examination and does not issue a driving licence.</p>'
-      + '<p style="margin-bottom:12px"><strong style="color:var(--ink)">Content sources.</strong> Road signs follow the international Vienna Convention (which Rwanda follows). Driving videos are embedded from publicly available YouTube sources. Where specific Rwandan legal details are required, users must refer to official Rwandan authorities.</p>'
-      + '<p style="margin-bottom:12px"><strong style="color:var(--ink)">Privacy.</strong> We store your display name, email, and photo from Google for account purposes. Your learning progress is stored in your private user document. We do not share your data.</p>'
-      + '</div>'
-      + '<button class="btn btn-primary btn-block" style="margin-top:18px" onclick="UI.closeModal()">Close</button>'
-    );
-  },
+  showLegal(){ alert("Legal: iMENA Drive is an educational platform. For full legal text visit imena-hub.vercel.app"); },
   initReveal(){
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   },
   initCounters(){
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting){
-          const el = e.target;
-          const target = parseInt(el.dataset.counter, 10);
-          const suffix = el.dataset.suffix || "";
-          let cur = 0;
-          const step = Math.max(1, Math.round(target / 40));
-          const iv = setInterval(() => {
-            cur += step;
-            if (cur >= target) { cur = target; clearInterval(iv); }
-            el.textContent = cur + suffix;
-          }, 30);
-          io.unobserve(el);
-        }
-      });
-    }, { threshold: 0.4 });
+    const io = new IntersectionObserver((es) => es.forEach(e => {
+      if (e.isIntersecting){
+        const el = e.target;
+        const target = parseInt(el.dataset.counter, 10);
+        const suffix = el.dataset.suffix || "";
+        let cur = 0;
+        const step = Math.max(1, Math.round(target / 40));
+        const iv = setInterval(() => { cur += step; if (cur >= target){ cur = target; clearInterval(iv); } el.textContent = cur + suffix; }, 30);
+        io.unobserve(el);
+      }
+    }), { threshold: 0.4 });
     document.querySelectorAll("[data-counter]").forEach(el => io.observe(el));
   },
   initHeader(){
     const h = $("homeHeader");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 40) h.classList.add("scrolled");
-      else h.classList.remove("scrolled");
-    });
+    window.addEventListener("scroll", () => h.classList.toggle("scrolled", window.scrollY > 40));
   }
 };
 
-/* ══════════ STATE ══════════ */
-const State = {
-  user: null, demo: false, data: null,
-  defaults(){
-    return {
-      uid: null, displayName: "Learner", email: null, photoURL: null,
-      progress: {
-        lessons: {}, signsLearned: {}, topics: {}, levelsCompleted: [],
-        currentLevel: 1, activity: {}, events: [],
-        currentLesson: { level: 1, idx: 0 },
-        xp: 0, quests: {}
-      },
-      stats: { attempts: 0, correct: 0, wrong: 0, streak: 0, lastDay: null },
-      achievements: []
-    };
-  },
-  load(){
-    try {
-      const s = localStorage.getItem("imena-state");
-      this.data = s ? JSON.parse(s) : this.defaults();
-    } catch(e){ this.data = this.defaults(); }
-    const p = this.data.progress;
-    if (!p.activity) p.activity = {};
-    if (!p.events) p.events = [];
-    if (!p.currentLesson) p.currentLesson = { level: 1, idx: 0 };
-    if (typeof p.xp !== "number") p.xp = 0;
-    if (!p.quests) p.quests = {};
-    if (!p.lessons) p.lessons = {};
-    if (!p.signsLearned) p.signsLearned = {};
-    if (!p.topics) p.topics = {};
-    if (!p.levelsCompleted) p.levelsCompleted = [];
-    const today = new Date().toDateString();
-    if (this.data.stats.lastDay !== today){
-      const y = new Date(Date.now() - 864e5).toDateString();
-      this.data.stats.streak = (this.data.stats.lastDay === y) ? (this.data.stats.streak + 1) : 1;
-      this.data.stats.lastDay = today;
-    }
-  },
-  save(){
-    localStorage.setItem("imena-state", JSON.stringify(this.data));
-    if (window.FB && window.FB.ready() && this.user && !this.demo){
-      window.FB.save(this.user.uid, this.data);
-    }
-  },
-  addXP(amount, reason){
-    this.data.progress.xp = (this.data.progress.xp || 0) + amount;
-    UI.toast("+" + amount + " XP — " + reason, "ok");
-  },
-  markActivity(){
-    const today = new Date().toISOString().slice(0, 10);
-    this.data.progress.activity[today] = (this.data.progress.activity[today] || 0) + 1;
-  },
-  logEvent(type, text, icon){
-    this.data.progress.events.unshift({
-      type, text, icon: icon || "🎯", when: new Date().toLocaleString()
-    });
-    this.data.progress.events = this.data.progress.events.slice(0, 30);
-  }
-};
-
-/* ══════════ AUTH ══════════ */
 const Auth = {
   waiting: false,
   async waitForFB(){
     if (window.FB && window.FB.ready && window.FB.ready()) return true;
-    for (let i = 0; i < 100; i++){
-      await new Promise(r => setTimeout(r, 40));
-      if (window.FB && window.FB.ready && window.FB.ready()) return true;
-    }
+    for (let i = 0; i < 100; i++){ await new Promise(r => setTimeout(r, 40)); if (window.FB && window.FB.ready && window.FB.ready()) return true; }
     return false;
   },
   async signIn(){
     if (this.waiting) return;
-    this.waiting = true;
-
-    // Guard against file:// before we even try
     if (location.protocol !== "http:" && location.protocol !== "https:"){
-      UI.toast("This page must be served over http:// or https://, not file://. Use GitHub Pages, Vercel, or a local server.", "no");
-      this.waiting = false;
+      alert("This page must be served over http:// or https://, not file://.");
       return;
     }
-
+    this.waiting = true;
     const ok = await this.waitForFB();
-    if (!ok){
-      UI.toast("Firebase is still loading. Please try again in 3 seconds.", "no");
-      this.waiting = false;
-      return;
-    }
-
+    if (!ok){ alert("Firebase is loading. Try again in a moment."); this.waiting = false; return; }
     const btn = $("googleBtn");
-    if (btn){ btn.disabled = true; $("gbtnText").textContent = "Signing in…"; }
-    UI.showSignin("Opening Google sign-in…", "A Google window will appear. Please wait a moment.");
-
+    btn.disabled = true; $("gbtnText").textContent = "Signing in…";
+    $("signin-overlay").classList.add("on");
     try {
       const result = await window.FB.signIn();
       if (result.user){
-        await this.accept(result.user);
-        UI.hideSignin();
-        UI.toast("Welcome, " + (result.user.displayName || "learner") + "!", "ok");
-        Sound.complete();
-      } else {
-        UI.showSignin("Redirecting to Google…", "If the page doesn't redirect, check that popups are allowed for this site.");
+        // Save basic profile for dashboard to pick up quickly, then redirect
+        localStorage.setItem("imena-user-cache", JSON.stringify({
+          uid: result.user.uid,
+          displayName: result.user.displayName,
+          email: result.user.email,
+          photoURL: result.user.photoURL
+        }));
+        window.location.href = "dashboard.html";
       }
     } catch(e){
-      UI.hideSignin();
-      console.error("[Auth] sign-in error:", e);
+      $("signin-overlay").classList.remove("on");
       const code = (e && (e.code || e.message)) || "unknown";
       const lower = String(code).toLowerCase();
-      let msg = "Sign-in failed.";
-      let hint = "";
-      if (lower.includes("unauthorized-domain")){
-        msg = "Domain not authorized.";
-        hint = "Add " + location.hostname + " to Firebase Console → Authentication → Settings → Authorized domains.";
-      } else if (lower.includes("invalid-protocol")){
-        msg = "Page must be served over http(s).";
-        hint = "You are opening the file directly. Use a local server or deploy to GitHub Pages.";
-      } else if (lower.includes("popup-blocked") || lower.includes("popup-closed")){
-        msg = "Popup was blocked or closed.";
-        hint = "Allow popups for " + location.hostname + " and try again.";
-      } else if (lower.includes("operation-not-allowed")){
-        msg = "Google sign-in is disabled.";
-        hint = "Enable Google in Firebase Console → Authentication → Sign-in method.";
-      } else if (lower.includes("network")){
-        msg = "Network error.";
-        hint = "Check your internet connection and try again.";
-      }
-      UI.toast(msg + " " + hint, "no");
+      if (lower.includes("unauthorized-domain")) alert("Domain not authorized. Add " + location.hostname + " to Firebase Console → Authentication → Authorized domains.");
+      else if (lower.includes("popup-blocked") || lower.includes("popup-closed")) alert("Popup was blocked. Allow popups for this site and try again.");
+      else if (lower.includes("operation-not-allowed")) alert("Google sign-in is disabled in Firebase Console.");
+      else if (lower.includes("network")) alert("Network error. Check your internet connection.");
+      else alert("Sign-in failed: " + code);
     } finally {
       this.waiting = false;
-      if (btn){ btn.disabled = false; $("gbtnText").textContent = "Sign in with Google"; }
+      btn.disabled = false;
+      $("gbtnText").textContent = "Sign in with Google";
+      $("signin-overlay").classList.remove("on");
     }
   },
-  async accept(user){
-    State.user = user;
-    State.demo = false;
-    State.load();
-    let remote = null;
-    try { remote = await window.FB.load(user.uid); } catch(e){}
-    if (remote){
-      // Merge intelligently: take max mastery, union lessons/signs, max XP
-      const base = State.defaults();
-      const merged = Object.assign(base, remote);
-      const lp = State.data.progress, rp = remote.progress || {};
-      merged.progress = merged.progress || base.progress;
-      merged.progress.lessons = Object.assign({}, lp.lessons||{}, rp.lessons||{});
-      merged.progress.signsLearned = Object.assign({}, lp.signsLearned||{}, rp.signsLearned||{});
-      const topics = Object.assign({}, lp.topics||{});
-      Object.keys(rp.topics||{}).forEach(k => topics[k] = Math.max(topics[k]||0, rp.topics[k]||0));
-      merged.progress.topics = topics;
-      const lc = new Set([...(lp.levelsCompleted||[]), ...(rp.levelsCompleted||[])]);
-      merged.progress.levelsCompleted = Array.from(lc);
-      merged.progress.xp = Math.max(lp.xp||0, rp.xp||0);
-      merged.progress.activity = Object.assign({}, lp.activity||{}, rp.activity||{});
-      merged.progress.events = (lp.events||[]).length > (rp.events||[]).length ? lp.events : (rp.events||[]);
-      merged.stats = merged.stats || base.stats;
-      merged.stats.streak = Math.max(State.data.stats.streak||0, remote.stats?.streak||0);
-      merged.stats.attempts = Math.max(State.data.stats.attempts||0, remote.stats?.attempts||0);
-      merged.stats.correct = Math.max(State.data.stats.correct||0, remote.stats?.correct||0);
-      State.data = merged;
-      console.log("[Auth] Merged local + remote progress");
+  init(){
+    // If already signed in (redirect result), go straight to dashboard
+    if (window.FB && window.FB.ready()) {
+      window.FB.consumeRedirect().then(u => { if (u) window.location.href = "dashboard.html"; }).catch(()=>{});
     } else {
-      State.data = State.defaults();
-      console.log("[Auth] New user");
+      setTimeout(() => {
+        if (window.FB && window.FB.ready()){
+          window.FB.consumeRedirect().then(u => { if (u) window.location.href = "dashboard.html"; }).catch(()=>{});
+        }
+      }, 1500);
     }
-    State.data.uid = user.uid;
-    State.data.displayName = user.displayName || "Learner";
-    State.data.email = user.email;
-    State.data.photoURL = user.photoURL;
-    State.save();
-    App.open();
-    if (btnReset) btnReset();
-  },
-  signOut(){
-    if (window.SpeechSynthesis) window.speechSynthesis.cancel();
-    if (window.FB && window.FB.ready()) window.FB.signOut();
-    State.user = null;
-    State.demo = false;
-    App.close();
-    UI.toast("Signed out.");
-  },
-  async init(){
-    const ok = await this.waitForFB();
-    if (!ok){ console.warn("[Auth] Firebase never initialised"); return; }
-    try {
-      const u = await window.FB.consumeRedirect();
-      if (u){
-        await this.accept(u);
-        UI.hideSignin();
-        UI.toast("Welcome, " + (u.displayName || "learner") + "!", "ok");
-        Sound.complete();
-      } else {
-        UI.hideSignin();
-      }
-    } catch(e){
-      UI.hideSignin();
-      const code = (e && (e.code || e.message)) || "unknown";
-      console.warn("[Auth] redirect consume error:", code);
-    }
-    window.FB.observe(async (u) => {
-      if (u && !State.user) await Auth.accept(u);
-    });
-  }
-};
-let btnReset = () => {};
-
-/* ══════════ APP ROUTER ══════════ */
-const App = {
-  route: "dashboard",
-  open(){
-    $("home").classList.add("hidden");
-    $("app").classList.remove("hidden");
-    if (window.Scene3D) window.Scene3D.pause();
-    this.render();
-  },
-  close(){
-    $("app").classList.add("hidden");
-    $("home").classList.remove("hidden");
-    if (window.Scene3D) window.Scene3D.resume();
-  },
-  go(route){
-    this.route = route;
-    if (window.SpeechSynthesis) window.speechSynthesis.cancel();
-    document.querySelectorAll(".bottom-nav button").forEach(b =>
-      b.classList.toggle("on", b.dataset.nav === route));
-    document.querySelectorAll(".side-nav button").forEach(b =>
-      b.classList.toggle("on", b.dataset.nav === route));
-    this.render();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  },
-  render(){
-    const main = $("appMain");
-    if (!main) return;
-    if (this.route === "dashboard") main.innerHTML = Dashboard.render();
-    else if (this.route === "levels") main.innerHTML = Levels.render();
-    else if (this.route === "lesson") main.innerHTML = Lesson.renderCurrent();
-    else if (this.route === "signs") main.innerHTML = Signs.render();
-    else if (this.route === "practice") main.innerHTML = Practice.render();
-    $("sideWeak").innerHTML = Dashboard.weakAreasHTML();
-    if (State.data){
-      $("topBadges").innerHTML = '<span class="xp-badge">⚡ ' + (State.data.progress.xp || 0) + ' XP</span>'
-        + '<span class="lvl-badge">⭐ L' + (Math.floor((State.data.progress.xp || 0) / 100) + 1) + '</span>';
-      const av = $("topAvatar");
-      if (State.data.photoURL) av.innerHTML = '<img src="' + esc(State.data.photoURL) + '" alt="">';
-      else av.textContent = (State.data.displayName || "L")[0].toUpperCase();
-      if (State.demo) SyncStatus.local();
-      else if (window.FB && window.FB.ready()) SyncStatus.ok();
-    }
-    document.querySelectorAll("[data-nav]").forEach(b => {
-      b.onclick = () => App.go(b.dataset.nav);
-    });
-    if (this.route === "dashboard"){
-      setTimeout(() => { Heatmap.render(); WeekGoal.render(); Quests.render(); }, 30);
+    // Auto-redirect if already signed in
+    if (window.FB && window.FB.ready()){
+      window.FB.observe(u => { if (u) window.location.href = "dashboard.html"; });
     }
   }
 };
 
-/* ══════════ CONTENT ══════════ */
-const LEVELS = [
-  { id:1, en:"Driving Foundations", topic:"foundations", cls:"t1", icon:"🚗",
-    intro:"What driving really is — a chain of observations and decisions." },
-  { id:2, en:"Road Signs & Markings", topic:"signs", cls:"t2", icon:"🛑",
-    intro:"Read the language of the road: shapes, colours, markings." },
-  { id:3, en:"Traffic Rules", topic:"rules", cls:"t3", icon:"📜",
-    intro:"The core rules that govern safe movement on Rwandan roads." },
-  { id:4, en:"Right of Way & Intersections", topic:"rightofway", cls:"t4", icon:"➡️",
-    intro:"Who goes first, and why — junctions and roundabouts." },
-  { id:5, en:"Vehicle Knowledge & Controls", topic:"vehicle", cls:"t5", icon:"🔧",
-    intro:"Every control, every warning light, every check." },
-  { id:6, en:"Road Users & Responsibilities", topic:"users", cls:"t6", icon:"🚶",
-    intro:"Pedestrians, cyclists, motorcyclists, buses." },
-  { id:7, en:"Road Safety & Defensive Driving", topic:"safety", cls:"t7", icon:"🛡️",
-    intro:"Anticipate. Observe. Decide. Habits that save lives." },
-  { id:8, en:"Real-World Situations", topic:"reallife", cls:"t8", icon:"🌧️",
-    intro:"Rain, night, hills, busy Kigali traffic." },
-  { id:9, en:"Advanced Hazard Awareness", topic:"hazard", cls:"t9", icon:"⚠️",
-    intro:"Spot danger before it becomes a crash." },
-  { id:10, en:"Theory Exam Preparation", topic:"theory", cls:"t10", icon:"📝",
-    intro:"How to prepare for the theory portion of the official process." },
-  { id:11, en:"Practical Driving Preparation", topic:"practical", cls:"t11", icon:"🛠️",
-    intro:"Make your instructor's time count." },
-  { id:12, en:"Final Readiness Assessment", topic:"final", cls:"t12", icon:"🎓",
-    intro:"Are you ready? A comprehensive readiness check." }
-];
-
-const LESSONS = {
-  foundations: [
-    { title: "What driving really is",
-      objective: "Understand driving as a chain of decisions, not a skill.",
-      color: ["#0891b2", "#22d3ee"], heroScene: "city",
-      steps: [
-        { kind: "learn", scene: "city", t: "Driving is a decision, every second",
-          d: "Every moment behind the wheel, you are observing the road, predicting what might happen, deciding what to do, and acting. The vehicle does not decide — you do. The road is a shared space, and every decision you make affects the people around you." },
-        { kind: "learn", scene: "cockpit", t: "The observation chain",
-          d: "Look far ahead. Check mirrors. Scan the sides. Feel the vehicle. The best drivers are not the ones who react fastest — they are the ones who noticed early. Look 12 seconds ahead of your bonnet at all times." },
-        { kind: "tip", t: "Safety tip",
-          d: "A safe driver is not a slow driver. A safe driver is one who has already decided what to do before the situation arrives." },
-        { kind: "mistake", t: "Common beginner mistake",
-          d: "Thinking driving is about controlling the car. It is about reading the road. The car is easy. The road is the challenge." }
-      ],
-      quiz: { q: "What is the safest decision-making order?",
-        opts: ["Act, then think", "Observe then Decide then Act", "Guess and go", "Ignore and hope"], a: 1,
-        why: "Observe first, then decide, then act. Every safe driver follows this rhythm." }
-    },
-    { title: "The road is a shared space",
-      objective: "Understand that every road user has a right to safety.",
-      color: ["#0e7490", "#06b6d4"], heroScene: "crossing",
-      steps: [
-        { kind: "learn", scene: "crossing", t: "You are never alone on the road",
-          d: "Cars, buses, motorcycles (moto taxis), bicycles, pedestrians, animals, and children — all share the same Rwandan road. Your decisions affect every one of them." },
-        { kind: "learn", scene: "city", t: "The most vulnerable deserve the most care",
-          d: "Pedestrians, cyclists and motorcyclists have the least protection. Give them the most space, the most patience, and the most respect." },
-        { kind: "tip", t: "Safety tip",
-          d: "Treat every pedestrian as if they might step into the road. That is how you keep them alive — and yourself out of trouble." }
-      ],
-      quiz: { q: "Who shares the road with you?",
-        opts: ["Only other cars", "Cars, motos, cyclists, pedestrians", "Only buses", "Nobody else"], a: 1,
-        why: "Rwandan roads carry cars, motos, bicycles, pedestrians and more." }
-    },
-    { title: "Your first responsibilities",
-      objective: "Learn the four responsibilities you accept when you get behind the wheel.",
-      color: ["#155e75", "#22d3ee"], heroScene: "cockpit",
-      steps: [
-        { kind: "learn", scene: "cockpit", t: "Four responsibilities",
-          d: "1) Be licensed and fit to drive. 2) Keep your vehicle safe and roadworthy. 3) Obey the rules of the road. 4) Protect the more vulnerable road users around you." },
-        { kind: "tip", t: "Safety tip",
-          d: "If you are tired, unwell, or emotional, you are not fit to drive. Postpone the trip. No destination is worth a life." },
-        { kind: "practice", t: "Try it yourself",
-          d: "Before you start the engine tomorrow, say the four responsibilities out loud. Say them every trip for a week and they become habit." }
-      ],
-      quiz: { q: "If you are very tired you should:",
-        opts: ["Drive faster", "Postpone the trip", "Drink coffee and continue", "Ignore it"], a: 1,
-        why: "Fatigue is as dangerous as alcohol." }
-    },
-    { title: "Understanding the road environment",
-      objective: "Recognise the different environments you will drive in.",
-      color: ["#0369a1", "#38bdf8"], heroScene: "highway",
-      steps: [
-        { kind: "learn", scene: "highway", t: "Environments differ",
-          d: "City roads, residential streets, hills, rural highways and market areas each demand different speeds and attention. The safe speed is the one that matches the environment." },
-        { kind: "learn", scene: "school", t: "Special zones need extra care",
-          d: "Schools, markets, hospitals, and residential areas have unique hazards. Children dart out. Elderly pedestrians walk slowly. Shoppers step into the road without looking." },
-        { kind: "tip", t: "Safety tip",
-          d: "If you are unsure of the environment, slow down. Slowness costs seconds. Speed can cost lives." }
-      ],
-      quiz: { q: "City roads require:",
-        opts: ["More speed", "More observation and lower speeds", "Ignoring pedestrians", "Using the horn constantly"], a: 1,
-        why: "City roads are dense with pedestrians and vehicles." }
-    },
-    { title: "Your first pre-drive routine",
-      objective: "Know the routine you run every single time you start the engine.",
-      color: ["#0891b2", "#22d3ee"], heroScene: "controls",
-      steps: [
-        { kind: "learn", scene: "controls", t: "The pre-drive routine",
-          d: "1) Adjust your seat. 2) Adjust mirrors. 3) Fasten seat belt. 4) Check controls. 5) Observe surroundings. Do this every single time — even for a two-minute trip." },
-        { kind: "practice", t: "Try it today",
-          d: "Sit in a parked car. Close your eyes. Reach for each control in order. Then open your eyes and confirm. Repeat five times." }
-      ],
-      quiz: { q: "First step before driving:",
-        opts: ["Start the engine", "Adjust seat, mirrors, belt", "Turn on the radio", "Sound the horn"], a: 1,
-        why: "Seat, mirrors, belt, controls. Every time. No exceptions." }
-    }
-  ],
-  signs: [
-    { title: "Reading signs correctly",
-      objective: "Signs are grouped by shape and colour — learn the pattern.",
-      color: ["#b91c1c", "#f97316"], heroScene: "signs",
-      steps: [
-        { kind: "learn", scene: "signs", t: "Shape tells you the category",
-          d: "Circles give orders. Triangles warn. Rectangles inform. Octagons stop. Diamonds give priority. Read the shape first — the meaning becomes obvious." },
-        { kind: "learn", scene: "signs", t: "Colour reinforces the shape",
-          d: "Red means stop or prohibit. Blue means mandatory. Yellow or white triangles warn. Green or blue rectangles inform." },
-        { kind: "tip", t: "Safety tip",
-          d: "When you see a sign you do not recognise, slow down. That is always the right response." }
-      ],
-      quiz: { q: "Triangle-shaped signs usually:",
-        opts: ["Warn of a hazard", "Give orders", "Inform", "Give priority"], a: 0,
-        why: "Triangles warn. Circles order. Rectangles inform." }
-    },
-    { title: "Warning signs",
-      objective: "Recognise the yellow/red triangle family.",
-      color: ["#dc2626", "#ef4444"], heroScene: "school",
-      steps: [
-        { kind: "learn", scene: "school", t: "What warning signs look like",
-          d: "Red-bordered triangles with a yellow or white interior, or a black symbol on yellow. They tell you about a hazard ahead: bends, crossings, schools, road works." },
-        { kind: "learn", scene: "crossing", t: "The correct response",
-          d: "Warning signs are not orders — they are predictions. Slow down. Increase your observation. Be ready for something unexpected." }
-      ],
-      quiz: { q: "At a warning sign, you should:",
-        opts: ["Speed up", "Slow and increase observation", "Ignore if you know the road", "Sound the horn"], a: 1,
-        why: "Warning signs are the road telling you to look more carefully." }
-    }
-  ],
-  rules: [
-    { title: "The core rules of the road",
-      objective: "The fundamental rules every Rwandan driver must know.",
-      color: ["#2563eb", "#3b82f6"], heroScene: "city",
-      steps: [
-        { kind: "learn", scene: "city", t: "Keep left, overtake right",
-          d: "In Rwanda, drive on the left side of the road. Overtake on the right. Signal before every turn or lane change — always." },
-        { kind: "learn", scene: "highway", t: "Speed is always contextual",
-          d: "There is no single safe speed. Your safe speed depends on the road, the weather, the traffic, and your visibility. Drive to the conditions, not to a number." }
-      ],
-      quiz: { q: "You should drive on which side?",
-        opts: ["Right", "Left", "Either side", "Middle"], a: 1,
-        why: "Rwanda drives on the left." }
-    },
-    { title: "Traffic lights and signals",
-      objective: "Interpret lights and police signals confidently.",
-      color: ["#1d4ed8", "#60a5fa"], heroScene: "intersection",
-      steps: [
-        { kind: "learn", scene: "intersection", t: "Red, amber, green — no ambiguity",
-          d: "Red = stop. Amber = prepare to stop. Green = proceed, but only when you have checked the junction is clear." },
-        { kind: "learn", scene: "police", t: "Police signals override lights",
-          d: "If a police officer is directing traffic, their signal takes priority over traffic lights and signs." }
-      ],
-      quiz: { q: "Amber light means:",
-        opts: ["Speed up", "Prepare to stop unless unsafe", "Always continue", "Sound the horn"], a: 1,
-        why: "Amber is a warning." }
-    }
-  ],
-  rightofway: [
-    { title: "Right of way fundamentals",
-      objective: "Who goes first, and why.",
-      color: ["#7c3aed", "#a855f7"], heroScene: "intersection",
-      steps: [
-        { kind: "learn", scene: "intersection", t: "Right of way is not a privilege",
-          d: "Right of way exists to make traffic predictable. Signs, markings and signals tell you who goes first. Never assume. Observe." }
-      ],
-      quiz: { q: "At an unmarked crossroads:",
-        opts: ["You always go first", "Slow and be ready to give way", "Speed up", "Sound the horn"], a: 1,
-        why: "Unmarked junctions require extra caution." }
-    },
-    { title: "Roundabouts",
-      objective: "Enter, navigate, and exit a roundabout safely.",
-      color: ["#6d28d9", "#c084fc"], heroScene: "roundabout",
-      steps: [
-        { kind: "learn", scene: "roundabout", t: "Give way to the roundabout",
-          d: "Traffic already on the roundabout has priority. Enter only when there is a safe gap. Signal before exiting." }
-      ],
-      quiz: { q: "In a roundabout you give way to:",
-        opts: ["Traffic already on it", "Traffic behind you", "Cyclists only", "Nobody"], a: 0,
-        why: "The roundabout has priority." }
-    }
-  ],
-  vehicle: [
-    { title: "The controls you must know",
-      objective: "Every control, what it does, and when to use it.",
-      color: ["#047857", "#22c55e"], heroScene: "controls",
-      steps: [
-        { kind: "learn", scene: "controls", t: "The essential controls",
-          d: "Steering wheel for direction. Accelerator for speed. Brake for slowing. Clutch to engage. Gears to match power to speed. Indicators to signal. Mirrors to observe. Handbrake to hold when parked." },
-        { kind: "learn", scene: "cockpit", t: "Reading the dashboard",
-          d: "Your dashboard tells you: speed, gear position, engine RPM, fuel level, and warning lights." }
-      ],
-      quiz: { q: "First step before driving:",
-        opts: ["Start the engine", "Adjust seat, mirrors, belt", "Turn on the radio", "Sound the horn"], a: 1,
-        why: "Set yourself up before you set off." }
-    }
-  ],
-  users: [
-    { title: "Vulnerable road users",
-      objective: "Protect pedestrians, cyclists, and motorcyclists.",
-      color: ["#be185d", "#ec4899"], heroScene: "crossing",
-      steps: [
-        { kind: "learn", scene: "crossing", t: "Who is most at risk",
-          d: "Pedestrians, cyclists, and motorcyclists have little to no protection. As a car driver, you have a duty of care. Give them space." },
-        { kind: "learn", scene: "school", t: "Children and elderly",
-          d: "Children may dart into the road. Elderly pedestrians may be slower than you expect." }
-      ],
-      quiz: { q: "Near a school you should:",
-        opts: ["Drive normally", "Reduce speed and watch for children", "Sound the horn", "Speed up"], a: 1,
-        why: "Children are unpredictable." }
-    }
-  ],
-  safety: [
-    { title: "Defensive driving",
-      objective: "Anticipate. Observe. Decide. The habits that save lives.",
-      color: ["#b45309", "#facc15"], heroScene: "city",
-      steps: [
-        { kind: "learn", scene: "city", t: "What defensive driving means",
-          d: "Defensive driving assumes other road users may make mistakes. You drive for yourself, and for the driver who runs a red light, the pedestrian who steps out, the moto that swerves." }
-      ],
-      quiz: { q: "Defensive driving means:",
-        opts: ["Driving slowly", "Anticipating other people's mistakes", "Using the horn", "Avoiding all trips"], a: 1,
-        why: "You assume others may make mistakes and plan for them." }
-    }
-  ],
-  reallife: [
-    { title: "Driving in real Rwandan conditions",
-      objective: "Rain, hills, night, busy Kigali traffic.",
-      color: ["#0d9488", "#5eead4"], heroScene: "rain",
-      steps: [
-        { kind: "learn", scene: "rain", t: "Adapt to the conditions",
-          d: "Wet roads need longer stopping distances. Steep hills need correct gear selection. Night driving needs lower speed and higher alertness." }
-      ],
-      quiz: { q: "In heavy rain you should:",
-        opts: ["Drive normally", "Reduce speed and increase distance", "Use hazard lights", "Turn off wipers"], a: 1,
-        why: "Wet roads double stopping distance." }
-    },
-    { title: "Night driving",
-      objective: "See and be seen after dark.",
-      color: ["#0f766e", "#14b8a6"], heroScene: "night",
-      steps: [
-        { kind: "learn", scene: "night", t: "Lower speed, higher alertness",
-          d: "At night your visibility is dramatically reduced. Slow down. Use headlights correctly. Avoid staring at oncoming lights." }
-      ],
-      quiz: { q: "At night you should:",
-        opts: ["Drive faster", "Slow down and increase distance", "Use high beams always", "Ignore markings"], a: 1,
-        why: "You cannot see as far at night." }
-    }
-  ],
-  hazard: [
-    { title: "Hazard awareness and scanning",
-      objective: "See danger before it becomes a crash.",
-      color: ["#991b1b", "#dc2626"], heroScene: "city",
-      steps: [
-        { kind: "learn", scene: "city", t: "Scan, do not stare",
-          d: "Move your eyes constantly: far ahead, near, mirrors, instruments. A driver who stares at one point will miss everything else." },
-        { kind: "learn", scene: "crossing", t: "Anticipate the likely hazard",
-          d: "A parked car with a driver inside — expect the door to open. A child on the pavement — expect them to run. A bus at a stop — expect pedestrians stepping out." }
-      ],
-      quiz: { q: "Hazard perception means:",
-        opts: ["Driving faster", "Spotting potential dangers early", "Using the horn", "Parking carefully"], a: 1,
-        why: "Hazard perception is anticipating danger before it becomes an emergency." }
-    }
-  ],
-  theory: [
-    { title: "Preparing for the theory examination",
-      objective: "Systematic preparation that actually works.",
-      color: ["#4338ca", "#818cf8"], heroScene: "cockpit",
-      steps: [
-        { kind: "learn", scene: "cockpit", t: "Practice, do not memorise",
-          d: "The best preparation is repeated practice with immediate feedback on every wrong answer." },
-        { kind: "tip", t: "Study tip",
-          d: "Do a little every day. Fifteen focused minutes daily beats three hours on Sunday." }
-      ],
-      quiz: { q: "Best way to prepare for the theory exam:",
-        opts: ["Memorise the night before", "Practice with feedback, daily", "Watch videos only", "Ask a friend"], a: 1,
-        why: "Daily practice with feedback beats cramming." }
-    }
-  ],
-  practical: [
-    { title: "Preparing for practical driving",
-      objective: "Make your instructor's time count.",
-      color: ["#c2410c", "#fb923c"], heroScene: "cockpit",
-      steps: [
-        { kind: "learn", scene: "cockpit", t: "Understand before you drive",
-          d: "You cannot learn to drive from a book — but you can arrive at your first practical lesson already knowing the vehicle layout, the controls, and the rules." }
-      ],
-      quiz: { q: "The best use of practical lessons is:",
-        opts: ["Learning signs", "Practising driving with the instructor", "Reading rules", "Watching videos"], a: 1,
-        why: "Practical lessons are for driving." }
-    }
-  ],
-  final: [
-    { title: "Final readiness check",
-      objective: "Are you ready for the official process?",
-      color: ["#166534", "#22c55e"], heroScene: "highway",
-      steps: [
-        { kind: "learn", scene: "highway", t: "What ready means",
-          d: "You are ready when you can explain — not just recall — the rules, recognise every common road sign, describe safe decision-making in a real scenario, and demonstrate that understanding in a mock examination." },
-        { kind: "tip", t: "Next step",
-          d: "When your mock exam scores consistently above 85 percent, you are ready to move to the official process with a qualified instructor." }
-      ],
-      quiz: { q: "You are ready for the official process when:",
-        opts: ["You feel like it", "Your mock scores are consistently high", "A friend says so", "You memorised a book"], a: 1,
-        why: "Consistent high scores are a strong sign of readiness." }
-    }
-  ]
-};
-
-// Fill gaps to 5 lessons per level
-LEVELS.forEach(lvl => {
-  if (!LESSONS[lvl.topic]) LESSONS[lvl.topic] = [];
-  while (LESSONS[lvl.topic].length < 5){
-    const idx = LESSONS[lvl.topic].length + 1;
-    LESSONS[lvl.topic].push({
-      title: lvl.en + " — Lesson " + idx,
-      objective: "Continue building your understanding of " + lvl.en.toLowerCase() + ".",
-      color: ["#0891b2", "#22d3ee"], heroScene: "city",
-      steps: [
-        { kind: "learn", scene: "city", t: "Applying what you know",
-          d: "This lesson builds on the fundamentals of " + lvl.en + ". Focus on understanding why the correct action is correct." },
-        { kind: "tip", t: "Safety tip",
-          d: "Understanding beats memorisation." }
-      ],
-      quiz: { q: "The main goal of this lesson is:",
-        opts: ["Memorise rules", "Understand why rules exist", "Pass a test", "Drive fast"], a: 1,
-        why: "Understanding the WHY makes the rules stick." }
-    });
-  }
-});
-
-const SIGNS = [
-  { id:"stop", en:"STOP", cat:"prohibitory", shape:"octagon", color:"#ef4444", text:"STOP" },
-  { id:"yield", en:"Give Way", cat:"priority", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"noentry", en:"No Entry", cat:"prohibitory", shape:"circle", color:"#ef4444", text:"X" },
-  { id:"speed50", en:"Speed Limit 50", cat:"prohibitory", shape:"circle", color:"#f8fafc", text:"50" },
-  { id:"noparking", en:"No Parking", cat:"prohibitory", shape:"circle", color:"#3b82f6", text:"P" },
-  { id:"pedestrian", en:"Pedestrian Crossing", cat:"warning", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"school", en:"School Zone", cat:"warning", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"roundabout", en:"Roundabout Ahead", cat:"warning", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"trafficlight", en:"Traffic Light Ahead", cat:"warning", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"roadworks", en:"Road Works", cat:"temporary", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"slippery", en:"Slippery Road", cat:"warning", shape:"triangle", color:"#f8fafc", text:"" },
-  { id:"oneway", en:"One-Way", cat:"information", shape:"rect", color:"#3b82f6", text:"→" },
-  { id:"parking", en:"Parking", cat:"information", shape:"rect", color:"#3b82f6", text:"P" },
-  { id:"mandatory_r", en:"Turn Right", cat:"mandatory", shape:"circle", color:"#3b82f6", text:"→" },
-  { id:"mandatory_l", en:"Turn Left", cat:"mandatory", shape:"circle", color:"#3b82f6", text:"←" },
-  { id:"no_overtake", en:"No Overtaking", cat:"prohibitory", shape:"circle", color:"#f8fafc", text:"⇄" }
-];
-
-const QUESTIONS = [
-  // foundations
-  { topic:"foundations", q:"What is the safest decision-making order when driving?", opts:["Act, then think","Observe then Decide then Act","Guess and go","Ignore and hope"], a:1, why:"Observe first, then decide, then act." },
-  { topic:"foundations", q:"Who shares the road with you?", opts:["Only other cars","Cars, motos, cyclists, pedestrians and more","Only buses","Nobody else"], a:1, why:"Rwandan roads carry many types of road users." },
-  { topic:"foundations", q:"If you are very tired you should:", opts:["Drive faster","Postpone the trip","Drink coffee and continue","Ignore it"], a:1, why:"Fatigue is as dangerous as alcohol." },
-  { topic:"foundations", q:"City roads require:", opts:["More speed","More observation and lower speeds","Ignoring pedestrians","Using the horn constantly"], a:1, why:"City roads are dense. More observation." },
-  { topic:"foundations", q:"First step before driving:", opts:["Start the engine","Adjust seat, mirrors, belt","Turn on the radio","Sound the horn"], a:1, why:"Seat, mirrors, belt, controls. Every time." },
-  { topic:"foundations", q:"The most vulnerable road users are:", opts:["Bus drivers","Pedestrians, cyclists and motorcyclists","Truck drivers","Other car drivers"], a:1, why:"Pedestrians, cyclists and motorcyclists have the least protection." },
-  { topic:"foundations", q:"Driving is mainly about:", opts:["Controlling the car","Reading the road and deciding","Driving fast","Owning an expensive car"], a:1, why:"The car is easy. The road is the challenge." },
-  // signs
-  { topic:"signs", q:"What does a red octagonal sign mean?", opts:["STOP","Give Way","No Entry","Yield"], a:0, why:"The octagon is reserved for STOP." },
-  { topic:"signs", q:"A red triangle sign usually means:", opts:["Warning","Mandatory","Information","Priority"], a:0, why:"Red-bordered triangles warn of a hazard." },
-  { topic:"signs", q:"A blue circle with a white arrow means:", opts:["A warning","A mandatory direction","Information","A prohibition"], a:1, why:"Blue circles are mandatory directions." },
-  { topic:"signs", q:"A red circle with a diagonal bar means:", opts:["You must do something","You must not do something","Warning","Information"], a:1, why:"Red circle + diagonal bar = prohibited." },
-  { topic:"signs", q:"A yellow diamond sign means:", opts:["Stop","You have priority","Warning","Information"], a:1, why:"Yellow diamonds give priority." },
-  // rightofway
-  { topic:"rightofway", q:"At a give-way sign, you should:", opts:["Slow and prepare to stop","Speed up","Sound the horn and continue","Ignore it"], a:0, why:"Give-way means you must be ready to stop." },
-  { topic:"rightofway", q:"At an unmarked crossroads, you should:", opts:["Slow and be ready to give way","Always proceed first","Sound the horn","Accelerate"], a:0, why:"Unmarked junctions need extra caution." },
-  { topic:"rightofway", q:"In a roundabout you give way to:", opts:["Traffic already on the roundabout","Traffic behind you","Cyclists only","Nobody"], a:0, why:"The roundabout has priority." },
-  // rules
-  { topic:"rules", q:"A red traffic light means:", opts:["Stop","Go if clear","Slow down","Sound the horn"], a:0, why:"Red means stop." },
-  { topic:"rules", q:"An amber light means:", opts:["Prepare to stop unless unsafe","Speed up","Always continue","Ignore if no police"], a:0, why:"Amber warns you to stop unless unsafe." },
-  { topic:"rules", q:"Overtaking is unsafe when:", opts:["You cannot see far enough ahead","The road is straight","You are on a highway","You have time"], a:0, why:"Never overtake unless you can see the whole manoeuvre through safely." },
-  { topic:"rules", q:"You should drive on which side in Rwanda?", opts:["Right","Left","Either side","Middle"], a:1, why:"Rwanda drives on the left." },
-  { topic:"rules", q:"The three-second rule helps you:", opts:["Time traffic lights","Keep a safe following distance","Judge speed limits","Park"], a:1, why:"Three seconds of following distance gives you time to react." },
-  { topic:"rules", q:"The correct order before a manoeuvre:", opts:["Mirror, Signal, Manoeuvre","Signal, Mirror, Manoeuvre","Accelerate, Mirror, Manoeuvre","Horn, Mirror, Move"], a:0, why:"Mirror-Signal-Manoeuvre is the universal routine." },
-  // vehicle
-  { topic:"vehicle", q:"The brake pedal is used to:", opts:["Slow or stop the vehicle","Increase speed","Change gear","Signal"], a:0, why:"Brakes slow or stop." },
-  { topic:"vehicle", q:"Before driving, mirrors should be:", opts:["Adjusted for clear view","Removed","Turned inward","Covered"], a:0, why:"Mirrors must be adjusted every trip." },
-  { topic:"vehicle", q:"The steering wheel controls:", opts:["Speed","Direction","Braking","Signalling"], a:1, why:"The steering wheel controls direction." },
-  // safety
-  { topic:"safety", q:"A seat belt should be worn by:", opts:["All occupants","Only the driver","Only on long trips","Only on highways"], a:0, why:"Every occupant. Every trip." },
-  { topic:"safety", q:"Following distance should increase when:", opts:["Roads are wet or visibility is poor","You are in a hurry","Following a bus","It is sunny"], a:0, why:"Rain doubles stopping distance." },
-  { topic:"safety", q:"Defensive driving means:", opts:["Driving slowly","Anticipating other people's mistakes","Using the horn","Avoiding all trips"], a:1, why:"You assume others may make mistakes." },
-  // hazard
-  { topic:"hazard", q:"Hazard perception means:", opts:["Spotting potential dangers early","Driving faster","Horn usage","Parking awareness"], a:0, why:"Anticipating danger before it becomes an emergency." },
-  { topic:"hazard", q:"You should move your eyes when driving:", opts:["Never","Constantly — far, near, mirrors, sides","Only when changing lanes","Only in rain"], a:1, why:"Constant eye movement keeps you aware." },
-  // pedestrians
-  { topic:"pedestrians", q:"If a pedestrian is on a crossing, you should:", opts:["Stop and give way","Pass quickly","Sound the horn","Pass closely"], a:0, why:"Pedestrians on crossings have right of way." },
-  { topic:"pedestrians", q:"Near a school you should:", opts:["Drive normally","Reduce speed and watch for children","Sound the horn","Speed up"], a:1, why:"Children are unpredictable." },
-  // roundabouts
-  { topic:"roundabouts", q:"When approaching a roundabout, you must:", opts:["Speed up","Give way to traffic already on the roundabout","Sound horn and go","Stop for 3 seconds"], a:1, why:"Roundabout traffic has priority." },
-  // users
-  { topic:"users", q:"Moto taxis are especially vulnerable because:", opts:["They ride fast","They have no protection","They ignore rules","They carry passengers"], a:1, why:"Motorcyclists have little protection." },
-  { topic:"users", q:"When passing cyclists you should:", opts:["Pass closely","Pass quickly","Give them plenty of space","Sound the horn"], a:2, why:"Cyclists can be unstable." },
-  // reallife
-  { topic:"reallife", q:"In heavy rain you should:", opts:["Drive normally","Reduce speed and increase distance","Use hazard lights continuously","Turn off wipers"], a:1, why:"Wet roads are twice as long to stop on." },
-  { topic:"reallife", q:"At night you should:", opts:["Drive faster","Slow down and increase distance","Use high beams always","Ignore markings"], a:1, why:"You cannot see as far at night." },
-  // theory
-  { topic:"theory", q:"Best way to prepare for the theory exam:", opts:["Memorise the night before","Practice with feedback, daily","Watch videos only","Ask a friend"], a:1, why:"Daily practice beats cramming." },
-  // practical
-  { topic:"practical", q:"The best use of practical lessons is:", opts:["Learning signs","Practising driving with the instructor","Reading rules","Watching videos"], a:1, why:"Practical lessons are for driving." },
-  // final
-  { topic:"final", q:"You are ready for the official process when:", opts:["You feel like it","Your mock scores are consistently high","A friend says so","You memorised a book"], a:1, why:"Consistent high scores are a strong sign." }
-];
-
-/* ══════════ SCENE LIBRARY ══════════ */
-const SCENE = {
-  city: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sk1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#87ceeb"/><stop offset="1" stop-color="#2d4a6e"/></linearGradient></defs><rect width="640" height="300" fill="url(#sk1)"/><circle cx="520" cy="60" r="35" fill="#fde68a" opacity=".85"/><g fill="#2d3644"><rect x="0" y="140" width="90" height="110"/><rect x="95" y="120" width="60" height="130"/><rect x="160" y="150" width="80" height="100"/><rect x="245" y="130" width="55" height="120"/><rect x="305" y="160" width="70" height="90"/><rect x="380" y="125" width="65" height="125"/><rect x="450" y="150" width="80" height="100"/><rect x="535" y="135" width="105" height="115"/></g><g fill="#fbbf24" opacity=".9"><rect x="15" y="160" width="12" height="14"/><rect x="40" y="160" width="12" height="14"/><rect x="110" y="145" width="12" height="14"/><rect x="180" y="170" width="14" height="16"/><rect x="260" y="150" width="12" height="14"/><rect x="395" y="145" width="12" height="14"/></g><rect y="250" width="640" height="50" fill="#334155"/><path d="M260 250 L380 250 L440 300 L200 300 Z" fill="#0f172a"/><g stroke="#facc15" stroke-width="3" stroke-dasharray="8 8"><line x1="320" y1="252" x2="320" y2="300"/></g><g transform="translate(180,258)"><rect width="60" height="22" rx="5" fill="#0ea5e9"/><circle cx="14" cy="24" r="6" fill="#111"/><circle cx="46" cy="24" r="6" fill="#111"/></g><g transform="translate(420,262)"><rect width="55" height="20" rx="5" fill="#ef4444"/><circle cx="12" cy="22" r="5" fill="#111"/><circle cx="43" cy="22" r="5" fill="#111"/></g></svg>`,
-
-  cockpit: () => `<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg"><rect y="0" width="640" height="220" fill="#5ea0d0"/><path d="M180 220 L460 220 L640 320 L0 320 Z" fill="#1e293b"/><path d="M240 220 L400 220 L500 320 L140 320 Z" fill="#0f172a"/><g stroke="#facc15" stroke-width="4" stroke-dasharray="20 15"><line x1="320" y1="225" x2="320" y2="320"/></g><rect y="220" width="640" height="100" fill="#0a0f18"/><ellipse cx="320" cy="290" rx="130" ry="60" fill="none" stroke="#1e293b" stroke-width="18"/><circle cx="320" cy="290" r="22" fill="#0a0f18" stroke="#22d3ee" stroke-width="2"/><g transform="translate(90,270)"><circle r="38" fill="#0a0f18" stroke="#2d3644" stroke-width="3"/><text y="6" text-anchor="middle" fill="#22d3ee" font-size="18" font-weight="800">60</text></g><g transform="translate(550,270)"><circle r="38" fill="#0a0f18" stroke="#2d3644" stroke-width="3"/><text y="-6" text-anchor="middle" fill="#facc15" font-size="14" font-weight="800">3</text><text y="12" text-anchor="middle" fill="#7b88a8" font-size="9">GEAR</text></g></svg>`,
-
-  signs: () => `<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="320" fill="#0e1526"/><g transform="translate(80,90)"><polygon points="0,-45 -45,45 45,45" fill="#f8fafc" stroke="#b91c1c" stroke-width="4"/><text y="35" text-anchor="middle" fill="#b91c1c" font-size="48" font-weight="800">!</text><text y="90" text-anchor="middle" fill="#7b88a8" font-size="11" font-weight="700">WARNING</text></g><g transform="translate(240,90)"><circle r="45" fill="#ef4444" stroke="#0b1220" stroke-width="3"/><text y="12" text-anchor="middle" fill="#fff" font-size="42" font-weight="800">X</text><text y="90" text-anchor="middle" fill="#7b88a8" font-size="11" font-weight="700">PROHIBITED</text></g><g transform="translate(400,90)"><circle r="45" fill="#3b82f6" stroke="#0b1220" stroke-width="3"/><text y="15" text-anchor="middle" fill="#fff" font-size="42" font-weight="800">→</text><text y="90" text-anchor="middle" fill="#7b88a8" font-size="11" font-weight="700">MANDATORY</text></g><g transform="translate(560,90)"><polygon points="0,-45 45,0 0,45 -45,0" fill="#facc15" stroke="#0b1220" stroke-width="3"/><text y="90" text-anchor="middle" fill="#7b88a8" font-size="11" font-weight="700">PRIORITY</text></g><g transform="translate(160,230)"><polygon points="-30,-42 30,-42 42,-30 42,30 30,42 -30,42 -42,30 -42,-30" fill="#ef4444" stroke="#0b1220"/><text y="6" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">STOP</text></g><g transform="translate(400,230)"><rect x="-55" y="-32" width="110" height="64" rx="6" fill="#3b82f6" stroke="#0b1220"/><text y="10" text-anchor="middle" fill="#fff" font-size="32" font-weight="800">P</text></g></svg>`,
-
-  controls: () => `<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="320" fill="#1a1f2e"/><g transform="translate(200,160)"><ellipse rx="80" ry="45" fill="none" stroke="#222" stroke-width="14"/><ellipse rx="80" ry="45" fill="none" stroke="#3a4152" stroke-width="8"/><circle r="14" fill="#222" stroke="#22d3ee" stroke-width="2"/><text y="60" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="700">STEERING WHEEL</text></g><g transform="translate(440,220)"><rect x="-60" y="-20" width="34" height="60" rx="4" fill="#22c55e"/><rect x="-16" y="-20" width="34" height="60" rx="4" fill="#ef4444"/><rect x="28" y="-20" width="24" height="60" rx="4" fill="#a855f7"/><text x="-43" y="55" text-anchor="middle" fill="#4ade80" font-size="9">ACCEL</text><text x="1" y="55" text-anchor="middle" fill="#fca5a5" font-size="9">BRAKE</text><text x="40" y="55" text-anchor="middle" fill="#d8b4fe" font-size="9">CLUTCH</text></g><g transform="translate(440,110)"><rect x="-4" y="-40" width="8" height="60" rx="4" fill="#666"/><circle r="14" fill="#ef4444"/><text y="4" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">1-5</text></g></svg>`,
-
-  roundabout: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#0e1526"/><rect x="0" y="130" width="190" height="40" fill="#334155"/><rect x="450" y="130" width="190" height="40" fill="#334155"/><rect x="300" y="0" width="40" height="110" fill="#334155"/><rect x="300" y="190" width="40" height="110" fill="#334155"/><circle cx="320" cy="150" r="80" fill="#334155"/><circle cx="320" cy="150" r="60" fill="#0e1526" stroke="#22c55e" stroke-width="3"/><g transform="translate(320,120)"><circle cy="-6" r="16" fill="#22c55e"/></g><path d="M 320 60 A 90 90 0 0 1 410 150" fill="none" stroke="#67e8f9" stroke-width="4"/><text x="320" y="285" text-anchor="middle" fill="#67e8f9" font-size="12" font-weight="700">GIVE WAY TO THE ROUNDABOUT</text></svg>`,
-
-  crossing: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#87ceeb"/><rect y="200" width="640" height="20" fill="#9a958c"/><rect y="220" width="640" height="80" fill="#334155"/><g fill="#f8fafc"><rect x="220" y="220" width="30" height="80"/><rect x="270" y="220" width="30" height="80"/><rect x="320" y="220" width="30" height="80"/><rect x="370" y="220" width="30" height="80"/></g><g transform="translate(280,175)"><circle r="8" fill="#fbbf24"/><rect x="-6" y="8" width="12" height="26" rx="3" fill="#ef4444"/><rect x="-10" y="34" width="6" height="16" fill="#1e293b"/><rect x="4" y="34" width="6" height="16" fill="#1e293b"/></g><g transform="translate(340,168)"><circle r="7" fill="#fed7aa"/><rect x="-5" y="7" width="10" height="22" rx="3" fill="#22d3ee"/></g><text x="320" y="30" text-anchor="middle" fill="#1e40af" font-size="14" font-weight="700">PEDESTRIANS HAVE PRIORITY</text></svg>`,
-
-  intersection: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#1e293b"/><rect y="100" width="640" height="100" fill="#334155"/><rect x="270" width="100" height="300" fill="#334155"/><line x1="0" y1="150" x2="270" y2="150" stroke="#facc15" stroke-width="3" stroke-dasharray="12 10"/><line x1="370" y1="150" x2="640" y2="150" stroke="#facc15" stroke-width="3" stroke-dasharray="12 10"/><g transform="translate(80,60)"><rect x="-3" y="20" width="6" height="60" fill="#222"/><rect x="-14" width="28" height="48" rx="6" fill="#0a1016"/><circle cy="12" r="6" fill="#450a0a"/><circle cy="24" r="6" fill="#422006"/><circle cy="36" r="6" fill="#22c55e"/></g><g transform="translate(560,60)"><rect x="-3" y="20" width="6" height="60" fill="#222"/><rect x="-14" width="28" height="48" rx="6" fill="#0a1016"/><circle cy="12" r="6" fill="#dc2626"/><circle cy="24" r="6" fill="#422006"/><circle cy="36" r="6" fill="#052e16"/></g><text x="320" y="40" text-anchor="middle" fill="#67e8f9" font-size="14" font-weight="700">OBSERVE ALL DIRECTIONS</text></svg>`,
-
-  night: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#05070d"/><g fill="#fff" opacity=".8"><circle cx="60" cy="40" r="1.5"/><circle cx="140" cy="70" r="1"/><circle cx="210" cy="30" r="1.5"/><circle cx="400" cy="50" r="1"/><circle cx="580" cy="40" r="1"/></g><circle cx="530" cy="60" r="18" fill="#fef3c7"/><path d="M240 220 L400 220 L640 300 L0 300 Z" fill="#0a0f18"/><g stroke="#facc15" stroke-width="3" stroke-dasharray="14 12" opacity=".7"><line x1="320" y1="225" x2="320" y2="295"/></g><g transform="translate(240,240)"><rect width="80" height="26" rx="6" fill="#1e293b"/><circle cx="18" cy="28" r="7" fill="#111"/><circle cx="62" cy="28" r="7" fill="#111"/><ellipse cx="-45" cy="14" rx="60" ry="25" fill="#fef3c7" opacity=".4"/></g><text x="320" y="30" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">NIGHT: LOWER SPEED, HIGHER ALERTNESS</text></svg>`,
-
-  rain: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#334155"/><g stroke="#94a3b8" stroke-width="2" opacity=".55"><line x1="40" y1="20" x2="30" y2="60"/><line x1="120" y1="10" x2="110" y2="50"/><line x1="200" y1="30" x2="190" y2="70"/><line x1="280" y1="15" x2="270" y2="55"/><line x1="360" y1="25" x2="350" y2="65"/><line x1="440" y1="10" x2="430" y2="50"/><line x1="520" y1="30" x2="510" y2="70"/><line x1="600" y1="20" x2="590" y2="60"/></g><path d="M240 200 L400 200 L640 300 L0 300 Z" fill="#1e293b"/><g stroke="#facc15" stroke-width="3" stroke-dasharray="14 12" opacity=".6"><line x1="320" y1="205" x2="320" y2="295"/></g><text x="320" y="278" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">SLOW DOWN — STOPPING DOUBLES IN RAIN</text></svg>`,
-
-  school: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#87ceeb"/><rect x="180" y="100" width="280" height="130" fill="#c98a5a"/><polygon points="180,100 320,40 460,100" fill="#8d3f2c"/><g fill="#a5d8ff"><rect x="210" y="120" width="40" height="40"/><rect x="270" y="120" width="40" height="40"/><rect x="330" y="120" width="40" height="40"/><rect x="390" y="120" width="40" height="40"/></g><rect y="230" width="640" height="70" fill="#334155"/><g fill="#f8fafc"><rect x="290" y="230" width="20" height="70"/><rect x="320" y="230" width="20" height="70"/><rect x="350" y="230" width="20" height="70"/></g><g transform="translate(200,195)"><circle r="7" fill="#fbbf24"/><rect x="-5" y="7" width="10" height="22" rx="3" fill="#ef4444"/></g><text x="320" y="20" text-anchor="middle" fill="#7c2d12" font-size="14" font-weight="700">SCHOOL ZONE: SLOW DOWN</text></svg>`,
-
-  highway: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hsk" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fcd34d"/><stop offset=".5" stop-color="#fb923c"/><stop offset="1" stop-color="#7c2d12"/></linearGradient></defs><rect width="640" height="300" fill="url(#hsk)"/><circle cx="320" cy="180" r="40" fill="#fef3c7" opacity=".9"/><path d="M0 220 Q80 140 160 200 Q240 140 320 210 Q400 150 480 200 Q560 160 640 220 L640 300 L0 300 Z" fill="#4a3020"/><path d="M220 240 L420 240 L640 300 L0 300 Z" fill="#1e293b"/><g stroke="#facc15" stroke-width="3" stroke-dasharray="20 15"><line x1="320" y1="245" x2="320" y2="295"/></g><text x="320" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">WATCH THE HORIZON, SCAN REGULARLY</text></svg>`,
-
-  police: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="300" fill="#1e293b"/><rect y="180" width="640" height="120" fill="#334155"/><line x1="0" y1="240" x2="640" y2="240" stroke="#facc15" stroke-width="3" stroke-dasharray="20 15"/><g transform="translate(320,90)"><circle r="22" fill="#fed7aa"/><rect x="-26" y="-24" width="52" height="12" rx="4" fill="#1e3a8a"/><rect x="-18" y="22" width="36" height="60" rx="6" fill="#1e3a8a"/><rect x="-16" y="30" width="32" height="30" rx="3" fill="#fbbf24"/><rect x="-16" y="82" width="14" height="40" rx="4" fill="#1e293b"/><rect x="2" y="82" width="14" height="40" rx="4" fill="#1e293b"/></g><text x="320" y="25" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">POLICE SIGNAL: FOLLOW DIRECTIONS</text></svg>`
-};
-
-/* ══════════ DASHBOARD ══════════ */
-const Dashboard = {
-  render(){
-    const d = State.data;
-    const level = LEVELS[d.progress.currentLevel - 1] || LEVELS[0];
-    const mastery = this.overallMastery();
-    const lessonsPct = Math.min(100, Math.round(Object.keys(d.progress.lessons).length / 60 * 100));
-    const questionsPct = d.stats.attempts ? Math.round(d.stats.correct / d.stats.attempts * 100) : 0;
-    const xp = d.progress.xp || 0;
-    const userLevel = Math.floor(xp / 100) + 1;
-    const xpInLevel = xp % 100;
-    const av = d.photoURL
-      ? `<div class="avatar"><img src="${esc(d.photoURL)}" alt=""></div>`
-      : `<div class="avatar">${(d.displayName || "L")[0].toUpperCase()}</div>`;
-    const curLesson = d.progress.currentLesson || { level: 1, idx: 0 };
-    const lessonList = LESSONS[LEVELS[curLesson.level-1].topic] || [];
-    const curLessonObj = lessonList[curLesson.idx] || lessonList[0] || { title: "Start", heroScene: "city" };
-
-    return `
-      <div class="dash-hero">
-        <div class="inner">
-          <div class="who">${av}
-            <div>
-              <h1>Welcome back, ${esc((d.displayName || "learner").split(" ")[0])}.</h1>
-              <div class="sub">${esc(d.email || (State.demo ? "Demo mode — saved on this device" : ""))}</div>
-              <div class="badges-row">
-                <span class="streak-badge"><span class="flame">🔥</span> ${d.stats.streak} day streak</span>
-                <span class="xp-badge">⚡ ${xp} XP</span>
-                <span class="lvl-badge">⭐ Level ${userLevel}</span>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-primary btn-lg" onclick="Levels.openLevel(${curLesson.level})">Continue learning →</button>
-        </div>
-        <div class="lvl-progress">
-          <div class="bar"><i style="width:${xpInLevel}%"></i></div>
-          <div class="txt"><span>${xpInLevel} / 100 XP to Level ${userLevel + 1}</span><span>${100 - xpInLevel} XP left</span></div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3><span class="left"><span class="ic">🎯</span>Your progress</span></h3>
-        <div class="rings">
-          ${this.ringSVG("Mastery", mastery, "#22d3ee")}
-          ${this.ringSVG("Lessons", lessonsPct, "#22c55e")}
-          ${this.ringSVG("Accuracy", questionsPct, "#a855f7")}
-        </div>
-      </div>
-
-      <div class="continue-card">
-        <div class="inner">
-          <div class="thumb">${SCENE[curLessonObj.heroScene || "city"]()}</div>
-          <div class="info">
-            <div class="tag">Continue where you left off</div>
-            <h3>${esc(curLessonObj.title)}</h3>
-            <p>Level ${curLesson.level} — ${esc(LEVELS[curLesson.level-1].en)}</p>
-            <div class="bar" style="margin-top:12px"><i style="width:${mastery}%"></i></div>
-          </div>
-          <button class="btn btn-primary" onclick="Levels.openLevel(${curLesson.level})">Resume lesson →</button>
-        </div>
-      </div>
-
-      <div class="grid grid-2" style="margin-bottom:20px">
-        <div class="panel"><h3><span class="left"><span class="ic">✨</span>Daily quests</span></h3><div id="quests"></div></div>
-        <div class="panel"><h3><span class="left"><span class="ic">📅</span>This week</span></h3><div id="weekGoal"></div>
-          <div style="margin-top:18px"><div class="mini dim">Last 12 weeks</div>
-            <div class="heatmap" id="heatmap"></div>
-            <div class="heat-legend"><span>Less</span><div class="dot" style="background:#0e4429"></div><div class="dot" style="background:#166c3a"></div><div class="dot" style="background:#22a04d"></div><div class="dot" style="background:#22d3ee"></div><span>More</span></div>
-          </div></div>
-      </div>
-
-      <div class="grid grid-2" style="margin-bottom:20px">
-        <div class="panel"><h3><span class="left"><span class="ic">📈</span>Skill balance</span></h3><div class="radar-wrap">${this.radarSVG()}</div></div>
-        <div class="panel"><h3><span class="left"><span class="ic">📊</span>Topic mastery</span></h3>${this.masteryHTML()}</div>
-      </div>
-
-      <div class="panel"><h3><span class="left"><span class="ic">🎯</span>Weak areas</span></h3>${this.weakAreasPanelHTML()}</div>
-      <div class="panel"><h3><span class="left"><span class="ic">🏆</span>Achievements</span></h3><div class="achv-grid">${this.achievementsHTML()}</div></div>
-      <div class="panel"><h3><span class="left"><span class="ic">🕐</span>Recent activity</span></h3><div class="timeline">${this.timelineHTML()}</div></div>
-    `;
-  },
-
-  ringSVG(label, pct, color){
-    const r = 40, c = 2 * Math.PI * r;
-    const off = c * (1 - pct / 100);
-    return `<div class="ring-card"><svg viewBox="0 0 90 90"><circle class="ring-bg" cx="45" cy="45" r="${r}"></circle><circle class="ring-val" cx="45" cy="45" r="${r}" stroke="${color}" stroke-dasharray="${c}" stroke-dashoffset="${off}"></circle></svg><div class="v">${pct}%</div><div class="l">${label}</div></div>`;
-  },
-
-  radarSVG(){
-    const labels = ["Signs", "Rules", "Right of Way", "Safety", "Hazards", "Vehicle"];
-    const keys = ["signs", "rules", "rightofway", "safety", "hazard", "vehicle"];
-    const t = State.data.progress.topics;
-    const vals = keys.map(k => Math.max(0.05, (t[k] || 0) / 100));
-    const cx = 140, cy = 130, max = 95;
-    const pts = vals.map((v, i) => {
-      const a = -Math.PI/2 + i * Math.PI/3;
-      return [cx + Math.cos(a) * max * v, cy + Math.sin(a) * max * v];
-    });
-    const polyPts = pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
-    let grid = "";
-    [0.25, 0.5, 0.75, 1].forEach(f => {
-      const g = [];
-      for (let i = 0; i < 6; i++){
-        const a = -Math.PI/2 + i * Math.PI/3;
-        g.push((cx + Math.cos(a) * max * f).toFixed(1) + "," + (cy + Math.sin(a) * max * f).toFixed(1));
-      }
-      grid += `<polygon points="${g.join(" ")}" fill="none" stroke="rgba(255,255,255,.08)"></polygon>`;
-    });
-    let axes = "";
-    for (let i = 0; i < 6; i++){
-      const a = -Math.PI/2 + i * Math.PI/3;
-      axes += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(a)*max}" y2="${cy + Math.sin(a)*max}" stroke="rgba(255,255,255,.08)"></line>`;
-    }
-    let lbls = "";
-    for (let i = 0; i < 6; i++){
-      const a = -Math.PI/2 + i * Math.PI/3;
-      const lx = cx + Math.cos(a) * (max + 18);
-      const ly = cy + Math.sin(a) * (max + 18);
-      lbls += `<text x="${lx}" y="${ly}" fill="#7b88a8" font-size="10" text-anchor="middle">${labels[i]}</text>`;
-    }
-    return `<svg viewBox="0 0 280 260"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#a855f7" stop-opacity=".4"/></linearGradient></defs>${grid}${axes}<polygon points="${polyPts}" fill="url(#rg)" stroke="#22d3ee" stroke-width="2"></polygon>${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#22d3ee"></circle>`).join("")}${lbls}</svg>`;
-  },
-
-  overallMastery(){
-    const t = State.data.progress.topics;
-    const keys = Object.keys(t);
-    if (!keys.length) return 0;
-    return Math.round(keys.reduce((s, k) => s + t[k], 0) / keys.length);
-  },
-
-  masteryHTML(){
-    const labels = { foundations:"Foundations", signs:"Road Signs", rules:"Rules", rightofway:"Right of Way", vehicle:"Vehicle", safety:"Safety", hazard:"Hazards", pedestrians:"Pedestrians", roundabouts:"Roundabouts" };
-    const rows = Object.keys(labels).map(k => ({ k, label: labels[k], pct: Math.round(State.data.progress.topics[k] || 0) })).sort((a,b) => b.pct - a.pct);
-    return rows.map(r => {
-      const grad = r.pct >= 70 ? "linear-gradient(90deg,#22d3ee,#22c55e)" : r.pct >= 40 ? "linear-gradient(90deg,#facc15,#f59e0b)" : "linear-gradient(90deg,#ef4444,#f97316)";
-      const col = r.pct >= 70 ? "#22c55e" : r.pct >= 40 ? "#facc15" : "#ef4444";
-      return `<div class="row-topic"><div class="lbl">${esc(r.label)}</div><div class="tr"><div class="bar"><i style="width:${r.pct}%;background:${grad}"></i></div></div><div class="val" style="color:${col}">${r.pct}%</div></div>`;
-    }).join("");
-  },
-
-  weakAreas(){
-    const t = State.data.progress.topics;
-    const map = { signs:"Road Signs", rules:"Rules", rightofway:"Right of Way", safety:"Safety", hazard:"Hazard Awareness", vehicle:"Vehicle", pedestrians:"Pedestrians", roundabouts:"Roundabouts" };
-    return Object.keys(t).filter(k => map[k] && t[k] < 60).sort((a,b) => t[a] - t[b]).slice(0,4).map(k => ({ topic:k, label:map[k], pct:Math.round(t[k]) }));
-  },
-
-  weakAreasHTML(){
-    const w = this.weakAreas();
-    if (!w.length) return `<p class="muted tiny">No weak areas yet. Complete a lesson or quiz and we will show you exactly what to focus on.</p>`;
-    return w.slice(0,3).map(x => `
-      <div style="margin-bottom:12px">
-        <div class="mini dim" style="display:flex;justify-content:space-between"><span>${esc(x.label)}</span><span>${x.pct}%</span></div>
-        <div class="bar" style="margin-top:5px"><i style="width:${x.pct}%;background:linear-gradient(90deg,#ef4444,#f59e0b)"></i></div>
-      </div>`).join("") + `<button class="btn btn-primary btn-block btn-sm" style="margin-top:8px" onclick="Practice.startTopic('${w[0].topic}')">Practice ${esc(w[0].label)} →</button>`;
-  },
-
-  weakAreasPanelHTML(){
-    const w = this.weakAreas();
-    if (!w.length) return `<p class="muted tiny">No weak areas yet.</p>`;
-    return w.map(x => {
-      const grad = x.pct < 40 ? "linear-gradient(90deg,#ef4444,#f97316)" : "linear-gradient(90deg,#facc15,#f59e0b)";
-      const col = x.pct < 40 ? "#ef4444" : "#facc15";
-      return `<div class="row-topic"><div class="lbl">${esc(x.label)}</div><div class="tr"><div class="bar"><i style="width:${x.pct}%;background:${grad}"></i></div></div><div class="val" style="color:${col}">${x.pct}%</div></div>`;
-    }).join("") + `<button class="btn btn-ghost btn-block btn-sm" style="margin-top:14px" onclick="Practice.startTopic('${w[0].topic}')">Practice now →</button>`;
-  },
-
-  achievementsHTML(){
-    const ACH = [
-      { id:"first", emoji:"🎯", en:"First Lesson", target:1, cur:s => Object.keys(s.progress.lessons).length },
-      { id:"s5", emoji:"🛑", en:"Sign Explorer", target:5, cur:s => Object.keys(s.progress.signsLearned).length },
-      { id:"r40", emoji:"📖", en:"Rules Reader", target:40, cur:s => s.progress.topics.rules || 0 },
-      { id:"h40", emoji:"⚠️", en:"Hazard Spotter", target:40, cur:s => s.progress.topics.hazard || 0 },
-      { id:"q10", emoji:"🏆", en:"Quiz Champion", target:10, cur:s => s.stats.correct },
-      { id:"ready", emoji:"🎓", en:"Ready", target:10, cur:s => s.progress.levelsCompleted.length },
-      { id:"streak7", emoji:"🔥", en:"7 Day Streak", target:7, cur:s => s.stats.streak },
-      { id:"xp500", emoji:"⚡", en:"500 XP", target:500, cur:s => s.progress.xp || 0 }
-    ];
-    return ACH.map(a => {
-      const cur = Math.min(a.target, a.cur(State.data));
-      const got = cur >= a.target;
-      const pct = Math.round(cur / a.target * 100);
-      return `<div class="achv ${got?'on':''}"><div class="ic">${a.emoji}</div><div class="t">${esc(a.en)}</div><div class="d">${cur} / ${a.target}</div><div class="bar"><i style="width:${pct}%;background:${got?'#facc15':'#22d3ee'}"></i></div></div>`;
-    }).join("");
-  },
-
-  timelineHTML(){
-    const events = State.data.progress.events || [];
-    if (!events.length) return `<div class="tl-item"><div class="ticon">🎯</div><div class="body"><div class="txt">No activity yet.</div><div class="when">Complete a lesson to see it here.</div></div></div>`;
-    return events.slice(0,8).map(e => `<div class="tl-item ${e.type||''}"><div class="ticon">${e.icon||"🎯"}</div><div class="body"><div class="txt">${esc(e.text)}</div><div class="when">${esc(e.when)}</div></div></div>`).join("");
-  }
-};
-
-/* ══════════ QUESTS / WEEK / HEATMAP ══════════ */
-const Quests = {
-  render(){
-    const el = $("quests"); if (!el) return;
-    const today = new Date().toISOString().slice(0,10);
-    const q = State.data.progress.quests || {};
-    const d = q[today] || { lessons: 0, quiz: 0, signs: 0 };
-    const items = [
-      { icon:"📚", t:"Complete 1 lesson", target:1, cur:Math.min(d.lessons||0,1), reward:25 },
-      { icon:"🎯", t:"Answer 5 quiz questions", target:5, cur:Math.min(d.quiz||0,5), reward:15 },
-      { icon:"🛑", t:"Learn 3 road signs", target:3, cur:Math.min(d.signs||0,3), reward:20 }
-    ];
-    el.innerHTML = items.map(it => {
-      const done = it.cur >= it.target;
-      const pct = Math.round(it.cur / it.target * 100);
-      return `<div class="quest ${done?'done':''}"><div class="qi">${it.icon}</div><div><div class="qt">${it.t}</div><div class="qd">${it.cur} / ${it.target} — reward ${it.reward} XP</div></div><div class="qbar"><i style="width:${pct}%"></i></div><div class="qp">${done?'✓':'+'+it.reward}</div></div>`;
-    }).join("");
-  },
-  add(kind, amount){
-    const today = new Date().toISOString().slice(0,10);
-    const q = State.data.progress.quests;
-    if (!q[today]) q[today] = { lessons:0, quiz:0, signs:0 };
-    q[today][kind] = (q[today][kind] || 0) + (amount || 1);
-  }
-};
-
-const WeekGoal = {
-  render(){
-    const el = $("weekGoal"); if (!el) return;
-    const activity = State.data.progress.activity || {};
-    const today = new Date();
-    const day = today.getDay() || 7;
-    const monday = new Date(today); monday.setDate(today.getDate() - (day - 1));
-    let days = 0;
-    for (let i = 0; i < 7; i++){
-      const d = new Date(monday); d.setDate(monday.getDate() + i);
-      if (d > today) break;
-      const key = d.toISOString().slice(0,10);
-      if (activity[key]) days++;
-    }
-    const target = 5;
-    const pct = Math.min(100, Math.round(days / target * 100));
-    el.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:2rem;font-weight:800">${days} <span style="font-size:.9rem;color:var(--ink3)">of ${target} days</span></div><div class="tiny muted">practice this week</div></div><div class="bar" style="margin-top:10px"><i style="width:${pct}%;background:linear-gradient(90deg,#22d3ee,#a855f7)"></i></div>${days >= target ? '<p class="tiny" style="color:#22c55e;margin-top:8px">Weekly goal reached. Well done.</p>' : '<p class="tiny dim" style="margin-top:8px">' + (target - days) + ' more ' + (target - days === 1 ? "day" : "days") + ' to hit your goal.</p>'}`;
-  }
-};
-
-const Heatmap = {
-  render(){
-    const el = $("heatmap"); if (!el) return;
-    const activity = State.data.progress.activity || {};
-    const today = new Date();
-    const cells = [];
-    for (let i = 83; i >= 0; i--){
-      const d = new Date(today); d.setDate(d.getDate() - i);
-      const key = d.toISOString().slice(0,10);
-      const count = activity[key] || 0;
-      const lvl = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 12 ? 3 : 4;
-      cells.push(`<div class="heat-cell" data-lvl="${lvl}" title="${key}: ${count} activities"></div>`);
-    }
-    el.innerHTML = cells.join("");
-  }
-};
-
-/* ══════════ LEVELS ══════════ */
-const Levels = {
-  render(){
-    const unlocked = this.unlocked();
-    return `<h2 style="margin-bottom:8px">Your learning path</h2><p class="muted" style="margin-bottom:22px">Twelve levels, each mastery-gated. Unlock the next by understanding the current one.</p><div class="level-grid">` +
-      LEVELS.map(l => {
-        const pct = State.data.progress.topics[l.topic] || 0;
-        const locked = l.id > unlocked;
-        const completed = State.data.progress.levelsCompleted.includes(l.id);
-        const state = locked ? "Locked" : completed ? "Mastered" : pct >= 40 ? "Practicing" : pct > 0 ? "Learning" : "New";
-        return `<div class="lvl ${l.cls} ${locked?'locked':''}" ${locked?'':'onclick="Levels.openLevel('+l.id+')"'}><div class="state">${state}</div><div class="num">LEVEL ${String(l.id).padStart(2,"0")}</div><h4>${l.icon}  ${esc(l.en)}</h4><div class="topic">${esc(l.intro)}</div><div class="mastery"><div class="bar"><i style="width:${pct}%"></i></div><div class="v">${pct}% mastery</div></div></div>`;
-      }).join("") + `</div>`;
-  },
-  unlocked(){
-    const c = State.data.progress.levelsCompleted;
-    if (!c.length) return 1;
-    return Math.min(12, Math.max(...c) + 1);
-  },
-  openLevel(id){
-    const lvl = LEVELS[id-1];
-    const lessons = LESSONS[lvl.topic] || [];
-    if (!lessons.length){ UI.toast("This level's lessons are being prepared.", "no"); return; }
-    const saved = State.data.progress.currentLesson || { level:1, idx:0 };
-    const currentIdx = saved.level === id ? saved.idx : 0;
-    let html = `<h2 style="font-size:1.5rem;margin-bottom:10px">${lvl.icon} Level ${String(id).padStart(2,"0")} — ${esc(lvl.en)}</h2><p class="muted tiny" style="margin-bottom:20px">Choose a lesson to begin.</p><div style="text-align:left">`;
-    lessons.forEach((ls, i) => {
-      const isCur = i === currentIdx;
-      const done = State.data.progress.lessons["L" + id + "_" + i];
-      html += `<button class="quest ${done?'done':''}" style="width:100%;cursor:pointer;text-align:left;font-family:inherit;color:inherit" onclick="UI.closeModal();Lesson.open(${id},${i});App.go('lesson')"><div class="qi" style="background:linear-gradient(135deg,${ls.color[0]},${ls.color[1]})">${done?'✓':(i+1)}</div><div style="flex:1"><div class="qt">${esc(ls.title)}</div><div class="qd">${esc(ls.objective)}</div></div>${isCur?'<div class="qp">CURRENT</div>':(done?'<div class="qp" style="color:#4ade80">DONE</div>':'')}</button>`;
-    });
-    html += `</div><button class="btn btn-ghost btn-block" style="margin-top:14px" onclick="UI.closeModal()">Close</button>`;
-    UI.openModal(html);
-  }
-};
-
-/* ══════════ LESSON ══════════ */
-const Lesson = {
-  cur:null, stepIndex:0, phase:"steps", quizAnswered:false,
-  open(levelId, idx){
-    const lvl = LEVELS[levelId-1];
-    const lessons = LESSONS[lvl.topic] || [];
-    const lesson = lessons[idx];
-    if (!lesson) return;
-    this.cur = { levelId, idx, lesson };
-    this.stepIndex = 0; this.phase = "steps"; this.quizAnswered = false;
-    State.data.progress.currentLesson = { level: levelId, idx };
-    State.save();
-  },
-  afterRender(){ Narrator.updateBtn(); },
-  goStep(i){
-    if (i < 0) return;
-    if (i >= this.cur.lesson.steps.length){ this.phase = "quiz"; this.stepIndex = 0; }
-    else { this.phase = "steps"; this.stepIndex = i; }
-    App.render();
-    window.scrollTo({ top:0, behavior:"smooth" });
-    Sound.tone(400, 0.05, "sine", 0.06);
-  },
-  goToQuiz(){ this.phase = "quiz"; App.render(); window.scrollTo({ top:0, behavior:"smooth" }); },
-  goToPrevious(){
-    if (this.phase === "quiz"){ this.phase = "steps"; this.stepIndex = this.cur.lesson.steps.length - 1; App.render(); return; }
-    if (this.stepIndex > 0){ this.goStep(this.stepIndex - 1); }
-  },
-  toggleAudio(){
-    if (!this.cur) return;
-    const lesson = this.cur.lesson;
-    const text = lesson.title + ". " + lesson.objective + ". " + lesson.steps.map(s => s.t + ". " + s.d).join(" ");
-    Narrator.toggle(text);
-  },
-  renderCurrent(){
-    if (!this.cur) return this.empty();
-    const { levelId, idx, lesson } = this.cur;
-    const lvl = LEVELS[levelId-1];
-    const [c1, c2] = lesson.color;
-    let html = `<div class="lesson-wrap"><div class="lesson-header"><button class="btn btn-ghost btn-sm" onclick="App.go('levels')">← Learning path</button><div class="crumb">Level ${String(levelId).padStart(2,"0")} — ${esc(lvl.en)} — Lesson ${idx+1} of 5</div></div><div class="lesson-hero" style="--c1:${c1};--c2:${c2}"><button class="audio-btn" id="audioBtn" onclick="Lesson.toggleAudio()">🔊 Listen</button><div class="eyebrow" style="color:#fff;background:rgba(0,0,0,.25);border-color:rgba(255,255,255,.3)">Interactive lesson</div><h2>${esc(lesson.title)}</h2><p>${esc(lesson.objective)}</p><div class="hero-scene">${SCENE[lesson.heroScene || "city"]()}</div></div>`;
-    let dotsHTML = "";
-    for (let i = 0; i < lesson.steps.length; i++){
-      let cls = "pdot";
-      if (this.phase === "steps" && i === this.stepIndex) cls += " on";
-      else if (this.phase === "quiz" || i < this.stepIndex) cls += " done";
-      dotsHTML += `<div class="${cls}" onclick="Lesson.goStep(${i})">${i+1}</div>`;
-    }
-    dotsHTML += `<div class="pdot q ${this.phase==='quiz'?'on':''}" onclick="Lesson.goToQuiz()">?</div>`;
-    html += `<div class="prog-dots">${dotsHTML}</div>`;
-    if (this.phase === "steps") html += this.renderStep(lesson.steps[this.stepIndex]);
-    else if (this.phase === "quiz") html += this.renderQuiz(lesson);
-    html += `</div>`;
-    return html;
-  },
-  renderStep(s){
-    const cls = s.kind || "";
-    const k = s.kind === "tip" ? "Safety tip" : s.kind === "mistake" ? "Common mistake" : s.kind === "video" ? "Video lesson" : s.kind === "practice" ? "Practice" : "Learn";
-    const sceneHTML = s.scene ? `<div class="media"><div class="real-tag">Reference</div>${SCENE[s.scene]()}</div>` : "";
-    const videoHTML = (s.kind === "video" && s.video) ? `<div class="video-embed"><iframe src="${s.video}" allowfullscreen loading="lazy"></iframe></div>` : "";
-    const totalSteps = this.cur.lesson.steps.length;
-    const isLast = this.stepIndex === totalSteps - 1;
-    const isFirst = this.stepIndex === 0;
-    return `<div class="step ${cls}"><div class="k">${k}</div><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p>${sceneHTML}${videoHTML}</div><div class="lesson-nav">${isFirst?'<span></span>':`<button class="btn btn-ghost" onclick="Lesson.goToPrevious()">← Previous</button>`}<div class="step-count">Step <b>${this.stepIndex+1}</b> of <b>${totalSteps}</b></div>${isLast?`<button class="btn btn-primary" onclick="Lesson.goToQuiz()">Take quiz →</button>`:`<button class="btn btn-primary" onclick="Lesson.goStep(${this.stepIndex+1})">Next step →</button>`}</div>`;
-  },
-  renderQuiz(lesson){
-    const q = lesson.quiz;
-    const optsHTML = q.opts.map((o, i) => `<button class="q-opt" onclick="Lesson.answer(${i})"><span class="kbd">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span></button>`).join("");
-    return `<div class="step"><div class="k">Quiz</div><h3>${esc(q.q)}</h3><div id="quizOpts">${optsHTML}</div><div id="quizFeedback"></div></div><div class="lesson-nav"><button class="btn btn-ghost" onclick="Lesson.goToPrevious()">← Back to lesson</button><div class="step-count">Final check</div><span id="quizNextWrap"></span></div>`;
-  },
-  answer(i){
-    if (this.quizAnswered) return;
-    const q = this.cur.lesson.quiz;
-    const ok = i === q.a;
-    this.quizAnswered = true;
-    document.querySelectorAll("#quizOpts .q-opt").forEach((el, k) => {
-      el.disabled = true;
-      if (k === q.a) el.classList.add("correct");
-      else if (k === i && !ok) el.classList.add("wrong");
-    });
-    if (ok) Sound.correct(); else Sound.wrong();
-    $("quizFeedback").innerHTML = `<div class="feedback ${ok?'ok':'no'}"><strong>${ok?'✓ Correct.':'✗ Not quite.'}</strong>The correct answer is <strong>${esc(q.opts[q.a])}</strong>. ${esc(q.why||"")}</div>`;
-    State.data.stats.attempts++;
-    if (ok) State.data.stats.correct++; else State.data.stats.wrong++;
-    State.markActivity();
-    Quests.add("quiz", 1);
-    const lvl = LEVELS[this.cur.levelId-1];
-    const prev = State.data.progress.topics[lvl.topic] || 0;
-    State.data.progress.topics[lvl.topic] = Math.min(100, Math.round(prev * 0.7 + (ok ? 30 : 0)));
-    const wrap = $("quizNextWrap");
-    if (ok){ if (wrap) wrap.innerHTML = `<button class="btn btn-primary" onclick="Lesson.finish()">Complete lesson →</button>`; }
-    else { if (wrap) wrap.innerHTML = `<button class="btn btn-ghost" onclick="Lesson.retry()">Try again</button>`; }
-    State.save();
-  },
-  retry(){ this.quizAnswered = false; App.render(); },
-  finish(){
-    const { levelId, idx, lesson } = this.cur;
-    const alreadyDone = State.data.progress.lessons["L" + levelId + "_" + idx];
-    State.data.progress.lessons["L" + levelId + "_" + idx] = true;
-    State.markActivity();
-    Quests.add("lessons", 1);
-    const xpEarned = alreadyDone ? 15 : 50;
-    State.addXP(xpEarned, alreadyDone ? "Reviewing" : "Lesson complete");
-    State.logEvent("success", "Completed: " + lesson.title, "🎯");
-    const lvl = LEVELS[levelId-1];
-    const pct = State.data.progress.topics[lvl.topic] || 0;
-    let leveledUp = false;
-    if (pct >= 80 && !State.data.progress.levelsCompleted.includes(levelId)){
-      State.data.progress.levelsCompleted.push(levelId);
-      State.data.progress.currentLevel = Math.min(12, levelId + 1);
-      leveledUp = true;
-    }
-    State.save();
-    const lessons = LESSONS[lvl.topic] || [];
-    const nextIdx = idx + 1;
-    const hasNext = nextIdx < lessons.length;
-    const nextLesson = hasNext ? lessons[nextIdx] : null;
-    let html = `<div class="success-ring">🎉</div><h2>${leveledUp?'Level '+levelId+' mastered!':'Lesson complete!'}</h2><p>You earned <strong>+${xpEarned} XP</strong> for "${esc(lesson.title)}".</p>`;
-    if (leveledUp) html += `<p style="color:#4ade80;margin-top:8px">Level ${levelId} is now mastered. Level ${levelId+1} is unlocked.</p>`;
-    if (hasNext){
-      html += `<div class="next-card"><div class="tag">Up next</div><div class="title">${esc(nextLesson.title)}</div><div class="meta">${esc(nextLesson.objective)}</div></div><div class="actions"><button class="btn btn-primary btn-lg" onclick="UI.closeModal();Lesson.open(${levelId},${nextIdx});App.go('lesson');Sound.complete()">Continue to next lesson →</button><button class="btn btn-ghost" onclick="UI.closeModal();App.go('levels')">Back to learning path</button></div>`;
-    } else {
-      html += `<div class="next-card"><div class="tag">Level complete</div><div class="title">You have finished every lesson in this level.</div><div class="meta">${leveledUp ? "Move on to the next level when you're ready." : "Practice the topic to reach 80% mastery and unlock the next level."}</div></div><div class="actions"><button class="btn btn-primary btn-lg" onclick="UI.closeModal();App.go('levels')">Back to learning path</button><button class="btn btn-ghost" onclick="UI.closeModal();App.go('dashboard')">Back to dashboard</button></div>`;
-    }
-    if (leveledUp) Sound.fanfare(); else Sound.complete();
-    UI.openModal(html);
-  },
-  empty(){
-    return `<div class="lesson-wrap" style="padding:60px 24px"><div class="panel" style="text-align:center"><div style="font-size:3rem;margin-bottom:16px">🎬</div><h3 style="margin-bottom:10px">Pick a lesson to begin</h3><p class="muted" style="margin-bottom:22px">Choose a level from the learning path.</p><button class="btn btn-primary" onclick="App.go('levels')">Open learning path</button></div></div>`;
-  }
-};
-
-/* ══════════ SIGNS ══════════ */
-const Signs = {
-  cat:"all",
-  render(){
-    const cats = ["all", ...new Set(SIGNS.map(s => s.cat))];
-    const filtered = SIGNS.filter(s => this.cat === "all" || s.cat === this.cat);
-    return `<h2 style="margin-bottom:8px">Road Signs Academy</h2><p class="muted" style="margin-bottom:20px">Learn the shapes, colours and meanings — Rwanda follows the international Vienna Convention.</p><div class="pill-row" style="margin-bottom:16px">${cats.map(c => `<button class="pill ${this.cat===c?'on':''}" onclick="Signs.setCat('${c}')">${c}</button>`).join("")}</div><div class="grid grid-4">${filtered.map(s => this.tile(s)).join("")}</div>`;
-  },
-  setCat(c){ this.cat = c; App.render(); },
-  svg(s){
-    const bg = s.color;
-    const ink = s.color === "#f8fafc" ? "#0b1220" : "#fff";
-    if (s.shape === "octagon") return `<svg viewBox="0 0 100 100" class="sign-svg"><polygon points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30" fill="${bg}" stroke="#0b1220"/><text x="50" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="${ink}">STOP</text></svg>`;
-    if (s.shape === "triangle") return `<svg viewBox="0 0 100 100" class="sign-svg"><polygon points="50,8 92,84 8,84" fill="${bg}" stroke="#b91c1c" stroke-width="4"/><text x="50" y="72" text-anchor="middle" font-size="34" fill="#b91c1c">!</text></svg>`;
-    if (s.shape === "rect") return `<svg viewBox="0 0 100 100" class="sign-svg"><rect x="10" y="26" width="80" height="48" rx="6" fill="${bg}" stroke="#0b1220"/><text x="50" y="60" text-anchor="middle" font-size="26" font-weight="800" fill="${ink}">${s.text||""}</text></svg>`;
-    return `<svg viewBox="0 0 100 100" class="sign-svg"><circle cx="50" cy="50" r="44" fill="${bg}" stroke="#0b1220"/><text x="50" y="62" text-anchor="middle" font-size="24" font-weight="800" fill="${ink}">${s.text||""}</text></svg>`;
-  },
-  tile(s){
-    const learned = State.data.progress.signsLearned[s.id];
-    return `<div class="sign-tile"><div class="sign-visual">${this.svg(s)}</div><div class="sign-name">${esc(s.en)}</div><div class="sign-cat">${s.cat}</div><button class="btn ${learned?'btn-ghost':'btn-primary'} btn-block btn-sm" onclick="Signs.mark('${s.id}')">${learned?'✓ Learned':'Mark learned'}</button></div>`;
-  },
-  mark(id){
-    State.data.progress.signsLearned[id] = true;
-    State.markActivity();
-    Quests.add("signs", 1);
-    State.addXP(5, "Sign learned");
-    State.logEvent("success", "Learned sign: " + id, "🛑");
-    State.save();
-    App.render();
-    Sound.tone(700, 0.15, "sine", 0.1);
-  }
-};
-
-/* ══════════ PRACTICE ══════════ */
-const Practice = {
-  session:null,
-  render(){
-    if (this.session) return this.renderSession();
-    return `<h2 style="margin-bottom:8px">Practice</h2><p class="muted" style="margin-bottom:22px">Sharpen your understanding. Questions adapt to what you need most.</p><div class="grid grid-2" style="margin-bottom:20px"><div class="panel"><h3><span class="left"><span class="ic">🎯</span>Choose a mode</span></h3><button class="btn btn-primary btn-block" style="margin-bottom:10px" onclick="Practice.start('quick')">Quick Test — 5 questions</button><button class="btn btn-ghost btn-block" onclick="Practice.start('mixed')">Full Mix — all topics</button></div><div class="panel"><h3><span class="left"><span class="ic">⚠️</span>Weak-area practice</span></h3>${Dashboard.weakAreasHTML()}</div></div>`;
-  },
-  start(mode){
-    let pool = QUESTIONS.slice();
-    if (mode === "quick") pool = this.shuffle(pool).slice(0, 5);
-    else pool = this.shuffle(pool);
-    this.session = { pool, i:0, score:0 };
-    App.render();
-  },
-  startTopic(topic){
-    const pool = QUESTIONS.filter(q => q.topic === topic);
-    if (!pool.length){ UI.toast("No questions for this topic yet. Try the Full Mix.", "no"); return; }
-    this.session = { pool: this.shuffle(pool), i:0, score:0 };
-    App.go("practice");
-  },
-  shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [a[i], a[j]] = [a[j], a[i]]; } return a; },
-  renderSession(){
-    const s = this.session;
-    if (s.i >= s.pool.length){
-      const pct = Math.round(s.score / s.pool.length * 100);
-      const color = pct >= 80 ? "#22c55e" : pct >= 60 ? "#facc15" : "#ef4444";
-      State.addXP(pct >= 80 ? 30 : pct >= 60 ? 20 : 10, "Practice session");
-      return `<div class="panel" style="text-align:center;padding:50px 24px"><div style="font-size:3.6rem;font-weight:800;color:${color}">${pct}%</div><h3 style="margin:12px 0 8px">Practice complete</h3><p class="muted">You scored <strong>${s.score} / ${s.pool.length}</strong>.</p><div class="row" style="justify-content:center;margin-top:22px"><button class="btn btn-primary" onclick="Practice.session=null;App.render()">Start again</button><button class="btn btn-ghost" onclick="Practice.session=null;App.go('dashboard')">Back to dashboard</button></div></div>`;
-    }
-    const q = s.pool[s.i];
-    return `<div class="panel"><div class="mini dim">Question ${s.i+1} / ${s.pool.length}</div><div class="bar" style="margin-top:8px"><i style="width:${Math.round(s.i/s.pool.length*100)}%;background:linear-gradient(90deg,#22d3ee,#a855f7)"></i></div><h3 style="margin-top:20px;font-size:1.15rem">${esc(q.q)}</h3><div style="margin-top:14px" id="pOpts">${q.opts.map((o, i) => `<button class="q-opt" onclick="Practice.answer(${i})"><span class="kbd">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span></button>`).join("")}</div><div id="pFeedback"></div></div>`;
-  },
-  answer(i){
-    const s = this.session;
-    const q = s.pool[s.i];
-    const ok = i === q.a;
-    if (ok){ s.score++; Sound.correct(); } else Sound.wrong();
-    document.querySelectorAll("#pOpts .q-opt").forEach((el, k) => {
-      el.disabled = true;
-      if (k === q.a) el.classList.add("correct");
-      else if (k === i && !ok) el.classList.add("wrong");
-    });
-    $("pFeedback").innerHTML = `<div class="feedback ${ok?'ok':'no'}"><strong>${ok?'✓ Correct.':'✗ Not quite.'}</strong>${esc(q.why)}</div><button class="btn btn-primary" style="margin-top:14px" onclick="Practice.next()">Next →</button>`;
-    State.data.stats.attempts++;
-    if (ok) State.data.stats.correct++; else State.data.stats.wrong++;
-    State.markActivity();
-    Quests.add("quiz", 1);
-    const prev = State.data.progress.topics[q.topic] || 0;
-    State.data.progress.topics[q.topic] = Math.min(100, Math.round(prev*0.7 + (ok?30:0)));
-    State.save();
-  },
-  next(){ this.session.i++; App.render(); }
-};
-
-/* ══════════ NARRATOR ══════════ */
-const Narrator = {
-  speaking:false,
-  speak(text, lang){
-    if (!("speechSynthesis" in window)){ UI.toast("Narration not supported.", "no"); return; }
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang === "rw" ? "rw-RW" : "en-GB";
-    u.rate = 0.95;
-    u.onend = () => { this.speaking = false; Narrator.updateBtn(); };
-    u.onerror = () => { this.speaking = false; Narrator.updateBtn(); };
-    window.speechSynthesis.speak(u);
-    this.speaking = true;
-    Narrator.updateBtn();
-  },
-  stop(){ if ("speechSynthesis" in window) window.speechSynthesis.cancel(); this.speaking = false; Narrator.updateBtn(); },
-  toggle(text){ if (this.speaking) this.stop(); else this.speak(text, "en"); },
-  updateBtn(){
-    const btn = $("audioBtn"); if (!btn) return;
-    if (this.speaking){ btn.classList.add("on"); btn.innerHTML = "🔊 Stop"; }
-    else { btn.classList.remove("on"); btn.innerHTML = "🔊 Listen"; }
-  }
-};
-
-/* ══════════ BOOT ══════════ */
 (function boot(){
   $("yr").textContent = new Date().getFullYear();
-  State.load();
-  Auth.init();
   $("googleBtn").addEventListener("click", () => Auth.signIn());
-  document.querySelectorAll("[data-nav]").forEach(b => b.onclick = () => App.go(b.dataset.nav));
-  Home.initReveal();
-  Home.initCounters();
-  Home.initHeader();
-  window.addEventListener("scroll", () => {
-    document.querySelectorAll(".reveal:not(.on)").forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add("on");
-    });
-  });
+  Home.initReveal(); Home.initCounters(); Home.initHeader();
+  Auth.init();
+  setTimeout(() => $("loading").classList.add("hide"), 1400);
 })();
-
-window.App = App; window.Auth = Auth; window.UI = UI; window.State = State;
-window.LEVELS = LEVELS; window.LESSONS = LESSONS; window.Dashboard = Dashboard;
-window.Levels = Levels; window.Lesson = Lesson; window.Signs = Signs;
-window.Practice = Practice; window.Sound = Sound; window.Home = Home;
 </script>
 
-<!-- ═══════════════════════════════════════════════════════════
-     THREE.JS SCENE
-     ═══════════════════════════════════════════════════════════ -->
 <script type="module">
 import * as THREE from 'three';
 import { Sky } from 'three/addons/objects/Sky.js';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-const rnd = (a, b) => a + Math.random() * (b - a);
+const rnd = (a,b) => a + Math.random()*(b-a);
 const PI = Math.PI;
 
 const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:"high-performance" });
@@ -2520,205 +464,135 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
 renderer.setSize(window.innerWidth, window.innerHeight, false);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const canvasEl = document.getElementById("scene");
-if (canvasEl){
-  canvasEl.replaceWith(renderer.domElement);
-  renderer.domElement.id = "scene";
-}
+if (canvasEl){ canvasEl.replaceWith(renderer.domElement); renderer.domElement.id = "scene"; }
 
 const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(0xffa575, 0.0018);
-const camera = new THREE.PerspectiveCamera(52, window.innerWidth/window.innerHeight, 0.5, 6000);
+const camera = new THREE.PerspectiveCamera(52, innerWidth/innerHeight, 0.5, 6000);
 
+const M = o => { const m = new THREE.MeshStandardMaterial(o); m.userData.e = o.envMapIntensity ?? 1; return m; };
 const mats = [];
-const M = (opts) => {
-  const m = new THREE.MeshStandardMaterial(opts);
-  m.userData.e = opts.envMapIntensity != null ? opts.envMapIntensity : 1;
-  mats.push(m);
-  return m;
-};
-const add = (g, m, x=0, y=0, z=0, parent) => {
-  const o = new THREE.Mesh(g, m);
-  o.position.set(x, y, z);
-  o.castShadow = o.receiveShadow = true;
-  (parent || scene).add(o);
-  return o;
-};
-const mkTex = (w, h, fn, rep) => {
-  const c = document.createElement("canvas");
-  c.width = w; c.height = h;
-  fn(c.getContext("2d"), w, h);
-  const t = new THREE.CanvasTexture(c);
-  t.wrapS = t.wrapT = THREE.RepeatWrapping;
-  t.colorSpace = THREE.SRGBColorSpace;
-  t.anisotropy = 8;
-  if (rep) t.repeat.set(rep[0], rep[1]);
-  return t;
-};
+const MM = o => { const m = M(o); mats.push(m); return m; };
+const add = (g,m,x=0,y=0,z=0) => { const o = new THREE.Mesh(g,m); o.position.set(x,y,z); o.castShadow = o.receiveShadow = true; scene.add(o); return o; };
+const mkTex = (w,h,fn,rep) => { const c = document.createElement("canvas"); c.width=w; c.height=h; fn(c.getContext("2d"),w,h); const t = new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.colorSpace=THREE.SRGBColorSpace; if(rep) t.repeat.set(rep[0],rep[1]); return t; };
 
-const Y0 = 3, DY = Y0 + 6.5;
-const gh = (r) => r < 95 ? Y0 : r < 145 ? Y0*(145-r)/50 : 0;
+const Y0 = 3;
+const gh = r => r < 95 ? Y0 : r < 145 ? Y0*(145-r)/50 : 0;
 
-const sky = new Sky();
-sky.scale.setScalar(4500);
-scene.add(sky);
-const su = sky.material.uniforms;
-su.mieDirectionalG.value = 0.8;
+const sky = new Sky(); sky.scale.setScalar(4500); scene.add(sky);
+const su = sky.material.uniforms; su.mieDirectionalG.value = 0.8;
 
 const sun = new THREE.DirectionalLight(0xfff5e6, 3.2);
-sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
-Object.assign(sun.shadow.camera, { left:-120, right:120, top:120, bottom:-120, near:1, far:700 });
-sun.shadow.bias = -0.0004;
-scene.add(sun);
+sun.castShadow = true; sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera, {left:-120,right:120,top:120,bottom:-120,near:1,far:700});
+sun.shadow.bias = -0.0004; scene.add(sun);
 
 const hemi = new THREE.HemisphereLight(0x87ceeb, 0x3a6b35, 0.55);
-const amb = new THREE.AmbientLight(0xa0b8d0, 0.35);
-scene.add(hemi); scene.add(amb);
+scene.add(hemi); scene.add(new THREE.AmbientLight(0xa0b8d0, 0.35));
 
-const gt = mkTex(256, 256, (g) => {
-  for (let i = 0; i < 4; i++){ g.fillStyle = i%2 ? "#4d8a3c" : "#5a9847"; g.fillRect(0, i*64, 256, 64); }
-  for (let i = 0; i < 2500; i++){
-    g.fillStyle = "rgba(" + (rnd(20,60)|0) + "," + (rnd(70,120)|0) + ",30,.18)";
-    g.fillRect(rnd(0,256), rnd(0,256), 2, 2);
-  }
-}, [40, 40]);
+const gt = mkTex(256,256, g => {
+  for (let i=0;i<4;i++){ g.fillStyle = i%2 ? "#4d8a3c" : "#5a9847"; g.fillRect(0,i*64,256,64); }
+  for (let i=0;i<2500;i++){ g.fillStyle = `rgba(${rnd(20,60)|0},${rnd(70,120)|0},30,.18)`; g.fillRect(rnd(0,256),rnd(0,256),2,2); }
+}, [40,40]);
+add(new THREE.CircleGeometry(400,96), MM({map:gt,roughness:1})).rotation.x = -PI/2;
+add(new THREE.CircleGeometry(4000,48), MM({color:0x4a6b44,roughness:1}),0,-0.2,0).rotation.x = -PI/2;
 
-add(new THREE.CircleGeometry(400, 96), M({ map:gt, roughness:1 })).rotation.x = -PI/2;
-add(new THREE.CircleGeometry(4000, 48), M({ color:0x4a6b44, roughness:1 }), 0, -0.2, 0).rotation.x = -PI/2;
-add(new THREE.CylinderGeometry(95, 145, 3, 96), M({ map:gt, roughness:1 }), 0, 1.5, 0);
+// Dome + podium
+const conc = MM({color:0xc9c6bd,roughness:0.85});
+const steelM = MM({color:0xaab2b9,metalness:0.85,roughness:0.35});
+const winTex = mkTex(512,64, (g,w,h) => { g.fillStyle = "#0e1a24"; g.fillRect(0,0,w,h); for (let i=0;i<16;i++){ g.fillStyle = "#2d4252"; g.fillRect(i*32+2,8,28,48); }}, [7,1]);
+add(new THREE.CylinderGeometry(50,50,5.5,128), MM({color:0xffffff,map:winTex,metalness:0.5,roughness:0.2}), 0, Y0+2.75, 0);
+add(new THREE.CylinderGeometry(50.8,50.8,1,128), conc, 0, Y0+6, 0);
 
-// Simple podium + dome (KCC-inspired)
-const conc = M({ color:0xc9c6bd, roughness:0.85 });
-const steelM = M({ color:0xaab2b9, metalness:0.85, roughness:0.35 });
-const winTex = mkTex(512, 64, (g, w, h) => {
-  g.fillStyle = "#0e1a24"; g.fillRect(0,0,w,h);
-  for (let i = 0; i < 16; i++){ g.fillStyle = "#2d4252"; g.fillRect(i*32+2, 8, 28, 48); }
-}, [7, 1]);
-const baseM = M({ color:0xffffff, map:winTex, metalness:0.5, roughness:0.2 });
-add(new THREE.CylinderGeometry(50, 50, 5.5, 128), baseM, 0, Y0 + 2.75, 0);
-add(new THREE.CylinderGeometry(50.8, 50.8, 1, 128), conc, 0, Y0 + 6, 0);
-
-const Rr = 28.5, NT = 9, y0 = 7, Ht = 32, tH = Ht/NT;
-const dome = new THREE.Group();
-dome.position.y = DY;
-scene.add(dome);
-const E = (y) => Rr * Math.sqrt(Math.max(0, 1 - Math.pow((y-y0)/Ht/1.04, 1.5)));
-const facet = mkTex(128, 64, (g, w, h) => {
-  g.fillStyle = "#c9d3d9"; g.fillRect(0,0,w,h);
-  g.fillStyle = "#f2f7fa";
-  g.beginPath(); g.moveTo(0,h); g.lineTo(w/2,0); g.lineTo(w,h); g.fill();
-}, [48, 1]);
+const Rr=28.5, NT=9, y0=7, Ht=32, tH=Ht/NT;
+const dome = new THREE.Group(); dome.position.y = Y0 + 6.5; scene.add(dome);
+const E = y => Rr * Math.sqrt(Math.max(0, 1 - Math.pow((y-y0)/Ht/1.04, 1.5)));
+const facet = mkTex(128,64, (g,w,h) => { g.fillStyle = "#c9d3d9"; g.fillRect(0,0,w,h); g.fillStyle = "#f2f7fa"; g.beginPath(); g.moveTo(0,h); g.lineTo(w/2,0); g.lineTo(w,h); g.fill(); }, [48,1]);
 const tierM = [];
-for (let i = 0; i < NT; i++){
-  const yb = y0 + i*tH;
-  const rb = E(yb), rt = E(yb+tH)+0.6;
-  const m = M({ color:0xffffff, map:facet, roughness:0.38, metalness:0.12, emissive:0x2bd04f, emissiveMap:facet, emissiveIntensity:0 });
+for (let i=0;i<NT;i++){
+  const yb = y0 + i*tH, rb = E(yb), rt = E(yb+tH)+0.6;
+  const m = MM({ color:0xffffff, map:facet, roughness:0.38, metalness:0.12, emissive:0x2bd04f, emissiveMap:facet, emissiveIntensity:0 });
   tierM.push(m);
-  const t = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, tH, 96, 1, true), m);
-  t.position.y = yb + tH/2;
-  t.castShadow = t.receiveShadow = true;
-  dome.add(t);
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,tH,96,1,true), m);
+  t.position.y = yb + tH/2; t.castShadow = t.receiveShadow = true; dome.add(t);
 }
 
-const dir = (az, el) => {
-  az *= PI/180; el *= PI/180;
-  return [Math.sin(az)*Math.cos(el), Math.sin(el), Math.cos(az)*Math.cos(el)];
-};
+const dir = (az,el) => { az*=PI/180; el*=PI/180; return [Math.sin(az)*Math.cos(el), Math.sin(el), Math.cos(az)*Math.cos(el)]; };
 const MODES = {
-  sunset: { sun:dir(150,12), sc:0xff8c42, si:2.4, hs:0xff9060, hg:0x4a3020, hi:0.4, ac:0xc09070, ai:0.2, fog:0xffa575, fd:0.0018, ex:1, env:0.6, sky:[10,3,0.005], lit:0 },
-  dusk:   { sun:dir(230,5), sk:dir(215,-2.5), sc:0xff8a55, si:0.6, hs:0x3a5a9a, hg:0x101820, hi:0.5, ac:0x2a3a60, ai:0.3, fog:0x3a4f78, fd:0.0014, ex:1.1, env:0.3, sky:[3,2.2,0.01], lit:1.3 },
-  night:  { sun:[-80,140,-60], sk:dir(150,-8), sc:0x4466aa, si:0.3, hs:0x1a2540, hg:0x0a0e1a, hi:0.12, ac:0x0a1020, ai:0.15, fog:0x0a0e1a, fd:0.0025, ex:0.85, env:0.1, sky:[2,0.15,0.005], lit:1.8 }
+  sunset:{sun:dir(150,12),sc:0xff8c42,si:2.4,hs:0xff9060,hg:0x4a3020,hi:0.4,ac:0xc09070,ai:0.2,fog:0xffa575,fd:0.0018,ex:1,env:0.6,sky:[10,3,0.005],lit:0},
+  dusk:{sun:dir(230,5),sk:dir(215,-2.5),sc:0xff8a55,si:0.6,hs:0x3a5a9a,hg:0x101820,hi:0.5,ac:0x2a3a60,ai:0.3,fog:0x3a4f78,fd:0.0014,ex:1.1,env:0.3,sky:[3,2.2,0.01],lit:1.3},
+  night:{sun:[-80,140,-60],sk:dir(150,-8),sc:0x4466aa,si:0.3,hs:0x1a2540,hg:0x0a0e1a,hi:0.12,ac:0x0a1020,ai:0.15,fog:0x0a0e1a,fd:0.0025,ex:0.85,env:0.1,sky:[2,0.15,0.005],lit:1.8}
 };
-
-let lit = 0, currentMode = "sunset", targetMode = MODES.sunset, blendK = 1;
-const curState = {
-  sc:new THREE.Color(0xff8c42), hs:new THREE.Color(0xff9060),
-  hg:new THREE.Color(0x4a3020), ac:new THREE.Color(0xc09070),
-  fog:new THREE.Color(0xffa575),
-  sunPos:new THREE.Vector3(...MODES.sunset.sun).normalize(),
-  skyPos:new THREE.Vector3(...MODES.sunset.sun).normalize(),
-  si:2.4, hi:0.4, ai:0.2, fd:0.0018, ex:1, env:0.6,
-  skyT:10, skyR:3, skyM:0.005, litV:0
-};
+let lit=0, cur="sunset", tgt=MODES.sunset, bk=1;
+const cs = { sc:new THREE.Color(0xff8c42), hs:new THREE.Color(0xff9060), hg:new THREE.Color(0x4a3020), ac:new THREE.Color(0xc09070), fog:new THREE.Color(0xffa575), sunPos:new THREE.Vector3(...MODES.sunset.sun).normalize(), skyPos:new THREE.Vector3(...MODES.sunset.sun).normalize(), si:2.4,hi:0.4,ai:0.2,fd:0.0018,ex:1,env:0.6,skyT:10,skyR:3,skyM:0.005,litV:0 };
 
 function setMode(k){
-  if (!MODES[k] || k === currentMode) return;
-  currentMode = k; targetMode = MODES[k];
-  curState.sc.copy(sun.color); curState.hs.copy(hemi.color);
-  curState.hg.copy(hemi.groundColor); curState.ac.copy(amb.color);
-  curState.fog.copy(scene.fog.color);
-  curState.sunPos.copy(sun.position).normalize();
-  curState.skyPos.copy(su.sunPosition.value).normalize();
-  curState.si = sun.intensity; curState.hi = hemi.intensity;
-  curState.ai = amb.intensity; curState.fd = scene.fog.density;
-  curState.ex = renderer.toneMappingExposure;
-  curState.env = mats.length ? mats[0].envMapIntensity : 1;
-  curState.skyT = su.turbidity.value; curState.skyR = su.rayleigh.value;
-  curState.skyM = su.mieCoefficient.value; curState.litV = lit;
-  blendK = 0;
+  if (!MODES[k] || k === cur) return;
+  cur = k; tgt = MODES[k];
+  Object.assign(cs, {
+    sc: sun.color.clone(), hs: hemi.color.clone(), hg: hemi.groundColor.clone(),
+    ac: new THREE.Color(0xa0b8d0), fog: scene.fog.color.clone(),
+    sunPos: sun.position.clone().normalize(), skyPos: su.sunPosition.value.clone().normalize(),
+    si: sun.intensity, hi: hemi.intensity, ai: 0.35, fd: scene.fog.density,
+    ex: renderer.toneMappingExposure, env: mats[0] ? mats[0].envMapIntensity : 1,
+    skyT: su.turbidity.value, skyR: su.rayleigh.value, skyM: su.mieCoefficient.value, litV: lit
+  });
+  bk = 0;
 }
-
 const _c = new THREE.Color();
 function applyMode(){
-  const m = targetMode;
-  const a = 1 - Math.exp(-1.6 * (1/60));
-  blendK = Math.min(1, blendK + a);
-  const k = blendK;
-  sun.color.copy(curState.sc).lerp(_c.setHex(m.sc), k);
-  hemi.color.copy(curState.hs).lerp(_c.setHex(m.hs), k);
-  hemi.groundColor.copy(curState.hg).lerp(_c.setHex(m.hg), k);
-  amb.color.copy(curState.ac).lerp(_c.setHex(m.ac), k);
-  scene.fog.color.copy(curState.fog).lerp(_c.setHex(m.fog), k);
-  sun.intensity = curState.si + (m.si - curState.si) * k;
-  hemi.intensity = curState.hi + (m.hi - curState.hi) * k;
-  amb.intensity = curState.ai + (m.ai - curState.ai) * k;
-  scene.fog.density = curState.fd + (m.fd - curState.fd) * k;
-  renderer.toneMappingExposure = curState.ex + (m.ex - curState.ex) * k;
+  const m = tgt;
+  bk = Math.min(1, bk + (1 - Math.exp(-1.6/60)));
+  const k = bk;
+  sun.color.copy(cs.sc).lerp(_c.setHex(m.sc), k);
+  hemi.color.copy(cs.hs).lerp(_c.setHex(m.hs), k);
+  hemi.groundColor.copy(cs.hg).lerp(_c.setHex(m.hg), k);
+  scene.fog.color.copy(cs.fog).lerp(_c.setHex(m.fog), k);
+  sun.intensity = cs.si + (m.si - cs.si)*k;
+  hemi.intensity = cs.hi + (m.hi - cs.hi)*k;
+  scene.fog.density = cs.fd + (m.fd - cs.fd)*k;
+  renderer.toneMappingExposure = cs.ex + (m.ex - cs.ex)*k;
   const toSun = new THREE.Vector3(...m.sun).normalize();
   const sunDir = new THREE.Vector3(
-    curState.sunPos.x + (toSun.x - curState.sunPos.x) * k,
-    curState.sunPos.y + (toSun.y - curState.sunPos.y) * k,
-    curState.sunPos.z + (toSun.z - curState.sunPos.z) * k
+    cs.sunPos.x + (toSun.x - cs.sunPos.x)*k,
+    cs.sunPos.y + (toSun.y - cs.sunPos.y)*k,
+    cs.sunPos.z + (toSun.z - cs.sunPos.z)*k
   ).normalize();
   const toSky = new THREE.Vector3(...(m.sk || m.sun)).normalize();
   const skyDir = new THREE.Vector3(
-    curState.skyPos.x + (toSky.x - curState.skyPos.x) * k,
-    curState.skyPos.y + (toSky.y - curState.skyPos.y) * k,
-    curState.skyPos.z + (toSky.z - curState.skyPos.z) * k
+    cs.skyPos.x + (toSky.x - cs.skyPos.x)*k,
+    cs.skyPos.y + (toSky.y - cs.skyPos.y)*k,
+    cs.skyPos.z + (toSky.z - cs.skyPos.z)*k
   ).normalize();
-  su.turbidity.value = curState.skyT + (m.sky[0] - curState.skyT) * k;
-  su.rayleigh.value = curState.skyR + (m.sky[1] - curState.skyR) * k;
-  su.mieCoefficient.value = curState.skyM + (m.sky[2] - curState.skyM) * k;
+  su.turbidity.value = cs.skyT + (m.sky[0]-cs.skyT)*k;
+  su.rayleigh.value = cs.skyR + (m.sky[1]-cs.skyR)*k;
+  su.mieCoefficient.value = cs.skyM + (m.sky[2]-cs.skyM)*k;
   su.sunPosition.value.copy(skyDir);
-  lit = curState.litV + (m.lit - curState.litV) * k;
-  const envT = curState.env + (m.env - curState.env) * k;
+  lit = cs.litV + (m.lit - cs.litV)*k;
+  const envT = cs.env + (m.env - cs.env)*k;
   mats.forEach(x => x.envMapIntensity = x.userData.e * envT);
-  tierM.forEach((tm, i) => tm.emissiveIntensity = lit * (1 + 0.07*Math.sin(performance.now()/600 + i)));
+  tierM.forEach((tm,i) => tm.emissiveIntensity = lit * (1 + 0.07*Math.sin(performance.now()/600 + i)));
   sun.position.copy(sunDir).multiplyScalar(260);
-  sun.target.position.set(0, 0, 0);
+  sun.target.position.set(0,0,0);
 }
 
 const camPos = new THREE.Vector3(), camLook = new THREE.Vector3();
-const targetPos = new THREE.Vector3(), targetLook = new THREE.Vector3();
 let scrollFrac = 0, elapsed = 0, visible = true;
 
 function updateCamera(dt){
-  const totalScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  const raw = window.scrollY / totalScroll;
+  const totalScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const raw = scrollY / totalScroll;
   scrollFrac += (Math.min(1, Math.max(0, raw)) - scrollFrac) * Math.min(1, dt*4);
   const t = elapsed * 0.03;
   const angle = -0.4 + scrollFrac * 1.4 + Math.sin(t*0.4) * 0.05;
   const radius = 108 - scrollFrac * 25;
   const height = 18 + scrollFrac * 30;
-  targetPos.set(Math.cos(angle) * radius, height, Math.sin(angle) * radius);
-  targetLook.set(0, 22 + scrollFrac * 6, 0);
-  camPos.lerp(targetPos, Math.min(1, dt*1.6));
-  camLook.lerp(targetLook, Math.min(1, dt*1.6));
+  camPos.lerp(new THREE.Vector3(Math.cos(angle)*radius, height, Math.sin(angle)*radius), Math.min(1, dt*1.6));
+  camLook.lerp(new THREE.Vector3(0, 22 + scrollFrac*6, 0), Math.min(1, dt*1.6));
   camera.position.copy(camPos);
   camera.lookAt(camLook);
 }
@@ -2727,48 +601,37 @@ function updateModeFromScroll(){
   let want = "sunset";
   if (scrollFrac > 0.7) want = "night";
   else if (scrollFrac > 0.35) want = "dusk";
-  if (want !== currentMode) setMode(want);
+  if (want !== cur) setMode(want);
 }
 
-function onResize(){
-  renderer.setSize(window.innerWidth, window.innerHeight, false);
-  camera.aspect = window.innerWidth/window.innerHeight;
+addEventListener("resize", () => {
+  renderer.setSize(innerWidth, innerHeight, false);
+  camera.aspect = innerWidth/innerHeight;
   camera.updateProjectionMatrix();
-}
-window.addEventListener("resize", onResize);
+});
 
 updateCamera(0.016);
 camera.position.copy(camPos);
 camera.lookAt(camLook);
-onResize();
+renderer.setSize(innerWidth, innerHeight, false);
 
 let last = performance.now()/1000;
 function loop(){
   requestAnimationFrame(loop);
   if (!visible) return;
-  const now = performance.now();
-  const t = now/1000;
+  const t = performance.now()/1000;
   const dt = Math.min(0.05, t - last);
   last = t;
   elapsed += dt;
   updateModeFromScroll();
   applyMode();
   updateCamera(dt);
-  sun.target.position.set(0, 0, 0);
+  sun.target.position.set(0,0,0);
   sun.target.updateMatrixWorld();
   renderer.render(scene, camera);
 }
 loop();
-
-window.Scene3D = {
-  pause(){ visible = false; },
-  resume(){ visible = true; last = performance.now()/1000; }
-};
-
-setTimeout(() => {
-  const l = document.getElementById("loading");
-  if (l) l.classList.add("hide");
-}, 1400);
+window.Scene3D = { pause(){ visible = false; }, resume(){ visible = true; last = performance.now()/1000; } };
 </script>
 </body>
 </html>
